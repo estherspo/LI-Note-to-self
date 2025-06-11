@@ -42,12 +42,12 @@ export default function InvitePage() {
       <div className="w-full space-y-6">
         <Card>
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
-          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col self-center sm:self-start">
-            <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start">
+          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Parent flex-col */}
+            <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start"> {/* self-start for sm+ */}
                 <Skeleton className="h-full w-full rounded-full bg-muted" />
             </Avatar>
             
-            <div className="w-full mt-4 text-center sm:text-left">
+            <div className="w-full mt-4 text-center sm:text-left"> {/* Text block centers on XS, left on SM+ */}
               {/* Top Row Skeleton */}
               <div className="flex flex-col sm:flex-row justify-between items-start mb-2">
                 <div className="w-full sm:w-auto text-center sm:text-left">
@@ -138,13 +138,13 @@ export default function InvitePage() {
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col self-center sm:self-start">
-          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start">
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Parent flex-col */}
+          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start"> {/* self-start for sm+ */}
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="w-full mt-4 text-center sm:text-left">
+          <div className="w-full mt-4 text-center sm:text-left"> {/* Text block centers on XS, left on SM+ */}
             {/* Top Row: Name/Degree vs Company */}
             <div className="flex flex-col sm:flex-row justify-between items-start mb-1">
               <div className="w-full sm:w-auto text-center sm:text-left">
@@ -174,11 +174,23 @@ export default function InvitePage() {
                 {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
                 {isAlreadyConnected ? 'Message' : 'Connect'}
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full" disabled>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="rounded-full bg-card border-foreground text-foreground disabled:opacity-100" 
+                disabled
+              >
                 {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
                 {isAlreadyConnected ? 'Following' : 'Follow'}
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full" disabled>More</Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="rounded-full bg-card border-foreground text-foreground disabled:opacity-100" 
+                disabled
+              >
+                More
+              </Button>
             </div>
             
             <div className="text-sm text-muted-foreground mb-2 text-center sm:text-left mt-2">
@@ -245,4 +257,5 @@ export default function InvitePage() {
     
 
     
+
 
