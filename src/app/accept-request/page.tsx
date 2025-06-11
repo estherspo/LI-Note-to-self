@@ -54,7 +54,7 @@ export default function AcceptRequestPage() {
           headline: "Founder & CEO at Teamcamp | Simplifying Project Execution for Agencies", // Override headline
           avatarUrl: 'https://placehold.co/128x128.png', // Keep or change avatar
           dataAiHint: 'man smiling',
-          mutualConnectionsText: "Kendra Shimmell is a mutual connection",
+          mutualConnectionsText: "Lucy Cray The Cat is a mutual connection", // Updated mutual connection
           isVerified: true,
         };
       }
