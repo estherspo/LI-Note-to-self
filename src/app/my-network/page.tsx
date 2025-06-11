@@ -9,10 +9,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile, Connection, PendingInvitation } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Users, Feather, Dot, PawPrint, CheckCircle2 } from 'lucide-react';
+import { Users, Feather, Dot, PawPrint, CheckCircle2, X } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { PostAcceptNoteDialog } from '@/components/connections/PostAcceptNoteDialog';
 import { PendingInvitationItem } from '@/components/accept-request/PendingInvitationItem';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function MyNetworkPage() {
   const { addConnection, connections } = useConnections();
@@ -20,6 +21,7 @@ export default function MyNetworkPage() {
   const [pendingInvitations, setPendingInvitations] = useState<PendingInvitation[]>([]);
   const [isAddNoteDialogOpen, setIsAddNoteDialogOpen] = useState(false);
   const [noteDialogConnection, setNoteDialogConnection] = useState<Connection | null>(null);
+  const [recentlyAcceptedConnection, setRecentlyAcceptedConnection] = useState<Profile | null>(null);
 
   useEffect(() => {
     const currentUserId = 'hunter-the-cat';
@@ -79,13 +81,16 @@ export default function MyNetworkPage() {
       const newConnection = addConnection(originalProfile, undefined);
 
       setPendingInvitations(prev => prev.filter(p => p.id !== inviter.id));
+      setRecentlyAcceptedConnection(originalProfile); // Show inline confirmation
       toast({
-        title: "Connection Accepted",
-        description: (
+        title: (
           <div className="flex items-center">
             <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
-            <span>You are now connected with {inviter.name}.</span>
+            <span>Connection Accepted</span>
           </div>
+        ),
+        description: (
+          <span>You are now connected with {inviter.name}.</span>
         ),
       });
 
@@ -106,6 +111,10 @@ export default function MyNetworkPage() {
         variant: "default",
       });
     }
+  };
+
+  const handleDismissRecentlyAcceptedMessage = () => {
+    setRecentlyAcceptedConnection(null);
   };
 
   const dailyGames = [
@@ -163,7 +172,32 @@ export default function MyNetworkPage() {
                 </div>
               </CardHeader>
               <CardContent className="p-0">
-                {pendingInvitations.length === 0 ? (
+                {recentlyAcceptedConnection && (
+                  <div className="px-4 py-3 border-b border-border bg-card">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-8 w-8 border">
+                        <AvatarImage src={recentlyAcceptedConnection.avatarUrl} alt={recentlyAcceptedConnection.name} data-ai-hint={recentlyAcceptedConnection.dataAiHint || "profile person"} />
+                        <AvatarFallback>{recentlyAcceptedConnection.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 text-sm text-foreground">
+                        <span className="font-semibold">{recentlyAcceptedConnection.name}</span> is now a connection.
+                        {' '}
+                        <Button
+                          variant="link"
+                          className="p-0 h-auto text-primary font-semibold hover:underline"
+                          onClick={() => { /* Placeholder for message action */ }}
+                        >
+                          Message {recentlyAcceptedConnection.name.split(' ')[0]}
+                        </Button>
+                      </div>
+                      <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:bg-muted/50" onClick={handleDismissRecentlyAcceptedMessage}>
+                        <X className="h-4 w-4" />
+                        <span className="sr-only">Dismiss</span>
+                      </Button>
+                    </div>
+                  </div>
+                )}
+                {pendingInvitations.length === 0 && !recentlyAcceptedConnection ? (
                   <div className="text-center py-12 px-4 sm:px-6">
                     <Users className="mx-auto h-12 w-12 text-muted-foreground mb-3" />
                     <p className="text-lg font-medium text-foreground">No pending invitations</p>
