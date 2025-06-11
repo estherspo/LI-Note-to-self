@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Users, Link2, MoreHorizontal } from 'lucide-react'; 
+import { Users, Link2, MoreHorizontal, ShieldCheck } from 'lucide-react'; 
 import { useToast } from "@/hooks/use-toast";
 
 interface PendingInvitation extends Profile {
@@ -98,8 +98,8 @@ export default function AcceptRequestPage() {
   };
 
   return (
-    <div className="container mx-auto px-0 sm:px-4 py-8">
-      <Card className="shadow-lg"> {/* Removed max-w-3xl and mx-auto */}
+    <div className="container mx-auto px-0 sm:px-4 pb-8"> {/* Removed py-8, changed to pb-8 */}
+      <Card className="shadow-lg">
         <Tabs defaultValue="grow" className="w-full">
           <CardHeader className="p-0 border-b">
             <TabsList className="grid w-full grid-cols-2 h-14 rounded-none bg-card p-0">
@@ -136,7 +136,7 @@ export default function AcceptRequestPage() {
               ) : (
                 <ul className="divide-y divide-border">
                   {pendingInvitations.map((inviter) => (
-                    <li key={inviter.id} className="px-4 sm:px-6 py-5">
+                    <li key={inviter.id} className="px-4 py-4"> {/* Changed padding here */}
                       <div className="flex items-start gap-4">
                         <Avatar className="h-14 w-14 border">
                           <AvatarImage src={inviter.avatarUrl} alt={inviter.name} data-ai-hint={inviter.dataAiHint || "profile person"} />
@@ -147,6 +147,14 @@ export default function AcceptRequestPage() {
                             <h3 className="text-lg font-semibold text-foreground hover:underline">
                               <Link href={`/invite/${inviter.id}`}>{inviter.name}</Link>
                             </h3>
+                            {inviter.isVerified && (
+                                <ShieldCheck className="h-4 w-4 text-green-600 fill-current" />
+                            )}
+                            {inviter.showLinkedInIcon && (
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-primary">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                                </svg>
+                            )}
                             {inviter.showLinkedInPremiumIcon && (
                               <span className="ml-1 inline-flex items-center justify-center h-[16px] w-[16px] bg-amber-500 rounded-sm p-0.5 align-middle">
                                 <span className="text-white text-[9px] font-bold leading-none">in</span>
@@ -202,3 +210,5 @@ export default function AcceptRequestPage() {
     </div>
   );
 }
+
+    
