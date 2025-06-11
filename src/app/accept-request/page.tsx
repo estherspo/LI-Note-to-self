@@ -26,46 +26,50 @@ export default function AcceptRequestPage() {
   const [pendingInvitations, setPendingInvitations] = useState<PendingInvitation[]>([]);
 
   useEffect(() => {
-    // Current user is Hunter The Cat (jane-doe)
-    // Lucy Cray The Cat (lucy-cray-cat) is already followed/connected.
-    const excludedProfileIds = ['jane-doe', 'lucy-cray-cat'];
-    
-    const potentialInviters = allMockProfiles.filter(
-      p => !excludedProfileIds.includes(p.id) && !connections.some(c => c.id.includes(p.id))
-    );
+    const currentUserId = 'jane-doe'; // Hunter The Cat's ID
 
-    const mappedInvitations: PendingInvitation[] = potentialInviters.map(profile => {
-      if (profile.id === 'bob-brown') { // Jack Cray The Cat
-        return {
-          ...profile, 
-          mutualConnectionsText: "Lucy Cray The Cat is a mutual connection", 
-          isVerified: true, 
-        };
+    // Define the exact order and profiles for invitations
+    const invitationProfileIdsOrder = ['salty-sears', 'bob-brown', 'emily-white'];
+
+    const invitations: PendingInvitation[] = invitationProfileIdsOrder.map(profileId => {
+      const profile = allMockProfiles.find(p => p.id === profileId);
+
+      // Skip if profile not found, is current user, or already connected
+      if (!profile || profile.id === currentUserId || connections.some(c => c.id.includes(profile.id))) {
+        return null;
       }
-      if (profile.id === 'salty-sears') { // Salty Sears
+
+      // Apply specific invitation details based on profile ID
+      if (profile.id === 'salty-sears') { // Salty Sears The Cat
         return {
-          ...profile,
-          avatarUrl: 'https://placehold.co/128x128.png',
-          dataAiHint: 'cat pirate',
+          ...profile, // name, headline, avatarUrl, dataAiHint come from mock
           message: "It was great meeting you at CatCon! Let's connect.",
           mutualConnectionsText: undefined,
           isVerified: false,
           showLinkedInIcon: false,
         };
       }
+      if (profile.id === 'bob-brown') { // Jack Cray The Cat
+        return {
+          ...profile, // name, headline, avatarUrl, dataAiHint come from mock
+          mutualConnectionsText: "Lucy Cray The Cat is a mutual connection",
+          isVerified: true,
+          showLinkedInIcon: false, // Assuming no LinkedIn icon for Jack
+        };
+      }
       if (profile.id === 'emily-white') { // George Sweeney The Cat
         return {
           ...profile, // name, headline, avatarUrl, dataAiHint come from mock
           message: "Heard you're the go-to cat for gourmet catnip reviews. Would love to pick your brain!",
-          mutualConnectionsText: undefined, 
-          isVerified: false, 
+          mutualConnectionsText: undefined,
+          isVerified: false,
           showLinkedInIcon: false,
         };
       }
-      return profile as PendingInvitation; 
-    }).filter(p => p.id === 'bob-brown' || p.id === 'salty-sears' || p.id === 'emily-white'); 
+      return null; // Fallback, should not be reached if IDs in order list are correct
+    }).filter(invitation => invitation !== null) as PendingInvitation[];
 
-    setPendingInvitations(mappedInvitations);
+    setPendingInvitations(invitations);
   }, [connections]);
 
   const handleAccept = (inviter: PendingInvitation) => {

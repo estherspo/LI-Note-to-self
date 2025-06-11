@@ -139,7 +139,7 @@ export const mockProfiles: Profile[] = [
   },
   {
     id: 'salty-sears',
-    name: 'Salty Sears',
+    name: 'Salty Sears The Cat',
     headline: 'Chief Yarn Officer at The Salty Paw',
     avatarUrl: 'https://placehold.co/128x128.png',
     dataAiHint: 'cat pirate',
@@ -169,4 +169,3 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 
 
 export const initialConnections: Connection[] = [];
-
