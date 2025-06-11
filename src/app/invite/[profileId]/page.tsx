@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { InvitationDialog } from '@/components/invitation/InvitationDialog';
-import { Building, MapPin, UserPlus, CheckCircle2, Info } from 'lucide-react';
+import { Building, MapPin, UserPlus, CheckCircle2, Info, Users, MessageSquare, Check } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -47,23 +47,42 @@ export default function InvitePage() {
                 <Skeleton className="h-full w-full rounded-full bg-muted" />
             </Avatar>
             
-            <div className="w-full mt-4 text-center sm:text-left">
-              <div className="space-y-2"> {/* Name and Headline wrapper */}
-                <Skeleton className="h-8 w-3/4 bg-muted mx-auto sm:mx-0" /> {/* Name skeleton */}
-                <Skeleton className="h-5 w-full bg-muted mx-auto sm:mx-0" /> {/* Headline skeleton */}
+            <div className="w-full mt-4">
+              {/* Top Row Skeleton */}
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-2">
+                <div className="w-full sm:w-auto text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start">
+                    <Skeleton className="h-8 w-40 bg-muted" /> 
+                    <Skeleton className="ml-2 h-6 w-6 bg-muted rounded-full" />
+                    <Skeleton className="ml-1 h-5 w-10 bg-muted" />
+                  </div>
+                </div>
+                <div className="w-full sm:w-auto mt-2 sm:mt-0 flex items-center justify-center sm:justify-end gap-2">
+                  <Skeleton className="h-8 w-8 bg-muted rounded-full" />
+                  <Skeleton className="h-5 w-24 bg-muted" />
+                </div>
+              </div>
+
+              {/* Headline Skeleton */}
+              <Skeleton className="h-5 w-5/6 bg-muted mb-2 mx-auto sm:mx-0" />
+              
+              {/* Location/Contact Skeleton */}
+              <Skeleton className="h-4 w-1/2 bg-muted mb-2 mx-auto sm:mx-0" />
+              
+              {/* Followers Skeleton */}
+              <Skeleton className="h-4 w-1/3 bg-muted mb-2 mx-auto sm:mx-0" />
+              
+              {/* Followed By Skeleton */}
+              <div className="flex items-center gap-1 mb-4 justify-center sm:justify-start">
+                <Skeleton className="h-4 w-4 bg-muted rounded-full"/>
+                <Skeleton className="h-4 w-28 bg-muted" />
               </div>
               
-              <Skeleton className="h-10 w-32 bg-muted mt-4 mx-auto sm:mx-0" /> {/* Button Skeleton */}
-
-              <div className="mt-2 space-y-1 w-full"> {/* Company/Location wrapper */}
-                <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
-                  <Skeleton className="h-4 w-4 bg-muted" />
-                  <Skeleton className="h-4 w-1/2 bg-muted" />
-                </div>
-                <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
-                  <Skeleton className="h-4 w-4 bg-muted" />
-                  <Skeleton className="h-4 w-1/3 bg-muted" />
-                </div>
+              {/* Buttons Skeleton */}
+              <div className="flex flex-col sm:flex-row gap-2 items-center sm:items-start">
+                <Skeleton className="h-10 w-full sm:w-28 bg-muted" />
+                <Skeleton className="h-10 w-full sm:w-28 bg-muted" />
+                <Skeleton className="h-10 w-full sm:w-20 bg-muted" />
               </div>
             </div>
           </CardHeader>
@@ -104,6 +123,8 @@ export default function InvitePage() {
   }
   
   const coverPhotoUrl = "https://placehold.co/1200x300.png";
+  const companyDomain = profile.company ? profile.company.toLowerCase().replace(/\s+/g, '').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") + '.com' : '';
+
 
   return (
     <div className="w-full space-y-6">
@@ -123,28 +144,57 @@ export default function InvitePage() {
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="w-full mt-4 text-center sm:text-left">
-            <CardTitle className="font-headline text-3xl">{profile.name}</CardTitle>
-            <p className="text-lg text-foreground">{profile.headline}</p>
-            
-            <Button onClick={handleConnect} className="whitespace-nowrap mt-4" size="lg">
-              {isAlreadyConnected ? <CheckCircle2 className="mr-2 h-5 w-5" /> : <UserPlus className="mr-2 h-5 w-5" />}
-              {isAlreadyConnected ? 'Connected' : 'Connect'}
-            </Button>
-
-            <div className="mt-2 space-y-1 text-sm text-muted-foreground">
+          <div className="w-full mt-4">
+            {/* Top Row: Name/Degree vs Company */}
+            <div className="flex flex-col sm:flex-row justify-between items-start mb-1">
+              <div className="w-full sm:w-auto text-center sm:text-left">
+                <CardTitle className="font-headline text-3xl flex items-center justify-center sm:justify-start">
+                  {profile.name}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="ml-2 h-6 w-6 text-blue-500">
+                    <path fillRule="evenodd" d="M8.603 3.799A4.5 4.5 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.5 4.5 0 013.498 1.308 4.5 4.5 0 01.986 3.296A4.5 4.5 0 0121.75 12c0 .379-.054.748-.158 1.102a4.5 4.5 0 01-1.308 3.498 4.5 4.5 0 01-3.296.986A4.5 4.5 0 0112 21.75a4.5 4.5 0 01-3.397-1.549 4.5 4.5 0 01-3.498-1.308 4.5 4.5 0 01-.986-3.296A4.5 4.5 0 012.25 12c0-.379.054.748.158-1.102a4.5 4.5 0 011.308-3.498 4.5 4.5 0 013.296-.986A4.5 4.5 0 018.603 3.799zM10.73 15.28a.75.75 0 001.06 1.06l3.5-3.5a.75.75 0 00-1.06-1.06l-3 3-1.5-1.5a.75.75 0 10-1.06 1.06l2 2z" clipRule="evenodd" />
+                  </svg>
+                  <span className="ml-1 text-sm text-muted-foreground font-normal">· 2nd</span>
+                </CardTitle>
+              </div>
               {profile.company && (
-                <div className="flex items-center gap-2 justify-center sm:justify-start">
-                  <Building className="h-4 w-4" />
-                  <span>{profile.company}</span>
+                <div className="w-full sm:w-auto mt-2 sm:mt-0 flex items-center justify-center sm:justify-end gap-2 text-sm">
+                   <Avatar className="h-8 w-8">
+                    <AvatarImage src={`https://logo.clearbit.com/${companyDomain}`} alt={`${profile.company} logo`} data-ai-hint="company logo" />
+                    <AvatarFallback><Building className="h-4 w-4"/></AvatarFallback>
+                  </Avatar>
+                  <span className="font-semibold text-foreground">{profile.company}</span>
                 </div>
               )}
+            </div>
+
+            <p className="text-lg text-foreground mb-2 text-center sm:text-left">{profile.headline}</p>
+            
+            <div className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
               {profile.location && (
-                <div className="flex items-center gap-2 justify-center sm:justify-start">
-                  <MapPin className="h-4 w-4" />
-                  <span>{profile.location}</span>
-                </div>
+                <span>{profile.location}</span>
               )}
+              <span className="text-primary hover:underline cursor-pointer ml-1">· Contact info</span>
+            </div>
+            
+            <p className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
+              8,141 followers · 500+ connections {/* Mocked */}
+            </p>
+
+            <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1 justify-center sm:justify-start">
+              <Users className="h-4 w-4"/>
+              Followed by Travis Broad {/* Mocked */}
+            </p>
+            
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap">
+                {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
+                {isAlreadyConnected ? 'Message' : 'Connect'}
+              </Button>
+              <Button variant="outline" size="lg">
+                {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
+                {isAlreadyConnected ? 'Following' : 'Follow'}
+              </Button>
+              <Button variant="outline" size="lg">More</Button>
             </div>
           </div>
         </CardHeader>
