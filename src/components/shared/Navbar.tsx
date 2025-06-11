@@ -14,10 +14,12 @@ import {
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import { Separator } from '@/components/ui/separator';
-import { usePathname } from 'next/navigation'; // Import usePathname
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 export function Navbar() {
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
+  const onAcceptRequestPage = pathname === '/accept-request';
 
   return (
     <header className="bg-card border-b sticky top-0 z-50 shadow-sm">
@@ -73,7 +75,11 @@ export function Navbar() {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0">
+              <Button 
+                variant="ghost" 
+                className="h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0"
+                disabled={onAcceptRequestPage}
+              >
                 <Avatar className="h-6 w-6 rounded-full mb-0.5">
                   <AvatarImage src="https://placehold.co/24x24.png" alt="User Avatar" data-ai-hint="person avatar" />
                   <AvatarFallback><User className="h-4 w-4"/></AvatarFallback>
@@ -96,7 +102,11 @@ export function Navbar() {
           <div className="hidden sm:flex items-center h-full">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-full px-1.5 sm:px-2 py-0 w-[80px] sm:w-[90px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0">
+                <Button 
+                  variant="ghost" 
+                  className="h-full px-1.5 sm:px-2 py-0 w-[80px] sm:w-[90px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0"
+                  disabled={onAcceptRequestPage}
+                >
                   <LayoutGrid className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5" />
                   <div className="flex items-center text-xs leading-tight">
                     For Business <ChevronDown className="h-3 w-3 ml-0.5" />
@@ -110,10 +120,24 @@ export function Navbar() {
             </DropdownMenu>
             
             <div className="flex flex-col items-start justify-center text-center pl-2 pr-1 h-full flex-shrink-0">
-              <Link href="#" className="text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap">
+              <Link 
+                href={onAcceptRequestPage ? undefined : "#"}
+                aria-disabled={onAcceptRequestPage}
+                className={cn(
+                  "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
+                  onAcceptRequestPage && "opacity-50 pointer-events-none cursor-not-allowed"
+                )}
+              >
                 Reactivate
               </Link>
-              <Link href="#" className="text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap">
+              <Link 
+                href={onAcceptRequestPage ? undefined : "#"}
+                aria-disabled={onAcceptRequestPage}
+                className={cn(
+                  "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
+                  onAcceptRequestPage && "opacity-50 pointer-events-none cursor-not-allowed"
+                )}
+              >
                 Premium: 50% Off
               </Link>
             </div>
