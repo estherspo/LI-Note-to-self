@@ -102,6 +102,19 @@ export const mockProfiles: Profile[] = [
       parseExperienceString('Senior Data Scientist at Insightful Analytics (2019-Present)'),
       parseExperienceString('Data Analyst at Quant Solutions (2017-2019)'),
     ],
+  },
+  {
+    id: 'emily-white',
+    name: 'Emily White',
+    headline: 'Marketing Specialist at Creative Solutions',
+    avatarUrl: 'https://placehold.co/128x128.png',
+    dataAiHint: 'woman smiling professional',
+    company: 'Creative Solutions',
+    location: 'San Francisco, CA',
+    bio: 'Passionate about digital marketing and brand strategy. Loves hiking and photography.',
+    experience: [
+      { title: 'Marketing Coordinator', company: 'AdVentures Inc.', dates: '2020-2022', responsibilities: ['Managed social media campaigns', 'Developed content strategy'] },
+    ],
   }
 ];
 

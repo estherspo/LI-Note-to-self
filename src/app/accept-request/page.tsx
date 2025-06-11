@@ -40,7 +40,7 @@ export default function AcceptRequestPage() {
           ...profile,
           name: 'Alan Stein', // Override name
           headline: "Want a better job faster? DM Me!...", // Override headline
-          avatarUrl: 'https://placehold.co/128x128.png', // Keep or change avatar
+          avatarUrl: 'https://placehold.co/128x128.png', 
           dataAiHint: 'man professional',
           message: "Hunter, As a member of the 'Catnip Connoisseurs' community, I saw you introduce yourself in The Friends of Catnip's newsletter. Your insights on the latest feather toy aerodynamics were fascinating! Would love to connect and share ideas.",
           mutualConnectionsText: "Deepa Chand and 5 other mutual connections",
@@ -52,20 +52,32 @@ export default function AcceptRequestPage() {
           ...profile,
           name: 'Sanjay Makasana', // Override name
           headline: "Founder & CEO at Teamcamp | Simplifying Project Execution for Agencies", // Override headline
-          avatarUrl: 'https://placehold.co/128x128.png', // Keep or change avatar
+          avatarUrl: 'https://placehold.co/128x128.png', 
           dataAiHint: 'man smiling',
-          mutualConnectionsText: "Lucy Cray The Cat is a mutual connection", // Updated mutual connection
+          mutualConnectionsText: "Lucy Cray The Cat is a mutual connection", 
           isVerified: true,
         };
       }
-      return profile as PendingInvitation; // Default case
-    }).filter(p => p.id === 'john-smith' || p.id === 'bob-brown'); // Only keep mapped profiles for now
+      if (profile.id === 'emily-white') { // Map Emily White to Priya Sharma
+        return {
+          ...profile,
+          name: 'Priya Sharma',
+          headline: "Senior Software Engineer at Innovatech | Building Next-Gen Solutions",
+          avatarUrl: 'https://placehold.co/128x128.png',
+          dataAiHint: 'woman developer',
+          message: "Hi Hunter, I came across your profile and was impressed by your work in the MeowCorp community. I'd love to connect and discuss potential collaborations on future purrjects!",
+          mutualConnectionsText: "John Smith and 2 other mutual connections",
+          isVerified: false,
+          showLinkedInIcon: false,
+        };
+      }
+      return profile as PendingInvitation; 
+    }).filter(p => p.id === 'john-smith' || p.id === 'bob-brown' || p.id === 'emily-white'); 
 
     setPendingInvitations(mappedInvitations);
   }, [connections]);
 
   const handleAccept = (inviter: PendingInvitation) => {
-    // Find the original profile to add, as inviter might have modified name/details
     const originalProfile = allMockProfiles.find(p => p.id === inviter.id);
     if (originalProfile) {
       addConnection(originalProfile, `Accepted connection with ${inviter.name}.`);
