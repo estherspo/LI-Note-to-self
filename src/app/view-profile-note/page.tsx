@@ -6,12 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Linkedin, Users, X } from "lucide-react";
+import { Linkedin, Users, X, StickyNote, Edit3 } from "lucide-react";
 
 export default function ViewProfileNotePage() {
-  const profileName = "Shinji Kim";
-  const profileLinkedInUrl = "linkedin.com/in/shinjikim";
-  const connectionDate = "Dec 23, 2019";
+  const profileName = "Hunter The Cat";
+  const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
+  const connectionDate = "Jan 15, 2024";
+  const noteToSelfText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
 
   // Placeholder for multiple avatars
   const premiumUserAvatars = [
@@ -50,6 +51,21 @@ export default function ViewProfileNotePage() {
                   <p className="text-sm text-muted-foreground">{connectionDate}</p>
                 </div>
               </div>
+              
+              <div className="flex items-start gap-3 pt-2">
+                <StickyNote className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <p className="font-medium text-foreground">Note to self</p>
+                    <Button variant="ghost" size="sm" className="h-auto px-2 py-1 text-xs text-primary hover:bg-muted/50" onClick={() => console.log("Edit note clicked (visual only)")}>
+                      <Edit3 className="h-3 w-3 mr-1" />
+                      Edit
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground whitespace-pre-line">{noteToSelfText}</p>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -81,3 +97,4 @@ export default function ViewProfileNotePage() {
     </div>
   );
 }
+
