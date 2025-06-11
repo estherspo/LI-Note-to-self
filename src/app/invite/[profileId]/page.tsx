@@ -40,7 +40,7 @@ export default function InvitePage() {
   if (profile === undefined || connectionsLoading) {
     return (
       <div className="w-full space-y-6">
-        <Card>
+        <Card className="overflow-hidden">
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
           <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Parent flex-col */}
             <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start"> {/* self-start for sm+ */}
@@ -86,23 +86,40 @@ export default function InvitePage() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="px-6 pt-4 pb-6 space-y-8">
-            <div>
-              <Skeleton className="h-6 w-1/4 mb-3 bg-muted" />
-              <Skeleton className="h-4 w-full bg-muted" />
-              <Skeleton className="h-4 w-5/6 bg-muted mt-2" />
-              <Skeleton className="h-4 w-full bg-muted mt-2" />
-            </div>
-            <div>
-              <Skeleton className="h-6 w-1/4 mb-3 bg-muted" />
-              <Skeleton className="h-4 w-full bg-muted mb-2" />
-              <Skeleton className="h-4 w-full bg-muted" />
-            </div>
-            <div>
-              <Skeleton className="h-6 w-1/4 mb-3 bg-muted" />
-              <Skeleton className="h-4 w-full bg-muted mb-2" />
-              <Skeleton className="h-4 w-full bg-muted" />
-            </div>
+          {/* No CardContent here for the main skeleton card anymore */}
+        </Card>
+
+        {/* Skeleton for Highlights Card */}
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-1/3 bg-muted" /> {/* "Highlights" title */}
+          </CardHeader>
+          <CardContent className="pt-0">
+            <Skeleton className="h-4 w-full bg-muted" />
+            <Skeleton className="h-4 w-5/6 bg-muted mt-2" />
+            <Skeleton className="h-4 w-full bg-muted mt-2" />
+          </CardContent>
+        </Card>
+
+        {/* Skeleton for Experience Card */}
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-1/4 bg-muted" /> {/* "Experience" title */}
+          </CardHeader>
+          <CardContent className="space-y-2 pt-0">
+            <Skeleton className="h-4 w-full bg-muted" />
+            <Skeleton className="h-4 w-full bg-muted" />
+          </CardContent>
+        </Card>
+
+        {/* Skeleton for Education Card */}
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-1/4 bg-muted" /> {/* "Education" title */}
+          </CardHeader>
+          <CardContent className="space-y-2 pt-0">
+            <Skeleton className="h-4 w-full bg-muted" />
+            <Skeleton className="h-4 w-full bg-muted" />
           </CardContent>
         </Card>
       </div>
@@ -138,14 +155,13 @@ export default function InvitePage() {
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Parent flex-col */}
-          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start"> {/* self-start for sm+ */}
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
+          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start">
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="w-full mt-4 text-center sm:text-left"> {/* Text block centers on XS, left on SM+ */}
-            {/* Top Row: Name/Degree vs Company */}
+          <div className="w-full mt-4 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row justify-between items-start mb-1">
               <div className="w-full sm:w-auto text-center sm:text-left">
                 <CardTitle className="font-headline text-3xl flex items-center justify-center sm:justify-start">
@@ -168,7 +184,6 @@ export default function InvitePage() {
             </div>
 
             <p className="text-lg text-foreground mb-2 text-center sm:text-left">{profile.headline}</p>
-             {/* Buttons Section - Moved Up */}
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
               <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
                 {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
@@ -210,38 +225,49 @@ export default function InvitePage() {
             </p>
           </div>
         </CardHeader>
-        
-        <CardContent className="px-6 pt-4 pb-6">
-          {profile.bio && (
-            <div className="mt-6 pt-6 border-t">
-              <h4 className="font-semibold text-lg mb-2">Highlights</h4>
-              <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-line">{profile.bio}</p>
-            </div>
-          )}
-
-          {profile.experience && profile.experience.length > 0 && (
-            <div className="mt-6 pt-6 border-t">
-              <h4 className="font-semibold text-lg mb-2">Experience</h4>
-              <ul className="space-y-3">
-                {profile.experience.map((exp, idx) => (
-                  <li key={idx} className="text-sm text-foreground/80">{exp}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {profile.education && profile.education.length > 0 && (
-            <div className="mt-6 pt-6 border-t">
-              <h4 className="font-semibold text-lg mb-2">Education</h4>
-              <ul className="space-y-3">
-                {profile.education.map((edu, idx) => (
-                  <li key={idx} className="text-sm text-foreground/80">{edu}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </CardContent>
+        {/* CardContent previously here is now removed */}
       </Card>
+
+      {profile.bio && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl">Highlights</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-line">{profile.bio}</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {profile.experience && profile.experience.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl">Experience</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-3">
+              {profile.experience.map((exp, idx) => (
+                <li key={idx} className="text-sm text-foreground/80">{exp}</li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
+
+      {profile.education && profile.education.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl">Education</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-3">
+              {profile.education.map((edu, idx) => (
+                <li key={idx} className="text-sm text-foreground/80">{edu}</li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       {profile && (
         <InvitationDialog
@@ -255,7 +281,3 @@ export default function InvitePage() {
   );
 }
     
-
-    
-
-
