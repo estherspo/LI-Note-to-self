@@ -83,7 +83,7 @@ export function PostAcceptNoteDialog({ connection, isOpen, onOpenChange }: PostA
             Add a note to self
           </DialogTitle>
           <DialogDescription>
-            Only you will see this note. You can always add or edit it later from your network. This note is for {connection.name}.
+            Only you will see this note. You can edit it later from {connection.name}'s Contact info card.
           </DialogDescription>
         </DialogHeader>
 
