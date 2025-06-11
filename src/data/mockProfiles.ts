@@ -1,3 +1,4 @@
+
 import type { Profile, Connection } from '@/lib/types';
 
 export const mockProfiles: Profile[] = [
@@ -9,7 +10,7 @@ export const mockProfiles: Profile[] = [
     dataAiHint: 'tabby cat',
     company: 'MeowCorp',
     location: 'California, CA',
-    bio: 'Passionate about building scalable web applications and innovative tech. Lover of hiking and photography.',
+    bio: 'Experienced feline professional specializing in human morale boosting and late-night zoomies. Known for strong interpersonal skills (especially with houseplants and cardboard boxes) and a keen ability to detect the exact moment someone is about to sit down.',
     experience: ['Software Engineer at Innovate Corp (2018-2020)', 'Junior Developer at WebStart LLC (2016-2018)'],
     education: ['M.S. Computer Science, Stanford University', 'B.S. Software Engineering, UC Berkeley'],
   },
