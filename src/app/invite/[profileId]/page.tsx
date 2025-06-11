@@ -39,32 +39,33 @@ export default function InvitePage() {
 
   if (profile === undefined || connectionsLoading) {
     return (
-      <div className="w-full space-y-6"> {/* Changed: Removed max-w-3xl mx-auto, added w-full */}
+      <div className="w-full space-y-6">
         <Card>
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
-          <CardHeader className="relative -mt-[64px] px-6 pb-2 flex flex-row items-start gap-4"> {/* Flex header, -mt-16 is -4rem or -64px */}
-            <Skeleton className="h-32 w-32 rounded-full border-4 border-background bg-muted flex-shrink-0" /> {/* Avatar skeleton */}
-            <div className="flex-1 pt-4"> {/* Main text block wrapper for skeleton */}
-              <div className="flex flex-row justify-between items-start">
-                <div className="flex-1 space-y-2 mr-4"> {/* Name and Headline wrapper */}
-                  <Skeleton className="h-8 w-3/4 bg-muted" /> {/* Name skeleton */}
+          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col items-center"> {/* Avatar and details will be centered */}
+            <Skeleton className="h-32 w-32 rounded-full border-4 border-background bg-muted" /> {/* Avatar skeleton */}
+            
+            <div className="w-full mt-4"> {/* Text details block wrapper */}
+              <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-2 w-full">
+                <div className="flex-1 space-y-2 text-center sm:text-left"> {/* Name and Headline wrapper */}
+                  <Skeleton className="h-8 w-3/4 bg-muted mx-auto sm:mx-0" /> {/* Name skeleton */}
                   <Skeleton className="h-5 w-full bg-muted" /> {/* Headline skeleton */}
                 </div>
-                <Skeleton className="h-10 w-32 bg-muted" /> {/* Button Skeleton */}
+                <Skeleton className="h-10 w-32 bg-muted mt-2 sm:mt-0" /> {/* Button Skeleton */}
               </div>
-              <div className="mt-2 space-y-1"> {/* Company/Location wrapper for skeleton */}
-                <div className="flex items-center gap-2">
+              <div className="mt-2 space-y-1 w-full text-center sm:text-left"> {/* Company/Location wrapper */}
+                <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
                   <Skeleton className="h-4 w-4 bg-muted" />
                   <Skeleton className="h-4 w-1/2 bg-muted" />
                 </div>
-                <div className="flex items-center gap-2 mt-1">
+                <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
                   <Skeleton className="h-4 w-4 bg-muted" />
                   <Skeleton className="h-4 w-1/3 bg-muted" />
                 </div>
               </div>
             </div>
           </CardHeader>
-          <CardContent className="px-6 pt-10 pb-6 space-y-8"> {/* Adjusted pt for space after header */}
+          <CardContent className="px-6 pt-4 pb-6 space-y-8"> {/* Adjusted pt for consistency */}
             <div>
               <Skeleton className="h-6 w-1/4 mb-3 bg-muted" /> {/* "About" title skeleton */}
               <Skeleton className="h-4 w-full bg-muted" />
@@ -89,7 +90,7 @@ export default function InvitePage() {
 
   if (profile === null) {
     return (
-       <Alert variant="destructive" className="max-w-lg mx-auto"> {/* Keep max-w-lg for error message centering */}
+       <Alert variant="destructive" className="max-w-lg mx-auto">
         <Info className="h-4 w-4" />
         <AlertTitle>Profile Not Found</AlertTitle>
         <AlertDescription>
@@ -100,33 +101,33 @@ export default function InvitePage() {
     );
   }
   
-  const coverPhotoUrl = "https://placehold.co/1200x300.png"; // Generic cover
+  const coverPhotoUrl = "https://placehold.co/1200x300.png";
 
   return (
-    <div className="w-full space-y-6"> {/* Changed: Removed max-w-3xl mx-auto, added w-full */}
+    <div className="w-full space-y-6">
       <Card className="overflow-hidden">
         <div className="relative h-48 bg-muted-foreground">
            <Image 
             src={coverPhotoUrl} 
             alt={`${profile.name}'s cover photo`} 
             fill
-            objectFit="cover"
+            style={{objectFit: "cover"}}
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pb-2 flex flex-row items-start gap-4"> {/* Flexbox for avatar and text block */}
-          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card flex-shrink-0">
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col items-center text-center sm:text-left">
+          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card">
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="flex-1 pt-5"> {/* Text content block, pt-5 for vertical alignment with avatar */}
-             <div className="flex flex-row justify-between items-start">
-                <div className="flex-1 mr-4"> {/* Added mr-4 to give space for button */}
+          <div className="w-full mt-4"> {/* Text content block */}
+             <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-2">
+                <div className="flex-1"> 
                     <CardTitle className="font-headline text-3xl">{profile.name}</CardTitle>
                     <p className="text-lg text-foreground">{profile.headline}</p>
                 </div>
-                <Button onClick={handleConnect} className="whitespace-nowrap" size="lg">
+                <Button onClick={handleConnect} className="whitespace-nowrap mt-2 sm:mt-0" size="lg">
                   {isAlreadyConnected ? <CheckCircle2 className="mr-2 h-5 w-5" /> : <UserPlus className="mr-2 h-5 w-5" />}
                   {isAlreadyConnected ? 'Connected' : 'Connect'}
                 </Button>
@@ -134,13 +135,13 @@ export default function InvitePage() {
 
             <div className="mt-2 space-y-1 text-sm text-muted-foreground">
               {profile.company && (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 justify-center sm:justify-start">
                   <Building className="h-4 w-4" />
                   <span>{profile.company}</span>
                 </div>
               )}
               {profile.location && (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 justify-center sm:justify-start">
                   <MapPin className="h-4 w-4" />
                   <span>{profile.location}</span>
                 </div>
@@ -192,4 +193,4 @@ export default function InvitePage() {
     </div>
   );
 }
-
+    
