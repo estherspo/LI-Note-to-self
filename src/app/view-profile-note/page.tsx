@@ -99,7 +99,7 @@ export default function ViewProfileNotePage() {
             <h3 className="text-lg font-semibold mb-3">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <Linkedin className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
+                <Linkedin className="h-6 w-6 text-foreground/80 mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-foreground">{profileName}'s Profile</p>
                   <Link href={profileActualLinkUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
@@ -108,15 +108,15 @@ export default function ViewProfileNotePage() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Users className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
+                <Users className="h-6 w-6 text-foreground/80 mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-foreground">Connected</p>
-                  <p className="text-sm text-muted-foreground">{connectionDate}</p>
+                  <p className="text-sm text-foreground/80">{connectionDate}</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-3 pt-2">
-                <StickyNote className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
+                <StickyNote className="h-6 w-6 text-foreground/80 mt-1 flex-shrink-0" />
                 <div className="flex-1">
                   <div className="flex justify-between items-center mb-1">
                     <p className="font-medium text-foreground">Note to self</p>
@@ -137,7 +137,7 @@ export default function ViewProfileNotePage() {
                         maxLength={MAX_NOTE_LENGTH + 20} 
                         className="min-h-[100px] border-input text-sm"
                       />
-                      <div className={`text-xs ${characterCount > MAX_NOTE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
+                      <div className={`text-xs ${characterCount > MAX_NOTE_LENGTH ? 'text-destructive' : 'text-foreground/70'}`}>
                         {characterCount}/{MAX_NOTE_LENGTH} characters
                       </div>
                       <div className="flex justify-end gap-2">
@@ -150,7 +150,7 @@ export default function ViewProfileNotePage() {
                       </div>
                     </div>
                   ) : (
-                    <p className="text-sm text-muted-foreground whitespace-pre-line">{noteToSelf || "No note added yet."}</p>
+                    <p className="text-sm text-foreground/80 whitespace-pre-line">{noteToSelf || "No note added yet."}</p>
                   )}
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function ViewProfileNotePage() {
 
           <div>
             <h4 className="text-md font-semibold mb-1">Get up to 4.6x replies when you message with InMail</h4>
-            <p className="text-sm text-muted-foreground mb-3">
+            <p className="text-sm text-foreground/80 mb-3">
               Message {profileName.split(' ')[0]} with InMail credits and write your own message or generate a message draft with the help of AI.
             </p>
             <div className="flex items-center mb-3">
@@ -174,16 +174,15 @@ export default function ViewProfileNotePage() {
                   </Avatar>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground">Sonia and millions of other members use Premium</p>
+              <p className="text-xs text-foreground/80">Sonia and millions of other members use Premium</p>
             </div>
-            <Button className="bg-amber-400 hover:bg-amber-500 text-black font-semibold rounded-full h-9 px-6">
+            <Button className="bg-amber-400 hover:bg-amber-500 text-black font-semibold rounded-full h-9 px-3">
               Reactivate Premium
             </Button>
-            <p className="text-xs text-muted-foreground text-center mt-2">Cancel anytime. No hidden fees.</p>
+            <p className="text-xs text-foreground/80 text-center mt-2">Cancel anytime. No hidden fees.</p>
           </div>
         </div>
       </DialogContent>
     </Dialog>
   );
 }
-
