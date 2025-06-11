@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Linkedin, Users, X, StickyNote, Edit3, Save, MessageSquare } from "lucide-react"; // Added Save, MessageSquare
+import { Linkedin, Users, X, StickyNote, Edit3, Save, MessageSquare } from "lucide-react"; 
 
 const MAX_NOTE_LENGTH = 500;
 
@@ -111,10 +111,10 @@ export default function ViewProfileNotePage() {
                       </div>
                       <div className="flex justify-end gap-2">
                         <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
-                           <X className="mr-1 h-4 w-4" /> Cancel
+                           Cancel
                         </Button>
                         <Button size="sm" onClick={handleSaveNote} disabled={characterCount > MAX_NOTE_LENGTH}>
-                          <Save className="mr-1 h-4 w-4" /> Save
+                          Save
                         </Button>
                       </div>
                     </div>
