@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Users, Link2, MoreHorizontal, ShieldCheck, Gamepad2, Feather, Dot, PawPrint } from 'lucide-react'; 
+import { Users, Link2, MoreHorizontal, ShieldCheck, Feather, Dot, PawPrint } from 'lucide-react'; 
 import { useToast } from "@/hooks/use-toast";
 
 interface PendingInvitation extends Profile {
@@ -101,17 +101,23 @@ export default function AcceptRequestPage() {
     { 
       icon: Feather, 
       title: "Feather Frenzy", 
-      description: "Gats goes wild for the flapping, swooping feather beast!" 
+      description: "Gats goes wild for the flapping, swooping feather beast!",
+      iconColorClass: "text-primary",
+      buttonClasses: "bg-primary text-primary-foreground hover:bg-primary/90",
     },
     { 
       icon: Dot, 
       title: "Dot of Doom", 
-      description: "That sneaky red dot must be caught… no matter the cost!" 
+      description: "That sneaky red dot must be caught… no matter the cost!",
+      iconColorClass: "text-green-600",
+      buttonClasses: "bg-green-600 text-white hover:bg-green-700",
     },
     { 
       icon: PawPrint, 
       title: "Greeble Gambit", 
-      description: "Unseen foes lurk, requiring swift paw-eye coordination and tactical pounces!" 
+      description: "Unseen foes lurk, requiring swift paw-eye coordination and tactical pounces!",
+      iconColorClass: "text-purple-600",
+      buttonClasses: "bg-purple-600 text-white hover:bg-purple-700",
     },
   ];
 
@@ -228,21 +234,21 @@ export default function AcceptRequestPage() {
 
       <Card className="shadow-lg">
         <CardHeader className="px-4 sm:px-6 py-4">
-          <CardTitle className="text-xl font-semibold flex items-center gap-2">
-            <Gamepad2 className="h-6 w-6 text-primary" />
-            Play Daily Games
+          <CardTitle className="text-xl font-semibold">
+            Play daily games
           </CardTitle>
         </CardHeader>
-        <CardContent className="px-4 sm:px-6 pb-5 space-y-4">
-          {dailyGames.map((game, index) => (
-            <div key={index} className="flex items-start gap-3">
-              <game.icon className="h-6 w-6 text-muted-foreground mt-0.5 shrink-0" />
-              <div>
-                <h4 className="font-medium text-foreground">{game.title}</h4>
-                <p className="text-sm text-muted-foreground">{game.description}</p>
+        <CardContent className="px-4 sm:px-6 pb-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {dailyGames.map((game, index) => (
+              <div key={index} className="flex flex-col items-center text-center p-6 border rounded-lg shadow-sm space-y-3 bg-card">
+                <game.icon className={`h-10 w-10 mb-1 ${game.iconColorClass}`} />
+                <h4 className="text-lg font-semibold text-foreground">{game.title}</h4>
+                <p className="text-sm text-muted-foreground flex-grow min-h-[50px]">{game.description}</p>
+                <Button className={`${game.buttonClasses} w-full sm:w-auto`}>Play</Button>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </CardContent>
       </Card>
     </div>
