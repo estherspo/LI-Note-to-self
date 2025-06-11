@@ -167,6 +167,11 @@ export const getMockProfileById = (id: string): Profile | undefined => {
   return mockProfiles.find(p => p.id === id);
 };
 
-// Initial connections should be empty for the desired "reset" state.
-// This ensures that Salty, Jack, and George appear as invitations for Hunter.
+// This ensures that when localStorage is cleared and the app initializes,
+// Hunter The Cat starts with no connections. Consequently, profiles like
+// Salty, Jack, and George will appear as new invitations on the
+// /accept-request page as per its logic.
 export const initialConnections: Connection[] = [];
+
+
+    
