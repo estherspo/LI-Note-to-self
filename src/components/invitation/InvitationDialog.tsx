@@ -18,8 +18,8 @@ import { Label } from '@/components/ui/label';
 import type { Profile } from '@/lib/types';
 import { useConnections } from '@/hooks/useConnections';
 import { useToast } from '@/hooks/use-toast';
-import { handleGenerateNotePrompts, saveConnectionNote as serverSaveNote } from '@/lib/actions'; // Server action
-import { Lightbulb, Send, Loader2, CheckCircle2, Save } from 'lucide-react';
+import { saveConnectionNote as serverSaveNote } from '@/lib/actions'; // Server action
+import { Send, Loader2, CheckCircle2, Save } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 interface InvitationDialogProps {
@@ -39,8 +39,6 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
 
   const [standardMessage, setStandardMessage] = useState('');
   const [privateNote, setPrivateNote] = useState(existingConnection?.privateNote || '');
-  const [aiPrompts, setAiPrompts] = useState<string[]>([]);
-  const [isLoadingPrompts, setIsLoadingPrompts] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
@@ -49,26 +47,9 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
     if (isOpen) {
       setStandardMessage(''); // LinkedIn typically clears this
       setPrivateNote(existingConnection?.privateNote || '');
-      setAiPrompts([]);
     }
   }, [isOpen, profile, existingConnection]);
 
-
-  const handleGeneratePrompts = async () => {
-    setIsLoadingPrompts(true);
-    try {
-      const prompts = await handleGenerateNotePrompts(profile);
-      setAiPrompts(prompts);
-    } catch (error) {
-      toast({
-        title: "Error Generating Prompts",
-        description: "Could not generate AI suggestions at this time.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoadingPrompts(false);
-    }
-  };
 
   const handleSendInvitation = async () => {
     setIsSaving(true);
@@ -169,32 +150,6 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Button variant="outline" onClick={handleGeneratePrompts} disabled={isLoadingPrompts} className="w-full sm:w-auto">
-              {isLoadingPrompts ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Lightbulb className="mr-2 h-4 w-4" />
-              )}
-              Generate Private Note Ideas (AI)
-            </Button>
-            {aiPrompts.length > 0 && (
-              <div className="space-y-1.5 pt-1">
-                <p className="text-xs text-muted-foreground">Suggestions (click to use):</p>
-                {aiPrompts.map((prompt, index) => (
-                  <Button
-                    key={index}
-                    variant="ghost"
-                    size="sm"
-                    className="w-full text-left justify-start h-auto py-1.5 px-2 text-primary hover:bg-primary/10"
-                    onClick={() => setPrivateNote(prompt)}
-                  >
-                    {prompt}
-                  </Button>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
 
         <DialogFooter className="gap-2 sm:gap-0">
