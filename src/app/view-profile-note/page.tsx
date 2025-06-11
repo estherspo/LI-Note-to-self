@@ -21,7 +21,6 @@ import {
 
 const MAX_NOTE_LENGTH = 500;
 const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
-// const NOTE_STORAGE_KEY = 'hunter-profile-note'; // Removed localStorage logic
 
 export default function ViewProfileNotePage() {
   const router = useRouter();
@@ -43,10 +42,10 @@ export default function ViewProfileNotePage() {
     }
   }, [isDialogOpen, router]);
 
-  // useEffect(() => { // Removed localStorage loading
-  //   setNoteToSelf(defaultInitialNoteText);
-  //   setEditedNoteText(defaultInitialNoteText);
-  // }, []);
+  useEffect(() => { 
+    setNoteToSelf(defaultInitialNoteText);
+    setEditedNoteText(defaultInitialNoteText);
+  }, []);
 
 
   const premiumUserAvatars = [
@@ -70,7 +69,6 @@ export default function ViewProfileNotePage() {
       return;
     }
     setNoteToSelf(editedNoteText);
-    // localStorage.setItem(NOTE_STORAGE_KEY, editedNoteText); // Removed localStorage saving
     setIsEditingNote(false);
     toast({
       title: (
@@ -79,7 +77,6 @@ export default function ViewProfileNotePage() {
           <span>Note to self Saved</span>
         </div>
       ),
-      // description: "Your note has been updated for this session.", // Removed description
     });
   };
 
@@ -92,13 +89,12 @@ export default function ViewProfileNotePage() {
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogContent className="sm:max-w-md"> {/* Reverted to sm:max-w-md */}
+      <DialogContent className="sm:max-w-md"> 
         <DialogHeader className="flex flex-row items-center justify-between pr-6"> 
           <DialogTitle className="font-headline text-xl font-semibold">{profileName}</DialogTitle>
-          {/* The X button is now handled by DialogContent's default close */}
         </DialogHeader>
         
-        <div className="space-y-6 pt-2 pb-6 max-h-[75vh] overflow-y-auto pr-3 pl-1">
+        <div className="space-y-6 pt-2 pb-6 max-h-[56vh] overflow-y-auto pr-3 pl-1">
           <div>
             <h3 className="text-lg font-semibold mb-3">Contact Info</h3>
             <div className="space-y-4">
