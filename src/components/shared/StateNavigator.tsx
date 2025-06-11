@@ -4,16 +4,15 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Send, UserCheck, UserCircle, SearchCode } from 'lucide-react'; // Icons are still imported but will not be used
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 const navigationStates = [
-  { name: 'Send Request', href: '/invite/jane-doe', icon: Send, description: "Mock sending an invitation to a new profile." },
-  { name: 'Accept Request', href: '/accept-request', icon: UserCheck, description: "Simulate accepting an incoming request." },
-  { name: 'View Connection Note', href: '/view-profile-note', icon: UserCircle, description: "View an existing connection's profile and private note." },
-  { name: 'Search Network', href: '/', icon: SearchCode, description: "Search your connections by name, headline, or note." },
+  { name: 'Send Request', href: '/invite/jane-doe', description: "Mock sending an invitation to a new profile." },
+  { name: 'Accept Request', href: '/accept-request', description: "Simulate accepting an incoming request." },
+  { name: 'View Connection Note', href: '/view-profile-note', description: "View an existing connection's profile and private note." },
+  { name: 'Search Network', href: '/', description: "Search your connections by name, headline, or note." },
 ];
 
 export function StateNavigator() {
@@ -36,10 +35,10 @@ export function StateNavigator() {
   }, [pathname]);
 
   return (
-    <Card className="sticky bottom-0 left-0 right-0 w-full z-40 bg-card border-t shadow-lg rounded-none">
+    <Card className="dark sticky bottom-0 left-0 right-0 w-full z-40 bg-card border-t shadow-lg rounded-none">
       <CardHeader className="pb-3 pt-4 container mx-auto px-4">
         <CardTitle className="text-base font-headline text-primary">Prototype State Navigator</CardTitle>
-        <CardDescription className="text-xs">Use these buttons to switch between different app states/features for Rememble.</CardDescription>
+        <CardDescription className="text-xs text-muted-foreground">Use these buttons to switch between different app states/features for Rememble.</CardDescription>
       </CardHeader>
       <CardContent className="pb-4 pt-0 container mx-auto px-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -50,8 +49,8 @@ export function StateNavigator() {
                 key={state.name}
                 variant={isButtonActive ? 'default' : 'outline'}
                 className={cn(
-                  "w-full justify-center text-center h-auto py-2 px-3", // Adjusted padding and justification
-                  isButtonActive && "ring-2 ring-primary ring-offset-1"
+                  "w-full justify-center text-center h-auto py-2 px-3",
+                  isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" 
                 )}
                 asChild
                 size="sm"
