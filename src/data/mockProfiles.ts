@@ -90,7 +90,7 @@ export const mockProfiles: Profile[] = [
     ],
   },
   {
-    id: 'bob-brown',
+    id: 'jack-cray-the-cat', // Updated ID
     name: 'Jack Cray The Cat',
     headline: 'VP of Nocturnal Operations at Zoomies United™',
     avatarUrl: 'https://placehold.co/128x128.png',
@@ -114,7 +114,7 @@ export const mockProfiles: Profile[] = [
     ],
   },
   {
-    id: 'emily-white', 
+    id: 'george-sweeney-the-cat', // Updated ID
     name: 'George Sweeney The Cat',
     headline: 'Executive Mealtime Coordinator at Food Logistics',
     avatarUrl: 'https://placehold.co/128x128.png',
@@ -167,37 +167,5 @@ export const getMockProfileById = (id: string): Profile | undefined => {
   return mockProfiles.find(p => p.id === id);
 };
 
-// Helper function to find a profile or throw an error if not found.
-const findProfileOrThrow = (id: string): Profile => {
-  const profile = mockProfiles.find(p => p.id === id);
-  if (!profile) {
-    // This should not happen with hardcoded IDs but is good practice.
-    throw new Error(`Profile with id ${id} not found in mockProfiles during initialConnections setup.`);
-  }
-  return profile;
-};
-
-// Define initial connections using specific profiles
-const profile1 = findProfileOrThrow('salty-sears'); // Salty Sears The Cat
-const profile2 = findProfileOrThrow('bob-brown');   // Jack Cray The Cat
-const profile3 = findProfileOrThrow('emily-white'); // George Sweeney The Cat
-
-export const initialConnections: Connection[] = [
-  {
-    ...profile1,
-    id: `conn-${profile1.id}-initial`, // Unique ID for connection
-    connectionDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 3 days ago
-    // privateNote, standardMessage are undefined by default for a "reset"
-  },
-  {
-    ...profile2,
-    id: `conn-${profile2.id}-initial`,
-    connectionDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 2 days ago
-  },
-  {
-    ...profile3,
-    id: `conn-${profile3.id}-initial`,
-    connectionDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 1 day ago
-  },
-];
-
+// Initial connections should be empty for the desired "reset" state
+export const initialConnections: Connection[] = [];

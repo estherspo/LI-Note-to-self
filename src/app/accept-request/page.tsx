@@ -30,13 +30,15 @@ export default function AcceptRequestPage() {
   const [noteDialogConnection, setNoteDialogConnection] = useState<Connection | null>(null);
 
   useEffect(() => {
-    const currentUserId = 'jane-doe'; 
+    const currentUserId = 'jane-doe'; // Hunter The Cat
 
-    const invitationProfileIdsOrder = ['salty-sears', 'bob-brown', 'emily-white'];
+    // These profiles should appear as invitations FOR Hunter The Cat
+    const invitationProfileIdsOrder = ['salty-sears', 'jack-cray-the-cat', 'george-sweeney-the-cat'];
 
     const invitations: PendingInvitation[] = invitationProfileIdsOrder.map(profileId => {
       const profile = allMockProfiles.find(p => p.id === profileId);
 
+      // If the profile is not found, or it's Hunter's own profile, or Hunter is already connected, don't show as invitation.
       if (!profile || profile.id === currentUserId || connections.some(c => c.id.includes(profile.id))) {
         return null;
       }
@@ -51,7 +53,7 @@ export default function AcceptRequestPage() {
           showLinkedInPremiumIcon: false,
         };
       }
-      if (profile.id === 'bob-brown') { // Jack Cray The Cat
+      if (profile.id === 'jack-cray-the-cat') { // Jack Cray The Cat
         return {
           ...profile,
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection",
@@ -60,7 +62,7 @@ export default function AcceptRequestPage() {
           showLinkedInPremiumIcon: false,
         };
       }
-      if (profile.id === 'emily-white') { // George Sweeney The Cat
+      if (profile.id === 'george-sweeney-the-cat') { // George Sweeney The Cat
         return {
           ...profile,
           message: "Heard you're the go-to cat for gourmet catnip reviews. Would love to pick your brain!",
@@ -70,7 +72,14 @@ export default function AcceptRequestPage() {
           showLinkedInPremiumIcon: true, 
         };
       }
-      return null;
+      // Fallback for any other profile ID in invitationProfileIdsOrder if not customized above
+      // This case shouldn't be hit with the current setup but is a safeguard.
+      return { 
+        ...profile,
+        isVerified: false,
+        showLinkedInIcon: false,
+        showLinkedInPremiumIcon: false,
+      };
     }).filter(invitation => invitation !== null) as PendingInvitation[];
 
     setPendingInvitations(invitations);
