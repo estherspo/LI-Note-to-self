@@ -57,10 +57,10 @@ export default function AcceptRequestPage() {
       if (profile.id === 'emily-white') { // Map emily-white (George Sweeney The Cat)
         return {
           ...profile, // This will bring George Sweeney The Cat's name, headline, avatar, etc. from mockProfiles
-          avatarUrl: 'https://placehold.co/128x128.png', // Keep placeholder or use profile.avatarUrl
+          avatarUrl: 'https://placehold.co/128x128.png', 
           dataAiHint: 'orange cat', // Override dataAiHint
           message: "Hi Hunter, I've heard tales of your sophisticated palate! As the Executive Mealtime Coordinator at Food Logistics, I'd be honored to connect and exchange notes on the latest gourmet kibble trends.",
-          mutualConnectionsText: "Alan Stein and 1 other mutual connection",
+          mutualConnectionsText: undefined, // Removed mutual connections
           isVerified: false,
           showLinkedInIcon: false,
         };
