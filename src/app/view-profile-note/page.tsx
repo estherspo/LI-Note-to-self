@@ -65,7 +65,7 @@ export default function ViewProfileNotePage() {
     setNoteToSelf(editedNoteText);
     setIsEditingNote(false);
     toast({
-      title: "Note Updated",
+      title: "Note to self Saved",
       description: "Your note to self has been updated for this session.",
     });
   };
