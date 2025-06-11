@@ -4,10 +4,10 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Send, UserCheck, UserCircle /* Corrected icon */, SearchCode } from 'lucide-react';
+import { Send, UserCheck, UserCircle, SearchCode } from 'lucide-react'; // Corrected UserCircle import if it was CircleUser
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react'; // Added useEffect, useState
+import { useEffect, useState } from 'react';
 
 const navigationStates = [
   { name: 'Send Request', href: '/invite/jane-doe', icon: Send, description: "Mock sending an invitation to a new profile." },
@@ -24,12 +24,9 @@ export function StateNavigator() {
     let newActiveHref: string | null = null;
     const sendRequestStateDefinition = navigationStates.find(state => state.name === 'Send Request');
 
-    // Logic to determine active state, mirroring the original isActive function
-    // The "Send Request" button is active if the pathname starts with /invite/
     if (sendRequestStateDefinition && pathname.startsWith('/invite/')) {
       newActiveHref = sendRequestStateDefinition.href;
     } else {
-      // Otherwise, active state is an exact match of href
       const matchedState = navigationStates.find(state => state.href === pathname);
       if (matchedState) {
         newActiveHref = matchedState.href;
@@ -61,7 +58,7 @@ export function StateNavigator() {
               >
                 <Link href={state.href}>
                   <state.icon className="mr-0 mb-0.5 sm:mr-1.5 sm:mb-0 h-4 w-4 flex-shrink-0" />
-                  <div className="flex flex-col">
+                  <div className="flex flex-col whitespace-normal"> {/* Added whitespace-normal here */}
                     <span className="text-xs font-medium">{state.name}</span>
                     <span className="hidden md:block text-xs text-muted-foreground mt-0.5 leading-tight">{state.description}</span>
                   </div>
@@ -74,4 +71,3 @@ export function StateNavigator() {
     </Card>
   );
 }
-
