@@ -90,8 +90,9 @@ export default function ViewProfileNotePage() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogContent className="sm:max-w-md"> 
-        <DialogHeader className="flex flex-row items-center justify-between pr-6"> 
+        <DialogHeader className="flex flex-col items-start pr-6"> 
           <DialogTitle className="font-headline text-xl font-semibold">{profileName}</DialogTitle>
+          <hr className="w-full border-primary my-2" />
         </DialogHeader>
         
         <div className="space-y-6 pt-2 pb-6 max-h-[56vh] overflow-y-auto pr-3 pl-1">
@@ -186,3 +187,4 @@ export default function ViewProfileNotePage() {
     </Dialog>
   );
 }
+
