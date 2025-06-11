@@ -170,7 +170,7 @@ export default function InvitePage() {
             <p className="text-lg text-foreground mb-2 text-center sm:text-left">{profile.headline}</p>
              {/* Buttons Section - Moved Up */}
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
-              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full" disabled>
+              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
                 {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
                 {isAlreadyConnected ? 'Message' : 'Connect'}
               </Button>
@@ -245,3 +245,4 @@ export default function InvitePage() {
     
 
     
+
