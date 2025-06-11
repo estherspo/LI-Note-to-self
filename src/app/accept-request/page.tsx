@@ -35,18 +35,6 @@ export default function AcceptRequestPage() {
     );
 
     const mappedInvitations: PendingInvitation[] = potentialInviters.map(profile => {
-      if (profile.id === 'john-smith') { // Map John Smith to Alan Stein
-        return {
-          ...profile,
-          name: 'Alan Stein', // Override name
-          headline: "Want a better job faster? DM Me!...", // Override headline
-          avatarUrl: 'https://placehold.co/128x128.png', 
-          dataAiHint: 'man professional',
-          message: "Hunter, As a member of the 'Catnip Connoisseurs' community, I saw you introduce yourself in The Friends of Catnip's newsletter. Your insights on the latest feather toy aerodynamics were fascinating! Would love to connect and share ideas.",
-          mutualConnectionsText: "Deepa Chand and 5 other mutual connections",
-          showLinkedInIcon: true,
-        };
-      }
       if (profile.id === 'bob-brown') { // Jack Cray The Cat
         return {
           ...profile, 
@@ -65,8 +53,17 @@ export default function AcceptRequestPage() {
           showLinkedInIcon: false,
         };
       }
+      if (profile.id === 'emily-white') { // George Sweeney The Cat
+        return {
+          ...profile, // name, headline, avatarUrl, dataAiHint come from mock
+          message: "Heard you're the go-to cat for gourmet catnip reviews. Would love to pick your brain!",
+          mutualConnectionsText: undefined, 
+          isVerified: false, 
+          showLinkedInIcon: false,
+        };
+      }
       return profile as PendingInvitation; 
-    }).filter(p => p.id === 'john-smith' || p.id === 'bob-brown' || p.id === 'salty-sears'); 
+    }).filter(p => p.id === 'bob-brown' || p.id === 'salty-sears' || p.id === 'emily-white'); 
 
     setPendingInvitations(mappedInvitations);
   }, [connections]);
