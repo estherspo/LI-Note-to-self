@@ -17,7 +17,7 @@ import { Label } from '@/components/ui/label';
 import type { Connection } from '@/lib/types';
 import { useConnections } from '@/hooks/useConnections';
 import { useToast } from '@/hooks/use-toast';
-import { Save, SkipForward, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 interface PostAcceptNoteDialogProps {
   connection: Connection | null;
@@ -80,10 +80,10 @@ export function PostAcceptNoteDialog({ connection, isOpen, onOpenChange }: PostA
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-xl font-headline">
-            Add a Note to self for {connection.name}?
+            Add a note to self
           </DialogTitle>
           <DialogDescription>
-            Only you will see this note. You can always add or edit it later from your network.
+            Only you will see this note. You can always add or edit it later from your network. This note is for {connection.name}.
           </DialogDescription>
         </DialogHeader>
 
@@ -106,7 +106,6 @@ export function PostAcceptNoteDialog({ connection, isOpen, onOpenChange }: PostA
 
         <DialogFooter className="gap-2 sm:gap-0">
           <Button type="button" variant="outline" onClick={handleSkip} disabled={isSaving}>
-            <SkipForward className="mr-2 h-4 w-4" />
             Skip
           </Button>
           <Button 
@@ -114,8 +113,8 @@ export function PostAcceptNoteDialog({ connection, isOpen, onOpenChange }: PostA
             onClick={handleSaveNote} 
             disabled={isSaving || characterCountPrivate > MAX_NOTE_TO_SELF_LENGTH}
           >
-            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
-            Save Note
+            {isSaving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            {isSaving ? 'Saving...' : 'Save Note'}
           </Button>
         </DialogFooter>
       </DialogContent>
