@@ -127,7 +127,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
                 value={standardMessage}
                 onChange={(e) => setStandardMessage(e.target.value)}
                 maxLength={MAX_STANDARD_MESSAGE_LENGTH}
-                className="min-h-[80px] border-primary/70"
+                className="min-h-[80px] border-2 border-primary"
               />
               <div className={`text-xs ${characterCountStandard > MAX_STANDARD_MESSAGE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
                 {characterCountStandard}/{MAX_STANDARD_MESSAGE_LENGTH} characters
