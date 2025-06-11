@@ -7,7 +7,6 @@ export interface Profile {
   location?: string;
   bio?: string; // For AI prompt generation
   experience?: string[]; // For AI prompt generation
-  education?: string[]; // For AI prompt generation
   dataAiHint?: string; // For placeholder image search keywords
 }
 

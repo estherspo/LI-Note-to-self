@@ -111,17 +111,6 @@ export default function InvitePage() {
             <Skeleton className="h-4 w-full bg-muted" />
           </CardContent>
         </Card>
-
-        {/* Skeleton for Education Card */}
-        <Card>
-          <CardHeader>
-            <Skeleton className="h-6 w-1/4 bg-muted" /> {/* "Education" title */}
-          </CardHeader>
-          <CardContent className="space-y-2 pt-0">
-            <Skeleton className="h-4 w-full bg-muted" />
-            <Skeleton className="h-4 w-full bg-muted" />
-          </CardContent>
-        </Card>
       </div>
     );
   }
@@ -155,7 +144,7 @@ export default function InvitePage() {
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col self-center sm:self-start">
           <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start">
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
@@ -248,21 +237,6 @@ export default function InvitePage() {
             <ul className="space-y-3">
               {profile.experience.map((exp, idx) => (
                 <li key={idx} className="text-sm text-foreground/80">{exp}</li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      )}
-
-      {profile.education && profile.education.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl">Education</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-3">
-              {profile.education.map((edu, idx) => (
-                <li key={idx} className="text-sm text-foreground/80">{edu}</li>
               ))}
             </ul>
           </CardContent>

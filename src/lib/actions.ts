@@ -1,3 +1,4 @@
+
 "use server";
 
 import { generateNotePrompts as aiGenerateNotePrompts } from '@/ai/flows/generate-note-prompts';
@@ -10,7 +11,7 @@ import type { Profile } from './types';
 export async function handleGenerateNotePrompts(profile: Profile): Promise<string[]> {
   try {
     // Construct a string from profile data for the AI
-    const profileDataString = `Name: ${profile.name}. Headline: ${profile.headline}. ${profile.company ? 'Company: ' + profile.company + '.' : ''} ${profile.location ? 'Location: ' + profile.location + '.' : ''} ${profile.bio ? 'Bio: ' + profile.bio + '.' : ''} ${profile.experience ? 'Experience: ' + profile.experience.join(', ') + '.' : ''} ${profile.education ? 'Education: ' + profile.education.join(', ') + '.' : ''}`;
+    const profileDataString = `Name: ${profile.name}. Headline: ${profile.headline}. ${profile.company ? 'Company: ' + profile.company + '.' : ''} ${profile.location ? 'Location: ' + profile.location + '.' : ''} ${profile.bio ? 'Bio: ' + profile.bio + '.' : ''} ${profile.experience ? 'Experience: ' + profile.experience.join(', ') + '.' : ''}`;
     
     const result = await aiGenerateNotePrompts({ profileData: profileDataString });
     return result.prompts;

@@ -6,13 +6,12 @@ export const mockProfiles: Profile[] = [
     id: 'jane-doe',
     name: 'Hunter The Cat',
     headline: 'Chief Vibe Officer (CVO)  at MeowCorp',
-    avatarUrl: 'https://placehold.co/128x128.png', // You can replace this with the actual path to your cat image
+    avatarUrl: 'https://placehold.co/128x128.png', 
     dataAiHint: 'tabby cat',
     company: 'MeowCorp',
     location: 'California, CA',
     bio: 'Experienced feline professional specializing in human morale boosting and late-night zoomies. Known for strong interpersonal skills (especially with houseplants and cardboard boxes) and a keen ability to detect the exact moment someone is about to sit down.',
-    experience: ['Software Engineer at Innovate Corp (2018-2020)', 'Junior Developer at WebStart LLC (2016-2018)'],
-    education: ['M.S. Computer Science, Stanford University', 'B.S. Software Engineering, UC Berkeley'],
+    experience: ['Chief Napping Officer at The Comfy Cushion (2021-Present)', 'Lead Playtime Innovator at String Theory Inc. (2019-2021)'],
   },
   {
     id: 'john-smith',
@@ -24,7 +23,6 @@ export const mockProfiles: Profile[] = [
     location: 'New York, NY',
     bio: 'Experienced Product Manager with a knack for user-centric design and market strategy. Avid reader and chess player.',
     experience: ['Product Lead at Alpha Innovations (2019-2021)', 'Associate PM at Beta Products (2017-2019)'],
-    education: ['MBA, Harvard Business School', 'B.A. Economics, Yale University'],
   },
   {
     id: 'alice-green',
@@ -36,7 +34,6 @@ export const mockProfiles: Profile[] = [
     location: 'Austin, TX',
     bio: 'Crafting delightful user experiences through empathy and design thinking. Enjoys painting and travel.',
     experience: ['Lead UX Designer at PixelPerfect Agency (2020-Present)', 'UI/UX Designer at MobileFirst Apps (2018-2020)'],
-    education: ['B.F.A. Graphic Design, Rhode Island School of Design'],
   },
   {
     id: 'bob-brown',
@@ -48,7 +45,6 @@ export const mockProfiles: Profile[] = [
     location: 'Chicago, IL',
     bio: 'Transforming data into actionable insights. Expertise in machine learning and statistical modeling. Loves board games.',
     experience: ['Senior Data Scientist at Insightful Analytics (2019-Present)', 'Data Analyst at Quant Solutions (2017-2019)'],
-    education: ['Ph.D. Statistics, University of Chicago', 'M.S. Data Science, Northwestern University'],
   }
 ];
 
