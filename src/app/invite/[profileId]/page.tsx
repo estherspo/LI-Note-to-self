@@ -182,7 +182,7 @@ export default function InvitePage() {
 
             <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1 justify-center sm:justify-start">
               <Users className="h-4 w-4"/>
-              Followed by Travis Broad {/* Mocked */}
+              Followed by Perry Sportello {/* Mocked */}
             </p>
             
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start">

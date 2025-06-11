@@ -3,12 +3,12 @@ import type { Profile, Connection } from '@/lib/types';
 export const mockProfiles: Profile[] = [
   {
     id: 'jane-doe',
-    name: 'Jane Doe',
-    headline: 'Senior Software Engineer at Tech Solutions Inc.',
-    avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'woman smiling',
-    company: 'Tech Solutions Inc.',
-    location: 'San Francisco, CA',
+    name: 'Hunter The Cat',
+    headline: 'Chief Vibe Officer (CVO)  at MeowCorp International Inc.',
+    avatarUrl: 'https://placehold.co/128x128.png', // You can replace this with the actual path to your cat image
+    dataAiHint: 'tabby cat',
+    company: 'MeowCorp International Inc.',
+    location: 'California, CA',
     bio: 'Passionate about building scalable web applications and innovative tech. Lover of hiking and photography.',
     experience: ['Software Engineer at Innovate Corp (2018-2020)', 'Junior Developer at WebStart LLC (2016-2018)'],
     education: ['M.S. Computer Science, Stanford University', 'B.S. Software Engineering, UC Berkeley'],
