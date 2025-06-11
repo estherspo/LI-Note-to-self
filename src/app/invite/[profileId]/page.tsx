@@ -47,7 +47,7 @@ export default function InvitePage() {
                 <Skeleton className="h-full w-full rounded-full bg-muted" />
             </Avatar>
             
-            <div className="w-full mt-4">
+            <div className="w-full mt-4 text-center sm:text-left">
               {/* Top Row Skeleton */}
               <div className="flex flex-col sm:flex-row justify-between items-start mb-2">
                 <div className="w-full sm:w-auto text-center sm:text-left">
@@ -79,10 +79,10 @@ export default function InvitePage() {
               </div>
               
               {/* Buttons Skeleton */}
-              <div className="flex flex-col sm:flex-row gap-2 items-center sm:items-start">
-                <Skeleton className="h-10 w-full sm:w-28 bg-muted" />
-                <Skeleton className="h-10 w-full sm:w-28 bg-muted" />
-                <Skeleton className="h-10 w-full sm:w-20 bg-muted" />
+              <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
+                <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
+                <Skeleton className="h-10 w-full sm:w-20 bg-muted rounded-full" />
               </div>
             </div>
           </CardHeader>
@@ -144,7 +144,7 @@ export default function InvitePage() {
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="w-full mt-4">
+          <div className="w-full mt-4 text-center sm:text-left">
             {/* Top Row: Name/Degree vs Company */}
             <div className="flex flex-col sm:flex-row justify-between items-start mb-1">
               <div className="w-full sm:w-auto text-center sm:text-left">
@@ -186,15 +186,15 @@ export default function InvitePage() {
             </p>
             
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap">
+              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
                 {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
                 {isAlreadyConnected ? 'Message' : 'Connect'}
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" className="rounded-full">
                 {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
                 {isAlreadyConnected ? 'Following' : 'Follow'}
               </Button>
-              <Button variant="outline" size="lg">More</Button>
+              <Button variant="outline" size="lg" className="rounded-full">More</Button>
             </div>
           </div>
         </CardHeader>
@@ -242,4 +242,6 @@ export default function InvitePage() {
     </div>
   );
 }
+    
+
     
