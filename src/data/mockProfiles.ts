@@ -167,6 +167,6 @@ export const getMockProfileById = (id: string): Profile | undefined => {
   return mockProfiles.find(p => p.id === id);
 };
 
-// Initial connections should be empty for the desired "reset" state
+// Initial connections should be empty for the desired "reset" state.
 // This ensures that Salty, Jack, and George appear as invitations for Hunter.
 export const initialConnections: Connection[] = [];
