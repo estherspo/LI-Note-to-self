@@ -22,8 +22,8 @@ export const mockProfiles: Profile[] = [
     id: 'hunter-the-cat',
     name: 'Hunter The Cat',
     headline: 'Chief Vibe Officer (CVO) at MeowCorp',
-    avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'tabby cat',
+    avatarUrl: 'https://scontent.cdninstagram.com/v/t51.2885-15/366099042_202111816049079_3015509776983050017_n.jpg',
+    // dataAiHint removed as it's now a specific image
     company: 'MeowCorp',
     location: 'California, CA',
     bio: 'Experienced feline professional specializing in human morale boosting and late-night zoomies. Known for strong interpersonal skills (especially with houseplants and cardboard boxes) and a keen ability to detect the exact moment someone is about to sit down.',
