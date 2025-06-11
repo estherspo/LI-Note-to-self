@@ -1,17 +1,47 @@
 
-import type { Profile, Connection } from '@/lib/types';
+import type { Profile, Connection, ExperienceEntry } from '@/lib/types';
+
+// Helper to parse old string format to new ExperienceEntry
+const parseExperienceString = (expStr: string): ExperienceEntry => {
+  const match = expStr.match(/(.*?) at (.*?)\s*\((.*?)\)/);
+  if (match) {
+    return {
+      title: match[1].trim(),
+      company: match[2].trim(),
+      dates: match[3].trim(),
+      responsibilities: [], // No responsibilities in old format
+    };
+  }
+  // Fallback if parsing fails (should ideally not happen with current data)
+  return { title: expStr, company: 'N/A', dates: 'N/A', responsibilities: [] };
+};
+
 
 export const mockProfiles: Profile[] = [
   {
     id: 'jane-doe',
     name: 'Hunter The Cat',
-    headline: 'Chief Vibe Officer (CVO)  at MeowCorp',
-    avatarUrl: 'https://placehold.co/128x128.png', 
+    headline: 'Chief Vibe Officer (CVO) at MeowCorp',
+    avatarUrl: 'https://placehold.co/128x128.png',
     dataAiHint: 'tabby cat',
     company: 'MeowCorp',
     location: 'California, CA',
     bio: 'Experienced feline professional specializing in human morale boosting and late-night zoomies. Known for strong interpersonal skills (especially with houseplants and cardboard boxes) and a keen ability to detect the exact moment someone is about to sit down.',
-    experience: ['Chief Napping Officer at The Comfy Cushion (2021-Present)', 'Lead Playtime Innovator at String Theory Inc. (2019-2021)'],
+    experience: [
+      {
+        title: 'Chief Vibe Officer',
+        company: 'MeowCorp',
+        dates: 'Jan 2025 – Present', // Future date for fun
+        responsibilities: [
+          'Set the tone for household relaxation and general cozy ambiance.',
+          'Expert in hallway monitoring.',
+          'Actively involved in client engagement via welcoming sniffs and nudges.'
+        ],
+        location: 'Home Office'
+      },
+      parseExperienceString('Chief Napping Officer at The Comfy Cushion (2021-2024)'),
+      parseExperienceString('Lead Playtime Innovator at String Theory Inc. (2019-2021)'),
+    ],
   },
   {
     id: 'john-smith',
@@ -22,7 +52,10 @@ export const mockProfiles: Profile[] = [
     company: 'Future Gadgets Co.',
     location: 'New York, NY',
     bio: 'Experienced Product Manager with a knack for user-centric design and market strategy. Avid reader and chess player.',
-    experience: ['Product Lead at Alpha Innovations (2019-2021)', 'Associate PM at Beta Products (2017-2019)'],
+    experience: [
+      parseExperienceString('Product Lead at Alpha Innovations (2019-2021)'),
+      parseExperienceString('Associate PM at Beta Products (2017-2019)'),
+    ],
   },
   {
     id: 'alice-green',
@@ -33,7 +66,10 @@ export const mockProfiles: Profile[] = [
     company: 'CreativeMinds Studio',
     location: 'Austin, TX',
     bio: 'Crafting delightful user experiences through empathy and design thinking. Enjoys painting and travel.',
-    experience: ['Lead UX Designer at PixelPerfect Agency (2020-Present)', 'UI/UX Designer at MobileFirst Apps (2018-2020)'],
+    experience: [
+      parseExperienceString('Lead UX Designer at PixelPerfect Agency (2020-Present)'),
+      parseExperienceString('UI/UX Designer at MobileFirst Apps (2018-2020)'),
+    ],
   },
   {
     id: 'bob-brown',
@@ -44,7 +80,10 @@ export const mockProfiles: Profile[] = [
     company: 'AnalyzeData Corp',
     location: 'Chicago, IL',
     bio: 'Transforming data into actionable insights. Expertise in machine learning and statistical modeling. Loves board games.',
-    experience: ['Senior Data Scientist at Insightful Analytics (2019-Present)', 'Data Analyst at Quant Solutions (2017-2019)'],
+    experience: [
+      parseExperienceString('Senior Data Scientist at Insightful Analytics (2019-Present)'),
+      parseExperienceString('Data Analyst at Quant Solutions (2017-2019)'),
+    ],
   }
 ];
 
@@ -56,15 +95,15 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 export const initialConnections: Connection[] = [
   {
     ...mockProfiles[1], // John Smith
-    id: 'conn-john-smith', // Ensure connection ID is unique if needed for list keys
+    id: 'conn-john-smith', 
     privateNote: "Met John at the 2023 Tech Conference. Discussed potential collaboration on product strategy.",
-    connectionDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), // 10 days ago
+    connectionDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), 
     standardMessage: "Hi John, enjoyed your talk at the conference. Would love to connect!",
   },
   {
     ...mockProfiles[2], // Alice Green
     id: 'conn-alice-green',
     privateNote: "Alice is a talented UX designer. We worked together on the MobileFirst project.",
-    connectionDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days ago
+    connectionDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), 
   },
 ];

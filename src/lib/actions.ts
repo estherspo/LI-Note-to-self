@@ -2,7 +2,7 @@
 "use server";
 
 import { generateNotePrompts as aiGenerateNotePrompts } from '@/ai/flows/generate-note-prompts';
-import type { Profile } from './types';
+import type { Profile, ExperienceEntry } from './types';
 
 // This is a mock/stub for actual database operations or API calls.
 // In a real app, this would interact with a database.
@@ -10,10 +10,23 @@ import type { Profile } from './types';
 
 export async function handleGenerateNotePrompts(profile: Profile): Promise<string[]> {
   try {
-    // Construct a string from profile data for the AI
-    const profileDataString = `Name: ${profile.name}. Headline: ${profile.headline}. ${profile.company ? 'Company: ' + profile.company + '.' : ''} ${profile.location ? 'Location: ' + profile.location + '.' : ''} ${profile.bio ? 'Bio: ' + profile.bio + '.' : ''} ${profile.experience ? 'Experience: ' + profile.experience.join(', ') + '.' : ''}`;
+    let experienceString = '';
+    if (profile.experience && profile.experience.length > 0) {
+      experienceString = 'Experience: ' + profile.experience.map(exp => {
+        let entryStr = `${exp.title} at ${exp.company} (${exp.dates})`;
+        if (exp.location) {
+          entryStr += ` located in ${exp.location}`;
+        }
+        if (exp.responsibilities && exp.responsibilities.length > 0) {
+          entryStr += `. Responsibilities included: ${exp.responsibilities.join(', ')}`;
+        }
+        return entryStr;
+      }).join('; Next role: ') + '.';
+    }
+
+    const profileDataString = `Name: ${profile.name}. Headline: ${profile.headline}. ${profile.company ? 'Current Company: ' + profile.company + '.' : ''} ${profile.location ? 'Location: ' + profile.location + '.' : ''} ${profile.bio ? 'Bio: ' + profile.bio + '.' : ''} ${experienceString}`;
     
-    const result = await aiGenerateNotePrompts({ profileData: profileDataString });
+    const result = await aiGenerateNotePrompts({ profileData: profileDataString.trim() });
     return result.prompts;
   } catch (error) {
     console.error("Error generating note prompts:", error);

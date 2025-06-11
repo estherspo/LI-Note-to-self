@@ -42,14 +42,13 @@ export default function InvitePage() {
       <div className="w-full space-y-6">
         <Card className="overflow-hidden">
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
-          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Parent flex-col */}
-            <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start"> {/* self-start for sm+ */}
+          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
+            <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start">
                 <Skeleton className="h-full w-full rounded-full bg-muted" />
             </Avatar>
             
-            <div className="w-full mt-4 text-center sm:text-left"> {/* Text block centers on XS, left on SM+ */}
-              {/* Top Row Skeleton */}
-              <div className="flex flex-col sm:flex-row justify-between items-start mb-2">
+            <div className="w-full mt-4 text-center sm:text-left">
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-1">
                 <div className="w-full sm:w-auto text-center sm:text-left">
                   <div className="flex items-center justify-center sm:justify-start">
                     <Skeleton className="h-8 w-40 bg-muted" /> 
@@ -63,36 +62,28 @@ export default function InvitePage() {
                 </div>
               </div>
 
-              {/* Headline Skeleton */}
               <Skeleton className="h-5 w-5/6 bg-muted mb-2 mx-auto sm:mx-0" />
               
-                {/* Buttons Skeleton - Moved up */}
               <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
                 <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
                 <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
                 <Skeleton className="h-10 w-full sm:w-20 bg-muted rounded-full" />
               </div>
 
-              {/* Location/Contact Skeleton */}
               <Skeleton className="h-4 w-1/2 bg-muted mb-2 mx-auto sm:mx-0" />
-              
-              {/* Followers Skeleton */}
               <Skeleton className="h-4 w-1/3 bg-muted mb-2 mx-auto sm:mx-0" />
               
-              {/* Followed By Skeleton */}
               <div className="flex items-center gap-1 mb-4 justify-center sm:justify-start">
                 <Skeleton className="h-4 w-4 bg-muted rounded-full"/>
                 <Skeleton className="h-4 w-28 bg-muted" />
               </div>
             </div>
           </CardHeader>
-          {/* No CardContent here for the main skeleton card anymore */}
         </Card>
 
-        {/* Skeleton for Highlights Card */}
         <Card>
           <CardHeader>
-            <Skeleton className="h-6 w-1/3 bg-muted" /> {/* "Highlights" title */}
+            <Skeleton className="h-6 w-1/3 bg-muted" />
           </CardHeader>
           <CardContent className="pt-0">
             <Skeleton className="h-4 w-full bg-muted" />
@@ -101,14 +92,25 @@ export default function InvitePage() {
           </CardContent>
         </Card>
 
-        {/* Skeleton for Experience Card */}
         <Card>
           <CardHeader>
             <Skeleton className="h-6 w-1/4 bg-muted" /> {/* "Experience" title */}
           </CardHeader>
-          <CardContent className="space-y-2 pt-0">
-            <Skeleton className="h-4 w-full bg-muted" />
-            <Skeleton className="h-4 w-full bg-muted" />
+          <CardContent className="space-y-6 pt-0">
+            <div className="space-y-1.5">
+              <Skeleton className="h-5 w-3/4 bg-muted" /> 
+              <Skeleton className="h-4 w-1/2 bg-muted" /> 
+              <Skeleton className="h-3 w-1/3 bg-muted" /> 
+              <div className="pl-5 pt-1 space-y-1.5">
+                <Skeleton className="h-4 w-full bg-muted" /> 
+                <Skeleton className="h-4 w-5/6 bg-muted" />
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <Skeleton className="h-5 w-2/3 bg-muted" />
+              <Skeleton className="h-4 w-1/2 bg-muted" />
+              <Skeleton className="h-3 w-1/3 bg-muted" />
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -144,7 +146,7 @@ export default function InvitePage() {
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col self-center sm:self-start">
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
           <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start">
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
@@ -214,7 +216,6 @@ export default function InvitePage() {
             </p>
           </div>
         </CardHeader>
-        {/* CardContent previously here is now removed */}
       </Card>
 
       {profile.bio && (
@@ -234,11 +235,23 @@ export default function InvitePage() {
             <CardTitle className="text-xl">Experience</CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3">
-              {profile.experience.map((exp, idx) => (
-                <li key={idx} className="text-sm text-foreground/80">{exp}</li>
+            <div className="space-y-6">
+              {profile.experience.map((expEntry, idx) => (
+                <div key={idx} className="space-y-1">
+                  <h4 className="font-semibold text-md">{expEntry.title}</h4>
+                  <p className="text-sm text-foreground/90">{expEntry.company}</p>
+                  <p className="text-xs text-muted-foreground">{expEntry.dates}</p>
+                  {expEntry.location && <p className="text-xs text-muted-foreground">{expEntry.location}</p>}
+                  {expEntry.responsibilities && expEntry.responsibilities.length > 0 && (
+                    <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-foreground/80 pl-1">
+                      {expEntry.responsibilities.map((resp, respIdx) => (
+                        <li key={respIdx}>{resp}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               ))}
-            </ul>
+            </div>
           </CardContent>
         </Card>
       )}

@@ -1,3 +1,12 @@
+
+export interface ExperienceEntry {
+  title: string;
+  company: string;
+  dates: string;
+  responsibilities?: string[];
+  location?: string; // Optional field
+}
+
 export interface Profile {
   id: string;
   name: string;
@@ -6,7 +15,7 @@ export interface Profile {
   company?: string;
   location?: string;
   bio?: string; // For AI prompt generation
-  experience?: string[]; // For AI prompt generation
+  experience?: ExperienceEntry[]; // Updated from string[]
   dataAiHint?: string; // For placeholder image search keywords
 }
 
