@@ -178,9 +178,9 @@ const findProfileOrThrow = (id: string): Profile => {
 };
 
 // Define initial connections using specific profiles
-const profile1 = findProfileOrThrow('john-smith'); // John Smith
-const profile2 = findProfileOrThrow('lucy-cray-cat'); // Lucy Cray The Cat
-const profile3 = findProfileOrThrow('bob-brown'); // Jack Cray The Cat
+const profile1 = findProfileOrThrow('salty-sears'); // Salty Sears The Cat
+const profile2 = findProfileOrThrow('bob-brown');   // Jack Cray The Cat
+const profile3 = findProfileOrThrow('emily-white'); // George Sweeney The Cat
 
 export const initialConnections: Connection[] = [
   {
@@ -200,3 +200,4 @@ export const initialConnections: Connection[] = [
     connectionDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 1 day ago
   },
 ];
+
