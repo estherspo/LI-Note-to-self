@@ -2,29 +2,49 @@
 // src/app/view-profile-note/page.tsx
 "use client";
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Linkedin, Users, X, StickyNote, Edit3, Save, MessageSquare } from "lucide-react"; 
+import { Linkedin, Users, X, StickyNote, Edit3 } from "lucide-react"; 
+import { useToast } from "@/hooks/use-toast";
 
 const MAX_NOTE_LENGTH = 500;
+const HUNTER_OWN_NOTE_KEY = 'rememble-hunter-own-note';
+const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
 
 export default function ViewProfileNotePage() {
   const profileName = "Hunter The Cat";
   const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
   const connectionDate = "June 11, 2025";
-  const initialNoteToSelfText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
 
-  const [noteToSelf, setNoteToSelf] = useState(initialNoteToSelfText);
+  const [noteToSelf, setNoteToSelf] = useState('');
   const [isEditingNote, setIsEditingNote] = useState(false);
-  const [editedNoteText, setEditedNoteText] = useState(initialNoteToSelfText);
+  const [editedNoteText, setEditedNoteText] = useState('');
+  const { toast } = useToast();
+
+  useEffect(() => {
+    try {
+      const storedNote = localStorage.getItem(HUNTER_OWN_NOTE_KEY);
+      const noteToUse = storedNote !== null ? storedNote : defaultInitialNoteText;
+      setNoteToSelf(noteToUse);
+      setEditedNoteText(noteToUse); 
+    } catch (error) {
+      console.error("Failed to load note from localStorage", error);
+      setNoteToSelf(defaultInitialNoteText);
+      setEditedNoteText(defaultInitialNoteText);
+      toast({
+        title: "Error Loading Note",
+        description: "Could not load your saved note.",
+        variant: "destructive",
+      });
+    }
+  }, [toast]);
 
 
-  // Placeholder for multiple avatars
   const premiumUserAvatars = [
     { src: "https://placehold.co/24x24.png", alt: "User 1", dataAiHint: "person avatar" },
     { src: "https://placehold.co/24x24.png", alt: "User 2", dataAiHint: "person avatar" },
@@ -32,27 +52,43 @@ export default function ViewProfileNotePage() {
   ];
 
   const handleEditNote = () => {
-    setEditedNoteText(noteToSelf); // Start editing with current note
+    setEditedNoteText(noteToSelf); 
     setIsEditingNote(true);
   };
 
   const handleSaveNote = () => {
     if (editedNoteText.length > MAX_NOTE_LENGTH) {
-      // Basic validation, could add a toast here
-      alert(`Note cannot exceed ${MAX_NOTE_LENGTH} characters.`);
+      toast({
+        title: "Note Too Long",
+        description: `Your note cannot exceed ${MAX_NOTE_LENGTH} characters.`,
+        variant: "destructive",
+      });
       return;
     }
     setNoteToSelf(editedNoteText);
     setIsEditingNote(false);
+    try {
+      localStorage.setItem(HUNTER_OWN_NOTE_KEY, editedNoteText);
+      toast({
+        title: "Note Saved",
+        description: "Your note to self has been successfully saved.",
+      });
+    } catch (error) {
+      console.error("Failed to save note to localStorage", error);
+      toast({
+        title: "Error Saving Note",
+        description: "Could not save your note due to a storage issue.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleCancelEdit = () => {
-    // No reset to original, just exit editing mode. editedNoteText keeps its value if not saved.
+    setEditedNoteText(noteToSelf); // Reset editor text to last saved state
     setIsEditingNote(false);
   };
 
   const characterCount = editedNoteText.length;
-
 
   return (
     <div className="container mx-auto px-0 sm:px-4 py-8 flex justify-center">
@@ -103,7 +139,7 @@ export default function ViewProfileNotePage() {
                         placeholder="e.g., Met at CatCon, discussed tuna snacks..."
                         value={editedNoteText}
                         onChange={(e) => setEditedNoteText(e.target.value)}
-                        maxLength={MAX_NOTE_LENGTH}
+                        maxLength={MAX_NOTE_LENGTH + 20} // Allow overtyping slightly to show error
                         className="min-h-[100px] border-input text-sm"
                       />
                       <div className={`text-xs ${characterCount > MAX_NOTE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
@@ -113,7 +149,7 @@ export default function ViewProfileNotePage() {
                         <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
                            Cancel
                         </Button>
-                        <Button size="sm" onClick={handleSaveNote} disabled={characterCount > MAX_NOTE_LENGTH}>
+                        <Button size="sm" onClick={handleSaveNote} disabled={characterCount > MAX_NOTE_LENGTH || characterCount === 0}>
                           Save
                         </Button>
                       </div>
@@ -155,3 +191,4 @@ export default function ViewProfileNotePage() {
     </div>
   );
 }
+
