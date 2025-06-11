@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback }_ from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useConnections } from '@/hooks/useConnections';
