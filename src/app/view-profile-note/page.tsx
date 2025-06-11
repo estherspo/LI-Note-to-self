@@ -71,7 +71,6 @@ export default function ViewProfileNotePage() {
           <span>Note to self Saved</span>
         </div>
       ),
-      description: "Your note to self has been updated for this session.",
     });
   };
 
