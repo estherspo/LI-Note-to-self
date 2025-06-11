@@ -109,8 +109,8 @@ export default function AcceptRequestPage() {
       icon: Dot, 
       title: "Dot of Doom", 
       description: "That sneaky red dot must be caught… no matter the cost!",
-      iconColorClass: "text-green-600",
-      buttonClasses: "bg-green-600 text-white hover:bg-green-700",
+      iconColorClass: "text-red-600",
+      buttonClasses: "bg-red-600 text-white hover:bg-red-700",
     },
     { 
       icon: PawPrint, 
