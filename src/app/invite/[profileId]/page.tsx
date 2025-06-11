@@ -238,7 +238,7 @@ export default function InvitePage() {
             </div>
             
             <p className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
-              8,141 followers · 500+ connections
+              2M followers · 500+ connections
             </p>
 
             <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1 justify-center sm:justify-start">
