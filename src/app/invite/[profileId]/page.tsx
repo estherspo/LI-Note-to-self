@@ -49,9 +49,9 @@ export default function InvitePage() {
         <Card>
           <div className="h-48 bg-muted animate-pulse" />
           <CardHeader className="relative -mt-16">
-            <Skeleton className="h-32 w-32 rounded-full border-4 border-background bg-muted mx-auto" />
-            <Skeleton className="h-8 w-1/2 mx-auto mt-4 bg-muted" />
-            <Skeleton className="h-5 w-3/4 mx-auto mt-2 bg-muted" />
+            <Skeleton className="h-32 w-32 rounded-full border-4 border-background bg-muted" /> {/* Adjusted mx-auto removal */}
+            <Skeleton className="h-8 w-1/2 ml-[152px] -mt-[calc(128px-32px)] bg-muted" /> {/* Mimic text block position */}
+            <Skeleton className="h-5 w-3/4 ml-[152px] mt-2 bg-muted" />
           </CardHeader>
           <CardContent className="text-center space-y-2 pb-6">
             <Skeleton className="h-5 w-1/2 mx-auto bg-muted" />
@@ -99,18 +99,19 @@ export default function InvitePage() {
           />
         </div>
         <CardHeader className="relative -mt-[64px] px-6 pb-2"> {/* LinkedIn style avatar offset */}
-          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card mx-auto sm:mx-0">
+          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card"> {/* REMOVED mx-auto sm:mx-0 */}
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="pt-4 sm:ml-[152px] sm:-mt-[calc(128px-32px)]"> {/* Adjust for avatar size and desired text position */}
-             <div className="flex flex-col sm:flex-row justify-between items-start">
-                <div>
+          {/* Text content aligned to the right of Avatar, consistent across screen sizes */}
+          <div className="pt-4 ml-[152px] -mt-[calc(128px-32px)]"> {/* REMOVED sm: prefixes for consistent layout */}
+             <div className="flex flex-row justify-between items-start"> {/* CHANGED to flex-row for consistent button placement */}
+                <div className="flex-1"> {/* Allows name/headline to take available space */}
                     <CardTitle className="font-headline text-3xl">{profile.name}</CardTitle>
                     <p className="text-lg text-foreground">{profile.headline}</p>
                 </div>
-                <Button onClick={handleConnect} className="mt-4 sm:mt-0 whitespace-nowrap" size="lg">
+                <Button onClick={handleConnect} className="ml-4 whitespace-nowrap" size="lg"> {/* Adjusted margin for button */}
                   {isAlreadyConnected ? <CheckCircle2 className="mr-2 h-5 w-5" /> : <UserPlus className="mr-2 h-5 w-5" />}
                   {isAlreadyConnected ? 'Connected' : 'Connect'}
                 </Button>
@@ -133,7 +134,7 @@ export default function InvitePage() {
           </div>
         </CardHeader>
         
-        <CardContent className="px-6 pt-0 pb-6">
+        <CardContent className="px-6 pt-4 pb-6"> {/* Adjusted pt from 0 to 4 to give some space below header */}
           {profile.bio && (
             <div className="mt-6 pt-6 border-t">
               <h4 className="font-semibold text-lg mb-2">About</h4>
