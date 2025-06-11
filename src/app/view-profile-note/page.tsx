@@ -3,7 +3,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,12 +10,22 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Linkedin, Users, X, StickyNote, Edit3 } from "lucide-react"; 
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from 'next/navigation';
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 const MAX_NOTE_LENGTH = 500;
 const HUNTER_OWN_NOTE_KEY = 'rememble-hunter-own-note';
 const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
 
 export default function ViewProfileNotePage() {
+  const router = useRouter();
+  const [isDialogOpen, setIsDialogOpen] = useState(true); // Dialog is open by default when page is visited
   const profileName = "Hunter The Cat";
   const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
   const connectionDate = "June 11, 2025";
@@ -43,6 +52,13 @@ export default function ViewProfileNotePage() {
       });
     }
   }, [toast]);
+
+  useEffect(() => {
+    // If dialog is closed by any means (onOpenChange), navigate to home
+    if (!isDialogOpen) {
+      router.push('/');
+    }
+  }, [isDialogOpen, router]);
 
 
   const premiumUserAvatars = [
@@ -84,22 +100,22 @@ export default function ViewProfileNotePage() {
   };
 
   const handleCancelEdit = () => {
-    setEditedNoteText(noteToSelf); // Reset editor text to last saved state
+    setEditedNoteText(noteToSelf); 
     setIsEditingNote(false);
   };
 
   const characterCount = editedNoteText.length;
 
   return (
-    <div className="container mx-auto px-0 sm:px-4 py-8 flex justify-center">
-      <Card className="w-full max-w-md shadow-xl">
-        <CardHeader className="flex flex-row items-center justify-between pb-4">
-          <CardTitle className="font-headline text-xl font-semibold">{profileName}</CardTitle>
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-muted/50 h-8 w-8" onClick={() => console.log("Close clicked (visual only)")}>
-            <X className="h-5 w-5" />
-          </Button>
-        </CardHeader>
-        <CardContent className="space-y-6 pt-0">
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader className="flex flex-row items-center justify-between pr-6"> {/* pr-6 to avoid overlap with DialogClose default positioning */}
+          <DialogTitle className="font-headline text-xl font-semibold">{profileName}</DialogTitle>
+          {/* DialogClose is automatically rendered by DialogContent, this custom one is removed to use default */}
+        </DialogHeader>
+        
+        {/* Scrollable Content Area */}
+        <div className="space-y-6 pt-2 pb-6 max-h-[75vh] overflow-y-auto pr-3 pl-1"> {/* Adjusted padding */}
           <div>
             <h3 className="text-lg font-semibold mb-3">Contact Info</h3>
             <div className="space-y-4">
@@ -139,7 +155,7 @@ export default function ViewProfileNotePage() {
                         placeholder="e.g., Met at CatCon, discussed tuna snacks..."
                         value={editedNoteText}
                         onChange={(e) => setEditedNoteText(e.target.value)}
-                        maxLength={MAX_NOTE_LENGTH + 20} // Allow overtyping slightly to show error
+                        maxLength={MAX_NOTE_LENGTH + 20} 
                         className="min-h-[100px] border-input text-sm"
                       />
                       <div className={`text-xs ${characterCount > MAX_NOTE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
@@ -186,9 +202,9 @@ export default function ViewProfileNotePage() {
             </Button>
             <p className="text-xs text-muted-foreground text-center mt-2">Cancel anytime. No hidden fees.</p>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
