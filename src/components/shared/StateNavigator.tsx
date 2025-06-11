@@ -10,20 +10,19 @@ import { useEffect, useState } from 'react';
 
 const navigationStates = [
   { name: "Invite Hunter (Salty's View)", href: '/invite/hunter-the-cat', description: "View Hunter The Cat's profile as Salty Sears to send an invitation." },
-  { name: "Accept Requests (Hunter's View)", href: '/accept-request', description: "View and manage incoming connection requests as Hunter The Cat." },
+  { name: "My Network", href: '/my-network', description: "View your network, manage invitations, and play daily games." },
   { name: 'View Connection Note', href: '/view-profile-note', description: "View an existing connection's profile and private note." },
 ];
 
 export function StateNavigator() {
   const pathname = usePathname();
   const [activeStateHref, setActiveStateHref] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false); // New state to track client-side mount
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true); // Set to true once component mounts on the client
+    setIsMounted(true); 
 
     let newActiveHref: string | null = null;
-    // Use the new name to find the state definition
     const inviteStateDefinition = navigationStates.find(state => state.name === "Invite Hunter (Salty's View)");
 
     if (inviteStateDefinition && pathname.startsWith('/invite/')) {
@@ -54,10 +53,10 @@ export function StateNavigator() {
             return (
               <Button
                 key={state.name}
-                variant={isMounted && isButtonActive ? 'default' : 'outline'} // Apply active variant only if mounted
+                variant={isMounted && isButtonActive ? 'default' : 'outline'} 
                 className={cn(
-                  "w-full justify-center text-center h-auto py-1 px-2", // Reduced padding
-                  isMounted && isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" // Apply active ring only if mounted
+                  "w-full justify-center text-center h-auto py-1 px-2", 
+                  isMounted && isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" 
                 )}
                 asChild
                 size="sm"

@@ -20,27 +20,26 @@ import { cn } from '@/lib/utils';
 export function Navbar() {
   const pathname = usePathname();
   const isOnInvitePage = pathname.startsWith('/invite/');
-  const isOnAcceptRequestPage = pathname === '/accept-request';
+  const isOnMyNetworkPage = pathname === '/my-network';
 
-  // Specific condition for visually and functionally disabling elements on AcceptRequestPage (but not InvitePage)
-  const disableOnAcceptPage = isOnAcceptRequestPage && !isOnInvitePage;
+  const disableOnMyNetworkPage = isOnMyNetworkPage && !isOnInvitePage;
 
   return (
     <header className="bg-card border-b sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Link
-            href={isOnInvitePage ? "#" : (disableOnAcceptPage ? "#" : "/")}
+            href={isOnInvitePage ? "#" : (disableOnMyNetworkPage ? "#" : "/")}
             className={cn(
               "flex items-center text-primary",
-              disableOnAcceptPage && "opacity-50 cursor-not-allowed pointer-events-none"
+              disableOnMyNetworkPage && "opacity-50 cursor-not-allowed pointer-events-none"
             )}
             onClick={(e) => {
-              if (isOnInvitePage || disableOnAcceptPage) {
+              if (isOnInvitePage || disableOnMyNetworkPage) {
                 e.preventDefault();
               }
             }}
-            aria-disabled={disableOnAcceptPage}
+            aria-disabled={disableOnMyNetworkPage}
           >
             <Linkedin className="h-10 w-10" fill="currentColor" />
           </Link>
@@ -50,7 +49,7 @@ export function Navbar() {
               type="search"
               placeholder="Search"
               className="pl-8 h-9 w-[200px] sm:w-[240px] lg:w-[280px] bg-slate-100 focus:bg-white rounded-sm border-gray-400 focus:border-primary"
-              disabled={disableOnAcceptPage}
+              disabled={disableOnMyNetworkPage}
               readOnly={isOnInvitePage}
             />
           </div>
@@ -67,13 +66,11 @@ export function Navbar() {
             variant="ghost" 
             asChild 
             className="relative h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0"
-            // This button is active on accept-request, not disabled by disableOnAcceptPage
           >
             <Link 
-              href={isOnInvitePage ? '#' : (isOnAcceptRequestPage ? '/accept-request' : '/')} 
+              href={isOnInvitePage ? '#' : '/my-network'} 
               className={cn(
                 "flex flex-col items-center justify-center text-center text-muted-foreground hover:text-primary"
-                // No "opacity-50 cursor-not-allowed" when isOnInvitePage
               )}
               onClick={(e) => {
                 if (isOnInvitePage) {
@@ -83,7 +80,7 @@ export function Navbar() {
             >
               <Users className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5" />
               <span className="text-xs leading-tight">My Network</span>
-              {pathname === '/accept-request' && (
+              {pathname === '/my-network' && (
                 <span className="absolute top-3 right-3 sm:right-4 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-card"></span>
               )}
             </Link>
@@ -113,9 +110,9 @@ export function Navbar() {
                 variant="ghost" 
                 className={cn(
                   "h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0",
-                  disableOnAcceptPage && "opacity-50 cursor-not-allowed" // Visually disable for Shadcn Button
+                  disableOnMyNetworkPage && "opacity-50 cursor-not-allowed" 
                 )}
-                disabled={disableOnAcceptPage}
+                disabled={disableOnMyNetworkPage}
                 onClick={(e) => {
                   if (isOnInvitePage) {
                     e.preventDefault();
@@ -149,9 +146,9 @@ export function Navbar() {
                   variant="ghost" 
                   className={cn(
                     "h-full px-1.5 sm:px-2 py-0 w-[80px] sm:w-[90px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0",
-                     disableOnAcceptPage && "opacity-50 cursor-not-allowed"
+                     disableOnMyNetworkPage && "opacity-50 cursor-not-allowed"
                   )}
-                  disabled={disableOnAcceptPage}
+                  disabled={disableOnMyNetworkPage}
                   onClick={(e) => {
                     if (isOnInvitePage) {
                       e.preventDefault();
@@ -176,15 +173,15 @@ export function Navbar() {
                 href="#"
                 className={cn(
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
-                  disableOnAcceptPage && "opacity-50 pointer-events-none cursor-not-allowed"
+                  disableOnMyNetworkPage && "opacity-50 pointer-events-none cursor-not-allowed"
                 )}
                 onClick={(e) => {
-                  if (isOnInvitePage || disableOnAcceptPage) {
+                  if (isOnInvitePage || disableOnMyNetworkPage) {
                     e.preventDefault();
                   }
                 }}
-                aria-disabled={disableOnAcceptPage}
-                tabIndex={disableOnAcceptPage ? -1 : undefined} 
+                aria-disabled={disableOnMyNetworkPage}
+                tabIndex={disableOnMyNetworkPage ? -1 : undefined} 
               >
                 Reactivate
               </Link>
@@ -192,15 +189,15 @@ export function Navbar() {
                 href="#"
                 className={cn(
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
-                  disableOnAcceptPage && "opacity-50 pointer-events-none cursor-not-allowed"
+                  disableOnMyNetworkPage && "opacity-50 pointer-events-none cursor-not-allowed"
                 )}
                 onClick={(e) => {
-                  if (isOnInvitePage || disableOnAcceptPage) {
+                  if (isOnInvitePage || disableOnMyNetworkPage) {
                     e.preventDefault();
                   }
                 }}
-                aria-disabled={disableOnAcceptPage}
-                tabIndex={disableOnAcceptPage ? -1 : undefined}
+                aria-disabled={disableOnMyNetworkPage}
+                tabIndex={disableOnMyNetworkPage ? -1 : undefined}
               >
                 Premium: 50% Off
               </Link>
