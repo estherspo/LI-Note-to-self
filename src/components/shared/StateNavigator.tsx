@@ -38,7 +38,7 @@ export function StateNavigator() {
   }, [pathname]);
 
   return (
-    <Card className="dark sticky top-16 left-0 right-0 w-full z-[60] bg-card border-b shadow-lg rounded-none">
+    <Card className="dark sticky bottom-0 left-0 right-0 w-full z-[60] bg-card border-t shadow-lg rounded-none">
       <CardHeader className="pb-1 pt-2 container mx-auto px-4">
         <CardTitle className="text-sm font-headline text-primary">Prototype State Navigator</CardTitle>
         <CardDescription className="text-xs text-muted-foreground leading-tight">Use these buttons to switch between different app states/features for Rememble.</CardDescription>

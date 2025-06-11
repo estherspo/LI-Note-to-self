@@ -25,10 +25,10 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <div className="flex flex-col min-h-screen">
           <Navbar />
-          <StateNavigator /> 
-          <main className="flex-grow container mx-auto px-4 py-8 pt-24"> {/* Added pt-24 to account for Navbar + StateNavigator height */}
+          <main className="flex-grow container mx-auto px-4 py-8 pb-28"> {/* Adjusted padding */}
             {children}
           </main>
+          <StateNavigator /> 
         </div>
         <Toaster />
       </body>
