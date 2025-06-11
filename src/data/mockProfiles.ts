@@ -92,33 +92,49 @@ export const mockProfiles: Profile[] = [
   {
     id: 'bob-brown', // This ID is used for mapping
     name: 'Jack Cray The Cat',
-    headline: 'Lead Paw-sibilities Engineer at The Scratching Post Inc.',
+    headline: 'VP of Nocturnal Operations at Zoomies United™',
     avatarUrl: 'https://placehold.co/128x128.png',
     dataAiHint: 'gray cat serious',
-    company: 'The Scratching Post Inc.',
+    company: 'Zoomies United™',
     location: 'Silicon Alley, CA',
-    bio: 'Specializing in algorithmically optimized nap locations and chasing rogue laser pointers. Enthusiastic about string theory (especially the kind you can bat at).',
+    bio: 'Master of stealth, connoisseur of late-night sprints. Currently optimizing the house for maximum zoom potential and strategic toy deployment.',
     experience: [
       {
-        title: 'Lead Paw-sibilities Engineer',
-        company: 'The Scratching Post Inc.',
-        dates: '2023 - Present',
-        responsibilities: ['Developing novel approaches to treat acquisition.', 'Debugging the red dot.']
+        title: 'VP of Nocturnal Operations',
+        company: 'Zoomies United™',
+        dates: '2024 - Present',
+        responsibilities: ['Overseeing all after-dark household activities.', 'Strategic deployment of toys to trip humans.', 'Advanced stealth techniques for treat acquisition.']
       },
-      parseExperienceString('Junior Tail Chaser at Felitech (2021-2023)'),
+      {
+        title: 'Chief Pillow Inspector', 
+        company: 'The Comfy Den', 
+        dates: '2022-2024', 
+        responsibilities: ['Ensuring optimal fluffiness levels.', 'Conducting extensive napability tests on all soft surfaces.']
+      },
     ],
   },
   {
-    id: 'emily-white',
-    name: 'Emily White',
-    headline: 'Marketing Specialist at Creative Solutions',
+    id: 'emily-white', // This ID is used for mapping
+    name: 'George Sweeney The Cat',
+    headline: 'Executive Mealtime Coordinator at Food Logistics',
     avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'woman smiling professional',
-    company: 'Creative Solutions',
-    location: 'San Francisco, CA',
-    bio: 'Passionate about digital marketing and brand strategy. Loves hiking and photography.',
+    dataAiHint: 'orange cat',
+    company: 'Food Logistics',
+    location: 'Kitchen District, CA',
+    bio: 'Passionate about timely meal delivery and rigorous quality control (taste testing is a non-negotiable part of the process). Believes every meal should be an event worth meowing about.',
     experience: [
-      { title: 'Marketing Coordinator', company: 'AdVentures Inc.', dates: '2020-2022', responsibilities: ['Managed social media campaigns', 'Developed content strategy'] },
+      { 
+        title: 'Executive Mealtime Coordinator', 
+        company: 'Food Logistics', 
+        dates: '2023-Present', 
+        responsibilities: ['Synchronizing human activity with the precise feeding schedule.', 'Advanced treat negotiation tactics and lobbying for extra snacks.', 'Quality assurance of all incoming food items.'] 
+      },
+      { 
+        title: 'Bowl Pre-Wash Technician', 
+        company: 'Kitchen Brigade Services', 
+        dates: '2021-2023', 
+        responsibilities: ['Ensuring no morsel goes to waste through diligent pre-cleaning.', 'Providing critical feedback on food quality and presentation.'] 
+      },
     ],
   }
 ];
@@ -129,4 +145,3 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 
 
 export const initialConnections: Connection[] = [];
-

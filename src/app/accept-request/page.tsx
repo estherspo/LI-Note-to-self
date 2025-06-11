@@ -47,24 +47,20 @@ export default function AcceptRequestPage() {
           showLinkedInIcon: true,
         };
       }
-      // The profile with id 'bob-brown' is now "Jack Cray The Cat" in mockProfiles.ts
-      // We will use its details directly and add invitation-specific properties.
-      if (profile.id === 'bob-brown') { 
+      if (profile.id === 'bob-brown') { // Jack Cray The Cat
         return {
-          ...profile, // This will bring Jack Cray The Cat's name, headline, avatar, etc.
+          ...profile, 
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection", 
-          isVerified: true, // Keep this specific to the invitation display
+          isVerified: true, 
         };
       }
-      if (profile.id === 'emily-white') { // Map Emily White to Priya Sharma
+      if (profile.id === 'emily-white') { // Map emily-white (George Sweeney The Cat)
         return {
-          ...profile,
-          name: 'Priya Sharma',
-          headline: "Senior Software Engineer at Innovatech | Building Next-Gen Solutions",
-          avatarUrl: 'https://placehold.co/128x128.png',
-          dataAiHint: 'woman developer',
-          message: "Hi Hunter, I came across your profile and was impressed by your work in the MeowCorp community. I'd love to connect and discuss potential collaborations on future purrjects!",
-          mutualConnectionsText: "John Smith and 2 other mutual connections",
+          ...profile, // This will bring George Sweeney The Cat's name, headline, avatar, etc. from mockProfiles
+          avatarUrl: 'https://placehold.co/128x128.png', // Keep placeholder or use profile.avatarUrl
+          dataAiHint: 'orange cat', // Override dataAiHint
+          message: "Hi Hunter, I've heard tales of your sophisticated palate! As the Executive Mealtime Coordinator at Food Logistics, I'd be honored to connect and exchange notes on the latest gourmet kibble trends.",
+          mutualConnectionsText: "Alan Stein and 1 other mutual connection",
           isVerified: false,
           showLinkedInIcon: false,
         };
@@ -201,4 +197,3 @@ export default function AcceptRequestPage() {
     </div>
   );
 }
-
