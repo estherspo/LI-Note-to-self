@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { InvitationDialog } from '@/components/invitation/InvitationDialog';
-import { Building, MapPin, UserPlus, CheckCircle2, Info, Users, MessageSquare, Check, ShieldCheck } from 'lucide-react';
+import { Building, MapPin, UserPlus, CheckCircle2, Info, Users, MessageSquare, Check, ShieldCheck, Clock } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -20,8 +20,8 @@ export default function InvitePage() {
   const router = useRouter();
   const profileId = params.profileId as string;
   
-  const { getProfileToInvite, connections, isLoading: connectionsLoading } = useConnections();
-  const [profile, setProfile] = useState<ProfileType | null | undefined>(undefined); // undefined for loading, null for not found
+  const { getProfileToInvite, connections, isLoading: connectionsLoading, isInvitationSent } = useConnections();
+  const [profile, setProfile] = useState<ProfileType | null | undefined>(undefined); 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,8 @@ export default function InvitePage() {
     }
   }, [profileId, getProfileToInvite, connectionsLoading]);
 
-  const isAlreadyConnected = connections.some(conn => conn.id.includes(profileId));
+  const alreadyConnected = connections.some(conn => conn.id.includes(profileId));
+  const invitationHasBeenSent = isInvitationSent(profileId);
 
   const handleConnect = () => {
     setIsDialogOpen(true);
@@ -41,7 +42,7 @@ export default function InvitePage() {
     return (
       <div className="w-full space-y-6">
         <Card className="overflow-hidden">
-          <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
+          <div className="h-48 bg-muted animate-pulse" /> 
           <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
             <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start">
                 <Skeleton className="h-full w-full rounded-full bg-muted" />
@@ -94,7 +95,7 @@ export default function InvitePage() {
 
         <Card>
           <CardHeader>
-            <Skeleton className="h-6 w-1/4 bg-muted" /> {/* "Experience" title */}
+            <Skeleton className="h-6 w-1/4 bg-muted" /> 
           </CardHeader>
           <CardContent className="space-y-6 pt-0">
             <div className="space-y-1.5">
@@ -133,6 +134,31 @@ export default function InvitePage() {
   const coverPhotoUrl = "https://placehold.co/1200x300.png";
   const companyDomain = profile.company ? profile.company.toLowerCase().replace(/\s+/g, '').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") + '.com' : '';
 
+  let connectButtonText = 'Connect';
+  let connectButtonIcon = <UserPlus className="mr-2 h-5 w-5"/>;
+  let connectButtonDisabled = false;
+  let connectButtonVariant: "default" | "outline" | "secondary" | "ghost" | "link" | "destructive" | null | undefined = "default";
+
+  if (alreadyConnected) {
+    if (invitationHasBeenSent) {
+      connectButtonText = 'Pending';
+      connectButtonIcon = <Clock className="mr-2 h-5 w-5"/>;
+      connectButtonDisabled = true;
+      connectButtonVariant = "secondary"; 
+    } else {
+      connectButtonText = 'Message';
+      connectButtonIcon = <MessageSquare className="mr-2 h-5 w-5"/>;
+      connectButtonDisabled = false; // Allow opening dialog to update notes
+      connectButtonVariant = "default";
+    }
+  } else {
+    // Not connected, standard connect button
+    connectButtonText = 'Connect';
+    connectButtonIcon = <UserPlus className="mr-2 h-5 w-5"/>;
+    connectButtonDisabled = false;
+    connectButtonVariant = "default";
+  }
+
 
   return (
     <div className="w-full space-y-6">
@@ -164,7 +190,7 @@ export default function InvitePage() {
               {profile.company && (
                 <div className="w-full sm:w-auto mt-2 sm:mt-0 flex items-center justify-center sm:justify-end gap-2 text-sm">
                    <Avatar className="h-8 w-8">
-                    <AvatarImage src={`https://logo.clearbit.com/${companyDomain}`} alt={`${profile.company} logo`} data-ai-hint="company logo" />
+                    <AvatarImage src={`https://logo.clearbit.com/${companyDomain}`} alt={`${profile.company} logo`} data-ai-hint="company logo"/>
                     <AvatarFallback><Building className="h-4 w-4"/></AvatarFallback>
                   </Avatar>
                   <span className="font-semibold text-foreground">{profile.company}</span>
@@ -174,18 +200,25 @@ export default function InvitePage() {
 
             <p className="text-lg text-foreground mb-2 text-center sm:text-left">{profile.headline}</p>
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
-              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
-                {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
-                {isAlreadyConnected ? 'Message' : 'Connect'}
+              <Button 
+                onClick={handleConnect} 
+                size="lg" 
+                className="whitespace-nowrap rounded-full"
+                disabled={connectButtonDisabled}
+                variant={connectButtonVariant}
+              >
+                {connectButtonIcon}
+                {connectButtonText}
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
                 className="rounded-full bg-card border-foreground text-foreground disabled:opacity-100" 
-                disabled
+                disabled // This button remains disabled as per original mock
               >
-                {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
-                {isAlreadyConnected ? 'Following' : 'Follow'}
+                {/* Logic for "Follow" / "Following" based on 'alreadyConnected' or 'invitationHasBeenSent' could go here if needed */}
+                {alreadyConnected || invitationHasBeenSent ? <Check className="mr-2 h-4 w-4"/> : null}
+                {alreadyConnected || invitationHasBeenSent ? 'Following' : 'Follow'}
               </Button>
               <Button 
                 variant="outline" 
@@ -205,12 +238,12 @@ export default function InvitePage() {
             </div>
             
             <p className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
-              8,141 followers · 500+ connections {/* Mocked */}
+              8,141 followers · 500+ connections
             </p>
 
             <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1 justify-center sm:justify-start">
               <Users className="h-4 w-4"/>
-              Followed by Perry Sportello {/* Mocked */}
+              Followed by Perry Sportello 
             </p>
           </div>
         </CardHeader>
@@ -259,7 +292,7 @@ export default function InvitePage() {
           profile={profile}
           isOpen={isDialogOpen}
           onOpenChange={setIsDialogOpen}
-          isAlreadyConnected={isAlreadyConnected}
+          isAlreadyConnected={alreadyConnected} 
         />
       )}
     </div>
