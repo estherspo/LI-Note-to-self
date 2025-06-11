@@ -42,7 +42,7 @@ export default function InvitePage() {
       <div className="w-full space-y-6">
         <Card>
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
-          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
+          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col self-center sm:self-start">
             <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start">
                 <Skeleton className="h-full w-full rounded-full bg-muted" />
             </Avatar>
@@ -138,7 +138,7 @@ export default function InvitePage() {
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col self-center sm:self-start">
           <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start">
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
@@ -170,15 +170,15 @@ export default function InvitePage() {
             <p className="text-lg text-foreground mb-2 text-center sm:text-left">{profile.headline}</p>
              {/* Buttons Section - Moved Up */}
             <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
-              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
+              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full" disabled>
                 {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
                 {isAlreadyConnected ? 'Message' : 'Connect'}
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full">
+              <Button variant="outline" size="lg" className="rounded-full" disabled>
                 {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
                 {isAlreadyConnected ? 'Following' : 'Follow'}
               </Button>
-              <Button variant="outline" size="lg" className="rounded-full">More</Button>
+              <Button variant="outline" size="lg" className="rounded-full" disabled>More</Button>
             </div>
             
             <div className="text-sm text-muted-foreground mb-2 text-center sm:text-left mt-2">
