@@ -22,14 +22,26 @@ export function Navbar() {
   const isOnInvitePage = pathname.startsWith('/invite/');
   const isOnAcceptRequestPage = pathname === '/accept-request';
 
-  // Determine if specific interactive elements should be disabled
-  const disableProfileInteractions = isOnInvitePage || isOnAcceptRequestPage;
+  // Specific condition for visually and functionally disabling elements on AcceptRequestPage (but not InvitePage)
+  const disableOnAcceptPage = isOnAcceptRequestPage && !isOnInvitePage;
 
   return (
     <header className="bg-card border-b sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Link href={isOnInvitePage ? "#" : "/"} className={cn("flex items-center text-primary", isOnInvitePage && "pointer-events-none")}>
+          <Link
+            href={isOnInvitePage ? "#" : (disableOnAcceptPage ? "#" : "/")}
+            className={cn(
+              "flex items-center text-primary",
+              disableOnAcceptPage && "opacity-50 cursor-not-allowed pointer-events-none"
+            )}
+            onClick={(e) => {
+              if (isOnInvitePage || disableOnAcceptPage) {
+                e.preventDefault();
+              }
+            }}
+            aria-disabled={disableOnAcceptPage}
+          >
             <Linkedin className="h-10 w-10" fill="currentColor" />
           </Link>
           <div className="relative">
@@ -38,7 +50,8 @@ export function Navbar() {
               type="search"
               placeholder="Search"
               className="pl-8 h-9 w-[200px] sm:w-[240px] lg:w-[280px] bg-slate-100 focus:bg-white rounded-sm border-gray-400 focus:border-primary"
-              disabled={disableProfileInteractions}
+              disabled={disableOnAcceptPage}
+              readOnly={isOnInvitePage}
             />
           </div>
         </div>
@@ -53,17 +66,20 @@ export function Navbar() {
           <Button 
             variant="ghost" 
             asChild 
-            className="relative h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0" 
-            disabled={isOnInvitePage}
+            className="relative h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0"
+            // This button is active on accept-request, not disabled by disableOnAcceptPage
           >
             <Link 
-              href={isOnAcceptRequestPage ? '/accept-request' : '/'} 
+              href={isOnInvitePage ? '#' : (isOnAcceptRequestPage ? '/accept-request' : '/')} 
               className={cn(
-                "flex flex-col items-center justify-center text-center text-muted-foreground hover:text-primary",
-                isOnInvitePage && "opacity-50 cursor-not-allowed"
+                "flex flex-col items-center justify-center text-center text-muted-foreground hover:text-primary"
+                // No "opacity-50 cursor-not-allowed" when isOnInvitePage
               )}
-              aria-disabled={isOnInvitePage}
-              tabIndex={isOnInvitePage ? -1 : undefined}
+              onClick={(e) => {
+                if (isOnInvitePage) {
+                  e.preventDefault();
+                }
+              }}
             >
               <Users className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5" />
               <span className="text-xs leading-tight">My Network</span>
@@ -95,8 +111,17 @@ export function Navbar() {
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0"
-                disabled={disableProfileInteractions}
+                className={cn(
+                  "h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0",
+                  disableOnAcceptPage && "opacity-50 cursor-not-allowed" // Visually disable for Shadcn Button
+                )}
+                disabled={disableOnAcceptPage}
+                onClick={(e) => {
+                  if (isOnInvitePage) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                }}
               >
                 <Avatar className="h-6 w-6 rounded-full mb-0.5">
                   <AvatarImage src="https://placehold.co/24x24.png" alt="User Avatar" data-ai-hint="person avatar" />
@@ -122,8 +147,17 @@ export function Navbar() {
               <DropdownMenuTrigger asChild>
                 <Button 
                   variant="ghost" 
-                  className="h-full px-1.5 sm:px-2 py-0 w-[80px] sm:w-[90px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0"
-                  disabled={disableProfileInteractions}
+                  className={cn(
+                    "h-full px-1.5 sm:px-2 py-0 w-[80px] sm:w-[90px] rounded-none hover:bg-slate-100 flex flex-col items-center justify-center text-muted-foreground hover:text-primary flex-shrink-0",
+                     disableOnAcceptPage && "opacity-50 cursor-not-allowed"
+                  )}
+                  disabled={disableOnAcceptPage}
+                  onClick={(e) => {
+                    if (isOnInvitePage) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }
+                  }}
                 >
                   <LayoutGrid className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5" />
                   <div className="flex items-center text-xs leading-tight">
@@ -140,29 +174,38 @@ export function Navbar() {
             <div className="flex flex-col items-start justify-center text-center pl-2 pr-1 h-full flex-shrink-0">
               <Link 
                 href="#"
-                aria-disabled={disableProfileInteractions}
                 className={cn(
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
-                  disableProfileInteractions && "opacity-50 pointer-events-none cursor-not-allowed"
+                  disableOnAcceptPage && "opacity-50 pointer-events-none cursor-not-allowed"
                 )}
-                tabIndex={disableProfileInteractions ? -1 : undefined} 
+                onClick={(e) => {
+                  if (isOnInvitePage || disableOnAcceptPage) {
+                    e.preventDefault();
+                  }
+                }}
+                aria-disabled={disableOnAcceptPage}
+                tabIndex={disableOnAcceptPage ? -1 : undefined} 
               >
                 Reactivate
               </Link>
               <Link 
                 href="#"
-                aria-disabled={disableProfileInteractions}
                 className={cn(
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
-                  disableProfileInteractions && "opacity-50 pointer-events-none cursor-not-allowed"
+                  disableOnAcceptPage && "opacity-50 pointer-events-none cursor-not-allowed"
                 )}
-                tabIndex={disableProfileInteractions ? -1 : undefined}
+                onClick={(e) => {
+                  if (isOnInvitePage || disableOnAcceptPage) {
+                    e.preventDefault();
+                  }
+                }}
+                aria-disabled={disableOnAcceptPage}
+                tabIndex={disableOnAcceptPage ? -1 : undefined}
               >
                 Premium: 50% Off
               </Link>
             </div>
           </div>
-
         </nav>
       </div>
     </header>
