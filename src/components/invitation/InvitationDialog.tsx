@@ -127,7 +127,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
                 value={standardMessage}
                 onChange={(e) => setStandardMessage(e.target.value)}
                 maxLength={MAX_STANDARD_MESSAGE_LENGTH}
-                className="min-h-[80px] border-foreground/30"
+                className="min-h-[80px] border-primary/70"
               />
               <div className={`text-xs ${characterCountStandard > MAX_STANDARD_MESSAGE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
                 {characterCountStandard}/{MAX_STANDARD_MESSAGE_LENGTH} characters
@@ -143,7 +143,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
               value={privateNote}
               onChange={(e) => setPrivateNote(e.target.value)}
               maxLength={MAX_PRIVATE_NOTE_LENGTH}
-              className="min-h-[100px] border-foreground/30"
+              className="min-h-[100px] border-input"
             />
             <div className={`text-xs ${characterCountPrivate > MAX_PRIVATE_NOTE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
               {characterCountPrivate}/{MAX_PRIVATE_NOTE_LENGTH} characters
