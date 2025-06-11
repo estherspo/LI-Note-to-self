@@ -101,7 +101,7 @@ export default function AcceptRequestPage() {
     { 
       icon: Feather, 
       title: "Feather Frenzy", 
-      description: "Gats goes wild for the flapping, swooping feather beast!",
+      description: "Cats goes wild for the flapping, swooping feather beast!",
       iconColorClass: "text-primary",
       buttonClasses: "bg-primary text-primary-foreground hover:bg-primary/90",
     },
@@ -114,7 +114,7 @@ export default function AcceptRequestPage() {
     },
     { 
       icon: PawPrint, 
-      title: "Greeble Gambit", 
+      title: "Shadow Stalker", 
       description: "Unseen foes lurk, requiring swift paw-eye coordination and tactical pounces!",
       iconColorClass: "text-purple-600",
       buttonClasses: "bg-purple-600 text-white hover:bg-purple-700",
@@ -254,3 +254,4 @@ export default function AcceptRequestPage() {
     </div>
   );
 }
+
