@@ -30,7 +30,7 @@ export default function AcceptRequestPage() {
   const [noteDialogConnection, setNoteDialogConnection] = useState<Connection | null>(null);
 
   useEffect(() => {
-    const currentUserId = 'hunter-the-cat'; // Hunter The Cat
+    const currentUserId = 'hunter-the-cat'; 
 
     const invitationProfileIdsOrder = ['salty-sears', 'jack-cray-the-cat', 'george-sweeney-the-cat'];
 
@@ -143,6 +143,7 @@ export default function AcceptRequestPage() {
   return (
     <>
       <div className="container mx-auto px-0 sm:px-4 pb-8 space-y-6"> 
+        <h1 className="text-3xl font-bold font-headline mb-6">My Network</h1>
         <Card className="shadow-lg">
           <Tabs defaultValue="grow" className="w-full">
             <CardHeader className="p-0 border-b">
@@ -166,7 +167,7 @@ export default function AcceptRequestPage() {
             <TabsContent value="grow">
               <CardHeader className="px-4 sm:px-6 py-4 border-b">
                 <div className="flex justify-between items-center">
-                  <CardTitle className="text-xl font-semibold">Invitations ({pendingInvitations.length})</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Accept Requests ({pendingInvitations.length})</CardTitle>
                   <Button variant="ghost" className="text-muted-foreground hover:text-primary p-0 h-auto" disabled>Show all</Button>
                 </div>
               </CardHeader>
