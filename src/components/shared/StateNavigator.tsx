@@ -4,9 +4,10 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Send, UserCheck, UserCircle, SearchCode } from 'lucide-react';
+import { Send, UserCheck, UserCircle /* Corrected icon */, SearchCode } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { useEffect, useState } from 'react'; // Added useEffect, useState
 
 const navigationStates = [
   { name: 'Send Request', href: '/invite/jane-doe', icon: Send, description: "Mock sending an invitation to a new profile." },
@@ -17,16 +18,26 @@ const navigationStates = [
 
 export function StateNavigator() {
   const pathname = usePathname();
+  const [activeStateHref, setActiveStateHref] = useState<string | null>(null);
 
-  // A simple heuristic to determine active state.
-  // For '/invite/[profileId]', we check if pathname starts with '/invite/'.
-  const isActive = (href: string) => {
-    if (href === '/invite/jane-doe' && pathname.startsWith('/invite/')) {
-      return true;
+  useEffect(() => {
+    let newActiveHref: string | null = null;
+    const sendRequestStateDefinition = navigationStates.find(state => state.name === 'Send Request');
+
+    // Logic to determine active state, mirroring the original isActive function
+    // The "Send Request" button is active if the pathname starts with /invite/
+    if (sendRequestStateDefinition && pathname.startsWith('/invite/')) {
+      newActiveHref = sendRequestStateDefinition.href;
+    } else {
+      // Otherwise, active state is an exact match of href
+      const matchedState = navigationStates.find(state => state.href === pathname);
+      if (matchedState) {
+        newActiveHref = matchedState.href;
+      }
     }
-    return pathname === href;
-  };
-  
+    setActiveStateHref(newActiveHref);
+  }, [pathname]);
+
   return (
     <Card className="sticky bottom-0 left-0 right-0 w-full z-40 bg-card border-t shadow-lg rounded-none">
       <CardHeader className="pb-3 pt-4 container mx-auto px-4">
@@ -35,28 +46,32 @@ export function StateNavigator() {
       </CardHeader>
       <CardContent className="pb-4 pt-0 container mx-auto px-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {navigationStates.map((state) => (
-            <Button
-              key={state.name}
-              variant={isActive(state.href) ? 'default' : 'outline'}
-              className={cn(
-                "w-full justify-start text-left h-auto py-1.5 px-2 flex-col items-start sm:flex-row sm:items-center sm:py-2 sm:px-3",
-                isActive(state.href) && "ring-2 ring-primary ring-offset-1"
-              )}
-              asChild
-              size="sm"
-            >
-              <Link href={state.href}>
-                <state.icon className="mr-0 mb-0.5 sm:mr-1.5 sm:mb-0 h-4 w-4 flex-shrink-0" />
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium">{state.name}</span>
-                  <span className="hidden md:block text-xs text-muted-foreground mt-0.5 leading-tight">{state.description}</span>
-                </div>
-              </Link>
-            </Button>
-          ))}
+          {navigationStates.map((state) => {
+            const isButtonActive = activeStateHref === state.href;
+            return (
+              <Button
+                key={state.name}
+                variant={isButtonActive ? 'default' : 'outline'}
+                className={cn(
+                  "w-full justify-start text-left h-auto py-1.5 px-2 flex-col items-start sm:flex-row sm:items-center sm:py-2 sm:px-3",
+                  isButtonActive && "ring-2 ring-primary ring-offset-1"
+                )}
+                asChild
+                size="sm"
+              >
+                <Link href={state.href}>
+                  <state.icon className="mr-0 mb-0.5 sm:mr-1.5 sm:mb-0 h-4 w-4 flex-shrink-0" />
+                  <div className="flex flex-col">
+                    <span className="text-xs font-medium">{state.name}</span>
+                    <span className="hidden md:block text-xs text-muted-foreground mt-0.5 leading-tight">{state.description}</span>
+                  </div>
+                </Link>
+              </Button>
+            );
+          })}
         </div>
       </CardContent>
     </Card>
   );
 }
+
