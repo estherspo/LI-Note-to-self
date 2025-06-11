@@ -94,9 +94,20 @@ export default function AcceptRequestPage() {
       <Card className="max-w-3xl mx-auto shadow-lg">
         <Tabs defaultValue="grow" className="w-full">
           <CardHeader className="p-0 border-b">
-            <TabsList className="grid w-full grid-cols-2 h-14 rounded-none">
-              <TabsTrigger value="grow" className="text-base h-full rounded-none data-[state=active]:border-b-2 data-[state=active]:border-green-600 data-[state=active]:text-green-700 data-[state=active]:font-semibold data-[state=active]:shadow-none">Grow</TabsTrigger>
-              <TabsTrigger value="catchup" className="text-base h-full rounded-none data-[state=active]:border-b-2 data-[state=active]:border-green-600 data-[state=active]:text-green-700 data-[state=active]:font-semibold data-[state=active]:shadow-none" disabled>Catch up</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 h-14 rounded-none bg-card p-0">
+              <TabsTrigger 
+                value="grow" 
+                className="text-base h-full rounded-none text-muted-foreground data-[state=active]:bg-muted data-[state=active]:text-foreground data-[state=active]:font-semibold data-[state=active]:border-b-2 data-[state=active]:border-muted-foreground data-[state=active]:shadow-none"
+              >
+                Grow
+              </TabsTrigger>
+              <TabsTrigger 
+                value="catchup" 
+                className="text-base h-full rounded-none text-muted-foreground data-[state=active]:bg-muted data-[state=active]:text-foreground data-[state=active]:font-semibold data-[state=active]:border-b-2 data-[state=active]:border-muted-foreground data-[state=active]:shadow-none"
+                disabled
+              >
+                Catch up
+              </TabsTrigger>
             </TabsList>
           </CardHeader>
           
