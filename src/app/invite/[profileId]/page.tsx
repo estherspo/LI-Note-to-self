@@ -140,19 +140,21 @@ export default function InvitePage() {
   let connectButtonVariant: "default" | "outline" | "secondary" | "ghost" | "link" | "destructive" | null | undefined = "default";
 
   if (alreadyConnected) {
-    if (invitationHasBeenSent) {
-      connectButtonText = 'Pending';
-      connectButtonIcon = <Clock className="mr-2 h-5 w-5"/>;
-      connectButtonDisabled = true;
-      connectButtonVariant = "secondary"; 
-    } else {
-      connectButtonText = 'Message';
-      connectButtonIcon = <MessageSquare className="mr-2 h-5 w-5"/>;
-      connectButtonDisabled = false; // Allow opening dialog to update notes
-      connectButtonVariant = "default";
-    }
+    // If they are already connected, the button should allow messaging or updating notes.
+    // We assume if `alreadyConnected` is true, an invitation was implicitly accepted or they were pre-connected.
+    // The `invitationHasBeenSent` is primarily for the "Pending" state for new invites.
+    connectButtonText = 'Message';
+    connectButtonIcon = <MessageSquare className="mr-2 h-5 w-5"/>;
+    connectButtonDisabled = false; 
+    connectButtonVariant = "default";
+  } else if (invitationHasBeenSent) {
+    // If not connected, but an invitation has been sent
+    connectButtonText = 'Pending';
+    connectButtonIcon = <Clock className="mr-2 h-5 w-5"/>;
+    connectButtonDisabled = true;
+    connectButtonVariant = "secondary";
   } else {
-    // Not connected, standard connect button
+    // Not connected and no invitation sent yet
     connectButtonText = 'Connect';
     connectButtonIcon = <UserPlus className="mr-2 h-5 w-5"/>;
     connectButtonDisabled = false;
@@ -234,7 +236,7 @@ export default function InvitePage() {
               {profile.location && (
                 <span>{profile.location}</span>
               )}
-              <span className="text-primary hover:underline cursor-pointer ml-1">· Contact info</span>
+              <span className="text-primary ml-1">· Contact info</span>
             </div>
             
             <p className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
