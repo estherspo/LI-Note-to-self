@@ -24,3 +24,12 @@ export interface Connection extends Profile {
   connectionDate?: string; // ISO date string
   standardMessage?: string; // Optional message sent with connection request
 }
+
+// Moved from accept-request/page.tsx for better reusability
+export interface PendingInvitation extends Profile {
+  message?: string;
+  mutualConnectionsText?: string;
+  isVerified?: boolean;
+  showLinkedInIcon?: boolean;
+  showLinkedInPremiumIcon?: boolean;
+}
