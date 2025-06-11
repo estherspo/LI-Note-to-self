@@ -1,3 +1,4 @@
+
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -17,6 +18,15 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/invite/jane-doe',
+        permanent: false, // Set to true if this should be a permanent redirect
+      },
+    ];
   },
 };
 
