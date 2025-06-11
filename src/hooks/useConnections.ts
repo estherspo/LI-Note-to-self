@@ -15,28 +15,60 @@ export function useConnections() {
 
   useEffect(() => {
     try {
-      const storedConnections = localStorage.getItem(CONNECTIONS_STORAGE_KEY);
-      if (storedConnections) {
-        setConnections(JSON.parse(storedConnections));
-      } else {
-        setConnections(initialConnections);
-        // localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(initialConnections)); // Save on first actual change
-      }
+      // Handle Connections
+      const storedConnectionsRaw = localStorage.getItem(CONNECTIONS_STORAGE_KEY);
+      let connectionsToSet: Connection[];
 
-      const storedSentInvitations = localStorage.getItem(SENT_INVITATIONS_STORAGE_KEY);
-      if (storedSentInvitations) {
-        setSentInvitations(JSON.parse(storedSentInvitations));
+      if (storedConnectionsRaw) {
+        let parsedConnections = JSON.parse(storedConnectionsRaw) as Connection[];
+        // Filter out "Hunter The Cat" by name
+        const filteredConnections = parsedConnections.filter(conn => conn.name !== 'Hunter The Cat');
+        
+        // If filtering changed the list, update localStorage
+        if (filteredConnections.length !== parsedConnections.length) {
+          localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(filteredConnections));
+        }
+        connectionsToSet = filteredConnections;
       } else {
-        setSentInvitations([]);
+        // If no stored connections, use initialConnections (which is now empty)
+        connectionsToSet = initialConnections; 
+        localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(connectionsToSet)); // Persist initial (empty) state
       }
+      setConnections(connectionsToSet);
+
+      // Handle Sent Invitations
+      const storedSentInvitationsRaw = localStorage.getItem(SENT_INVITATIONS_STORAGE_KEY);
+      let sentInvitationsToSet: string[];
+
+      if (storedSentInvitationsRaw) {
+        let parsedSentInvitations = JSON.parse(storedSentInvitationsRaw) as string[];
+        // Filter out "Hunter The Cat" (profile ID 'jane-doe') from sent invitations
+        const filteredSentInvitations = parsedSentInvitations.filter(id => id !== 'jane-doe');
+        
+        if (filteredSentInvitations.length !== parsedSentInvitations.length) {
+           localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(filteredSentInvitations));
+        }
+        sentInvitationsToSet = filteredSentInvitations;
+      } else {
+        // If no stored sent invitations, initialize as empty
+        sentInvitationsToSet = [];
+        localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(sentInvitationsToSet));
+      }
+      setSentInvitations(sentInvitationsToSet);
 
     } catch (error) {
-      console.error("Failed to load data from localStorage", error);
-      setConnections(initialConnections);
-      setSentInvitations([]);
+      console.error("Failed to load or reset data from localStorage", error);
+      // Fallback to a truly empty state if any error occurs during this process
+      const emptyConnections: Connection[] = [];
+      const emptySentInvitations: string[] = [];
+      setConnections(emptyConnections);
+      localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(emptyConnections));
+      setSentInvitations(emptySentInvitations);
+      localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(emptySentInvitations));
     }
     setIsLoading(false);
-  }, []);
+  }, []); // Empty dependency array means this runs once on mount
+
 
   const saveAppState = useCallback((updatedConnections: Connection[], updatedSentInvitations: string[]) => {
     setConnections(updatedConnections);
@@ -59,7 +91,6 @@ export function useConnections() {
       connectionDate: new Date().toISOString(),
     };
     
-    // Ensure profile.id is added to sentInvitations, avoiding duplicates
     const updatedSentInvitations = Array.from(new Set([...sentInvitations, profile.id]));
     const updatedConnections = [...connections, newConnection];
     
@@ -71,7 +102,6 @@ export function useConnections() {
     const updatedConnections = connections.map(conn =>
       conn.id === connectionId ? { ...conn, privateNote: note } : conn
     );
-    // Note update does not affect sentInvitations list directly
     saveAppState(updatedConnections, sentInvitations);
   }, [connections, sentInvitations, saveAppState]);
 
@@ -88,9 +118,14 @@ export function useConnections() {
     
     let updatedSentInvitations = [...sentInvitations];
     if (connectionToRemove) {
-      // Use the base profile ID from the connection object for removing from sentInvitations
-      const baseProfileId = connectionToRemove.id.replace(/^conn-|-(\d+)$/g, '');
-      updatedSentInvitations = sentInvitations.filter(id => id !== baseProfileId);
+      // Determine the original profile ID to remove from sentInvitations
+      // Assuming connection ID format `conn-${profile.id}-timestamp`
+      // We need to find the profileId from mockProfiles based on something like 'name' if the original 'profile.id' isn't easily extractable
+      // Or, more simply, if connectionToRemove.name is unique enough:
+      const profileData = mockProfiles.find(p => p.name === connectionToRemove.name);
+      if (profileData) {
+         updatedSentInvitations = sentInvitations.filter(id => id !== profileData.id);
+      }
     }
     
     saveAppState(updatedConnections, updatedSentInvitations);
@@ -118,7 +153,7 @@ export function useConnections() {
     deleteConnection,
     getConnectionById,
     getProfileToInvite,
-    isInvitationSent, // Expose this
+    isInvitationSent,
     mockProfiles, 
   };
 }

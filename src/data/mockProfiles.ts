@@ -91,19 +91,4 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 };
 
 
-export const initialConnections: Connection[] = [
-  {
-    ...mockProfiles[1], // John Smith
-    id: 'conn-john-smith', 
-    privateNote: "Met John at the 2023 Tech Conference. Discussed potential collaboration on product strategy.",
-    connectionDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(), 
-    standardMessage: "Hi John, enjoyed your talk at the conference. Would love to connect!",
-  },
-  {
-    ...mockProfiles[2], // Alice Green
-    id: 'conn-alice-green',
-    privateNote: "Alice is a talented UX designer. We worked together on the MobileFirst project.",
-    connectionDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), 
-  },
-];
-
+export const initialConnections: Connection[] = [];
