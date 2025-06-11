@@ -39,7 +39,7 @@ export default function InvitePage() {
 
   if (profile === undefined || connectionsLoading) {
     return (
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="w-full space-y-6"> {/* Changed: Removed max-w-3xl mx-auto, added w-full */}
         <Card>
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
           <CardHeader className="relative -mt-[64px] px-6 pb-2 flex flex-row items-start gap-4"> {/* Flex header, -mt-16 is -4rem or -64px */}
@@ -89,7 +89,7 @@ export default function InvitePage() {
 
   if (profile === null) {
     return (
-       <Alert variant="destructive" className="max-w-lg mx-auto">
+       <Alert variant="destructive" className="max-w-lg mx-auto"> {/* Keep max-w-lg for error message centering */}
         <Info className="h-4 w-4" />
         <AlertTitle>Profile Not Found</AlertTitle>
         <AlertDescription>
@@ -103,13 +103,13 @@ export default function InvitePage() {
   const coverPhotoUrl = "https://placehold.co/1200x300.png"; // Generic cover
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="w-full space-y-6"> {/* Changed: Removed max-w-3xl mx-auto, added w-full */}
       <Card className="overflow-hidden">
         <div className="relative h-48 bg-muted-foreground">
            <Image 
             src={coverPhotoUrl} 
             alt={`${profile.name}'s cover photo`} 
-            fill // Changed layout to fill
+            fill
             objectFit="cover"
             data-ai-hint="professional network background"
           />
