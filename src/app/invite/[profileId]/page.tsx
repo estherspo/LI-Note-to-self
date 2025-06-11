@@ -183,7 +183,7 @@ export default function InvitePage() {
               <div className="w-full sm:w-auto text-center sm:text-left">
                 <CardTitle className="font-headline text-3xl flex items-center justify-center sm:justify-start">
                   {profile.name}
-                  <ShieldCheck className="ml-2 h-6 w-6 text-primary" fill="currentColor" />
+                  <ShieldCheck className="ml-2 h-6 w-6" fill="white" stroke="black" />
                   <span className="ml-1 text-sm text-muted-foreground font-normal">· 2nd</span>
                 </CardTitle>
               </div>
