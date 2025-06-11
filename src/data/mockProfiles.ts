@@ -31,7 +31,7 @@ export const mockProfiles: Profile[] = [
       {
         title: 'Chief Vibe Officer',
         company: 'MeowCorp',
-        dates: 'Jan 2025 – Present', 
+        dates: 'Jan 2025 – Present',
         responsibilities: [
           'Set the tone for household relaxation and general cozy ambiance.',
           'Expert in hallway monitoring.',
@@ -90,7 +90,7 @@ export const mockProfiles: Profile[] = [
     ],
   },
   {
-    id: 'jack-cray-the-cat', // Updated ID
+    id: 'jack-cray-the-cat',
     name: 'Jack Cray The Cat',
     headline: 'VP of Nocturnal Operations at Zoomies United™',
     avatarUrl: 'https://placehold.co/128x128.png',
@@ -106,15 +106,15 @@ export const mockProfiles: Profile[] = [
         responsibilities: ['Overseeing all after-dark household activities.', 'Strategic deployment of toys to trip humans.', 'Advanced stealth techniques for treat acquisition.', 'Leading the midnight choir practice.']
       },
       {
-        title: 'Chief Pillow Inspector', 
-        company: 'The Comfy Den', 
-        dates: '2022-2024', 
+        title: 'Chief Pillow Inspector',
+        company: 'The Comfy Den',
+        dates: '2022-2024',
         responsibilities: ['Ensuring optimal fluffiness levels.', 'Conducting extensive napability tests on all soft surfaces.', 'Providing gravitational assistance to freshly laundered items.']
       },
     ],
   },
   {
-    id: 'george-sweeney-the-cat', // Updated ID
+    id: 'george-sweeney-the-cat',
     name: 'George Sweeney The Cat',
     headline: 'Executive Mealtime Coordinator at Food Logistics',
     avatarUrl: 'https://placehold.co/128x128.png',
@@ -123,17 +123,17 @@ export const mockProfiles: Profile[] = [
     location: 'Kitchen District, CA',
     bio: 'Passionate about timely meal delivery and rigorous quality control (taste testing is a non-negotiable part of the process). Believes every meal should be an event worth meowing about, ideally five times a day.',
     experience: [
-      { 
-        title: 'Executive Mealtime Coordinator', 
-        company: 'Food Logistics', 
-        dates: '2023-Present', 
-        responsibilities: ['Synchronizing human activity with the precise feeding schedule.', 'Advanced treat negotiation tactics and lobbying for extra snacks.', 'Quality assurance of all incoming food items via enthusiastic sniffing.'] 
+      {
+        title: 'Executive Mealtime Coordinator',
+        company: 'Food Logistics',
+        dates: '2023-Present',
+        responsibilities: ['Synchronizing human activity with the precise feeding schedule.', 'Advanced treat negotiation tactics and lobbying for extra snacks.', 'Quality assurance of all incoming food items via enthusiastic sniffing.']
       },
-      { 
-        title: 'Bowl Pre-Wash Technician', 
-        company: 'Kitchen Brigade Services', 
-        dates: '2021-2023', 
-        responsibilities: ['Ensuring no morsel goes to waste through diligent pre-cleaning.', 'Providing critical feedback on food quality and presentation, often vocally.', 'Advanced water bowl aeration specialist.'] 
+      {
+        title: 'Bowl Pre-Wash Technician',
+        company: 'Kitchen Brigade Services',
+        dates: '2021-2023',
+        responsibilities: ['Ensuring no morsel goes to waste through diligent pre-cleaning.', 'Providing critical feedback on food quality and presentation, often vocally.', 'Advanced water bowl aeration specialist.']
       },
     ],
   },
@@ -168,4 +168,5 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 };
 
 // Initial connections should be empty for the desired "reset" state
+// This ensures that Salty, Jack, and George appear as invitations for Hunter.
 export const initialConnections: Connection[] = [];
