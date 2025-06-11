@@ -20,38 +20,19 @@ import {
 } from '@/components/ui/dialog';
 
 const MAX_NOTE_LENGTH = 500;
-const HUNTER_OWN_NOTE_KEY = 'rememble-hunter-own-note';
 const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
 
 export default function ViewProfileNotePage() {
   const router = useRouter();
-  const [isDialogOpen, setIsDialogOpen] = useState(true); // Dialog is open by default when page is visited
+  const [isDialogOpen, setIsDialogOpen] = useState(true); 
   const profileName = "Hunter The Cat";
   const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
   const connectionDate = "June 11, 2025";
 
-  const [noteToSelf, setNoteToSelf] = useState('');
+  const [noteToSelf, setNoteToSelf] = useState(defaultInitialNoteText);
   const [isEditingNote, setIsEditingNote] = useState(false);
-  const [editedNoteText, setEditedNoteText] = useState('');
+  const [editedNoteText, setEditedNoteText] = useState(defaultInitialNoteText);
   const { toast } = useToast();
-
-  useEffect(() => {
-    try {
-      const storedNote = localStorage.getItem(HUNTER_OWN_NOTE_KEY);
-      const noteToUse = storedNote !== null ? storedNote : defaultInitialNoteText;
-      setNoteToSelf(noteToUse);
-      setEditedNoteText(noteToUse); 
-    } catch (error) {
-      console.error("Failed to load note from localStorage", error);
-      setNoteToSelf(defaultInitialNoteText);
-      setEditedNoteText(defaultInitialNoteText);
-      toast({
-        title: "Error Loading Note",
-        description: "Could not load your saved note.",
-        variant: "destructive",
-      });
-    }
-  }, [toast]);
 
   useEffect(() => {
     // If dialog is closed by any means (onOpenChange), navigate to home
@@ -83,20 +64,10 @@ export default function ViewProfileNotePage() {
     }
     setNoteToSelf(editedNoteText);
     setIsEditingNote(false);
-    try {
-      localStorage.setItem(HUNTER_OWN_NOTE_KEY, editedNoteText);
-      toast({
-        title: "Note Saved",
-        description: "Your note to self has been successfully saved.",
-      });
-    } catch (error) {
-      console.error("Failed to save note to localStorage", error);
-      toast({
-        title: "Error Saving Note",
-        description: "Could not save your note due to a storage issue.",
-        variant: "destructive",
-      });
-    }
+    toast({
+      title: "Note Updated",
+      description: "Your note to self has been updated for this session.",
+    });
   };
 
   const handleCancelEdit = () => {
@@ -109,13 +80,11 @@ export default function ViewProfileNotePage() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogContent className="sm:max-w-md">
-        <DialogHeader className="flex flex-row items-center justify-between pr-6"> {/* pr-6 to avoid overlap with DialogClose default positioning */}
+        <DialogHeader className="flex flex-row items-center justify-between pr-6"> 
           <DialogTitle className="font-headline text-xl font-semibold">{profileName}</DialogTitle>
-          {/* DialogClose is automatically rendered by DialogContent, this custom one is removed to use default */}
         </DialogHeader>
         
-        {/* Scrollable Content Area */}
-        <div className="space-y-6 pt-2 pb-6 max-h-[75vh] overflow-y-auto pr-3 pl-1"> {/* Adjusted padding */}
+        <div className="space-y-6 pt-2 pb-6 max-h-[75vh] overflow-y-auto pr-3 pl-1">
           <div>
             <h3 className="text-lg font-semibold mb-3">Contact Info</h3>
             <div className="space-y-4">
@@ -207,4 +176,3 @@ export default function ViewProfileNotePage() {
     </Dialog>
   );
 }
-
