@@ -121,7 +121,7 @@ export function Navbar() {
             
             <div className="flex flex-col items-start justify-center text-center pl-2 pr-1 h-full flex-shrink-0">
               <Link 
-                href={onAcceptRequestPage ? undefined : "#"}
+                href={onAcceptRequestPage ? "#" : "#"}
                 aria-disabled={onAcceptRequestPage}
                 className={cn(
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
@@ -131,7 +131,7 @@ export function Navbar() {
                 Reactivate
               </Link>
               <Link 
-                href={onAcceptRequestPage ? undefined : "#"}
+                href={onAcceptRequestPage ? "#" : "#"}
                 aria-disabled={onAcceptRequestPage}
                 className={cn(
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
@@ -148,3 +148,4 @@ export function Navbar() {
     </header>
   );
 }
+
