@@ -48,7 +48,7 @@ export default function AcceptRequestPage() {
           ...profile,
           message: "It was great meeting you at CatCon! Let's connect.",
           mutualConnectionsText: undefined,
-          isVerified: false,
+          isVerified: true, // Show shield
           showLinkedInIcon: false,
           showLinkedInPremiumIcon: false,
         };
@@ -57,7 +57,7 @@ export default function AcceptRequestPage() {
         return {
           ...profile,
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection",
-          isVerified: false, 
+          isVerified: true, // Show shield
           showLinkedInIcon: false,
           showLinkedInPremiumIcon: false,
         };
@@ -193,7 +193,7 @@ export default function AcceptRequestPage() {
                                 <Link href={`/invite/${inviter.id}`}>{inviter.name}</Link>
                               </h3>
                               {inviter.isVerified && (
-                                  <ShieldCheck className="h-4 w-4 text-green-600 fill-current" />
+                                  <ShieldCheck className="h-4 w-4 ml-1" fill="white" stroke="black" />
                               )}
                               {inviter.showLinkedInIcon && (
                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-primary">
