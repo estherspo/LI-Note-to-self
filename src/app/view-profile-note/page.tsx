@@ -26,7 +26,8 @@ export default function ViewProfileNotePage() {
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(true); 
   const profileName = "Hunter The Cat";
-  const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
+  const profileLinkedInDisplayText = "linkedin.com/in/hunter-the-cat-cvo";
+  const profileActualLinkUrl = "https://www.instagram.com/hunter_spo?igsh=NTc4MTIwNjQ2YQ==";
   const connectionDate = "June 11, 2025";
 
   const [noteToSelf, setNoteToSelf] = useState(defaultInitialNoteText);
@@ -86,6 +87,7 @@ export default function ViewProfileNotePage() {
       <DialogContent className="sm:max-w-md">
         <DialogHeader className="flex flex-row items-center justify-between pr-6"> 
           <DialogTitle className="font-headline text-xl font-semibold">{profileName}</DialogTitle>
+          {/* The X button is now handled by DialogContent's default close */}
         </DialogHeader>
         
         <div className="space-y-6 pt-2 pb-6 max-h-[75vh] overflow-y-auto pr-3 pl-1">
@@ -96,8 +98,8 @@ export default function ViewProfileNotePage() {
                 <Linkedin className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-foreground">{profileName}'s Profile</p>
-                  <Link href={`https://${profileLinkedInUrl}`} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
-                    {profileLinkedInUrl}
+                  <Link href={profileActualLinkUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                    {profileLinkedInDisplayText}
                   </Link>
                 </div>
               </div>
@@ -170,7 +172,7 @@ export default function ViewProfileNotePage() {
               </div>
               <p className="text-xs text-muted-foreground">Sonia and millions of other members use Premium</p>
             </div>
-            <Button className="w-full bg-amber-400 hover:bg-amber-500 text-black font-semibold rounded-full h-9">
+            <Button className="bg-amber-400 hover:bg-amber-500 text-black font-semibold rounded-full h-9 px-6">
               Reactivate Premium
             </Button>
             <p className="text-xs text-muted-foreground text-center mt-2">Cancel anytime. No hidden fees.</p>
@@ -180,3 +182,4 @@ export default function ViewProfileNotePage() {
     </Dialog>
   );
 }
+
