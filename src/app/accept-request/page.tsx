@@ -10,15 +10,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Users, Link2, MoreHorizontal, MessageSquareText } from 'lucide-react'; // Removed Linkedin, ShieldCheck as they are not used or handled differently
+import { Users, Link2, MoreHorizontal } from 'lucide-react'; 
 import { useToast } from "@/hooks/use-toast";
 
 interface PendingInvitation extends Profile {
   message?: string;
   mutualConnectionsText?: string;
-  isVerified?: boolean; // Kept for potential future use, but not visually rendered for Jack anymore
-  showLinkedInIcon?: boolean; // Kept for potential future use
-  showLinkedInPremiumIcon?: boolean; // New flag for the gold "in" icon
+  isVerified?: boolean; 
+  showLinkedInIcon?: boolean; 
+  showLinkedInPremiumIcon?: boolean; 
 }
 
 export default function AcceptRequestPage() {
@@ -27,7 +27,7 @@ export default function AcceptRequestPage() {
   const [pendingInvitations, setPendingInvitations] = useState<PendingInvitation[]>([]);
 
   useEffect(() => {
-    const currentUserId = 'jane-doe'; // Hunter The Cat's ID
+    const currentUserId = 'jane-doe'; 
 
     const invitationProfileIdsOrder = ['salty-sears', 'bob-brown', 'emily-white'];
 
@@ -64,7 +64,7 @@ export default function AcceptRequestPage() {
           mutualConnectionsText: undefined,
           isVerified: false,
           showLinkedInIcon: false,
-          showLinkedInPremiumIcon: true, // Enable for George
+          showLinkedInPremiumIcon: true, 
         };
       }
       return null;
@@ -99,7 +99,7 @@ export default function AcceptRequestPage() {
 
   return (
     <div className="container mx-auto px-0 sm:px-4 py-8">
-      <Card className="max-w-3xl mx-auto shadow-lg">
+      <Card className="shadow-lg"> {/* Removed max-w-3xl and mx-auto */}
         <Tabs defaultValue="grow" className="w-full">
           <CardHeader className="p-0 border-b">
             <TabsList className="grid w-full grid-cols-2 h-14 rounded-none bg-card p-0">
@@ -147,7 +147,6 @@ export default function AcceptRequestPage() {
                             <h3 className="text-lg font-semibold text-foreground hover:underline">
                               <Link href={`/invite/${inviter.id}`}>{inviter.name}</Link>
                             </h3>
-                            {/* Gold "in" icon for premium */}
                             {inviter.showLinkedInPremiumIcon && (
                               <span className="ml-1 inline-flex items-center justify-center h-[16px] w-[16px] bg-amber-500 rounded-sm p-0.5 align-middle">
                                 <span className="text-white text-[9px] font-bold leading-none">in</span>
