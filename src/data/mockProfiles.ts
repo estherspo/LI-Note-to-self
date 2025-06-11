@@ -167,5 +167,36 @@ export const getMockProfileById = (id: string): Profile | undefined => {
   return mockProfiles.find(p => p.id === id);
 };
 
+// Helper function to find a profile or throw an error if not found.
+const findProfileOrThrow = (id: string): Profile => {
+  const profile = mockProfiles.find(p => p.id === id);
+  if (!profile) {
+    // This should not happen with hardcoded IDs but is good practice.
+    throw new Error(`Profile with id ${id} not found in mockProfiles during initialConnections setup.`);
+  }
+  return profile;
+};
 
-export const initialConnections: Connection[] = [];
+// Define initial connections using specific profiles
+const profile1 = findProfileOrThrow('john-smith'); // John Smith
+const profile2 = findProfileOrThrow('lucy-cray-cat'); // Lucy Cray The Cat
+const profile3 = findProfileOrThrow('bob-brown'); // Jack Cray The Cat
+
+export const initialConnections: Connection[] = [
+  {
+    ...profile1,
+    id: `conn-${profile1.id}-initial`, // Unique ID for connection
+    connectionDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 3 days ago
+    // privateNote, standardMessage are undefined by default for a "reset"
+  },
+  {
+    ...profile2,
+    id: `conn-${profile2.id}-initial`,
+    connectionDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 2 days ago
+  },
+  {
+    ...profile3,
+    id: `conn-${profile3.id}-initial`,
+    connectionDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // Simulate connection 1 day ago
+  },
+];
