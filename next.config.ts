@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/',
-        destination: '/invite/jane-doe',
+        destination: '/invite/hunter-the-cat',
         permanent: false, // Set to true if this should be a permanent redirect
       },
     ];

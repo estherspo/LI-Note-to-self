@@ -30,7 +30,7 @@ export default function AcceptRequestPage() {
   const [noteDialogConnection, setNoteDialogConnection] = useState<Connection | null>(null);
 
   useEffect(() => {
-    const currentUserId = 'jane-doe'; // Hunter The Cat
+    const currentUserId = 'hunter-the-cat'; // Hunter The Cat
 
     const invitationProfileIdsOrder = ['salty-sears', 'jack-cray-the-cat', 'george-sweeney-the-cat'];
 

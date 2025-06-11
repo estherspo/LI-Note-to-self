@@ -19,7 +19,7 @@ const parseExperienceString = (expStr: string): ExperienceEntry => {
 
 export const mockProfiles: Profile[] = [
   {
-    id: 'jane-doe',
+    id: 'hunter-the-cat',
     name: 'Hunter The Cat',
     headline: 'Chief Vibe Officer (CVO) at MeowCorp',
     avatarUrl: 'https://placehold.co/128x128.png',

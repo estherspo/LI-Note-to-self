@@ -42,8 +42,8 @@ export function useConnections() {
 
       if (storedSentInvitationsRaw) {
         let parsedSentInvitations = JSON.parse(storedSentInvitationsRaw) as string[];
-        // Filter out "Hunter The Cat" (profile ID 'jane-doe') from sent invitations
-        const filteredSentInvitations = parsedSentInvitations.filter(id => id !== 'jane-doe');
+        // Filter out "Hunter The Cat" (profile ID 'hunter-the-cat') from sent invitations
+        const filteredSentInvitations = parsedSentInvitations.filter(id => id !== 'hunter-the-cat');
         
         if (filteredSentInvitations.length !== parsedSentInvitations.length) {
            localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(filteredSentInvitations));

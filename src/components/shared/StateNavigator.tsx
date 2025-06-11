@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 const navigationStates = [
-  { name: "Invite Hunter (Salty's View)", href: '/invite/jane-doe', description: "View Hunter The Cat's profile as Salty Sears to send an invitation." },
+  { name: "Invite Hunter (Salty's View)", href: '/invite/hunter-the-cat', description: "View Hunter The Cat's profile as Salty Sears to send an invitation." },
   { name: "Accept Requests (Hunter's View)", href: '/accept-request', description: "View and manage incoming connection requests as Hunter The Cat." },
   { name: 'View Connection Note', href: '/view-profile-note', description: "View an existing connection's profile and private note." },
 ];
@@ -72,4 +72,3 @@ export function StateNavigator() {
     </Card>
   );
 }
-
