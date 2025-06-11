@@ -143,7 +143,6 @@ export default function AcceptRequestPage() {
   return (
     <>
       <div className="container mx-auto px-0 sm:px-4 pb-8 space-y-6"> 
-        <h1 className="text-3xl font-bold font-headline mb-6">My Network</h1>
         <Card className="shadow-lg">
           <Tabs defaultValue="grow" className="w-full">
             <CardHeader className="p-0 border-b">
