@@ -40,7 +40,6 @@ export const mockProfiles: Profile[] = [
         location: 'Home Office'
       },
       parseExperienceString('Chief Napping Officer at The Comfy Cushion (2021-2024)'),
-      parseExperienceString('Lead Playtime Innovator at String Theory Inc. (2019-2021)'),
     ],
   },
   {
@@ -107,3 +106,4 @@ export const initialConnections: Connection[] = [
     connectionDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), 
   },
 ];
+
