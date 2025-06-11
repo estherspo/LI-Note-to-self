@@ -31,7 +31,7 @@ export const mockProfiles: Profile[] = [
       {
         title: 'Chief Vibe Officer',
         company: 'MeowCorp',
-        dates: 'Jan 2025 – Present', // Future date for fun
+        dates: 'Jan 2025 – Present', 
         responsibilities: [
           'Set the tone for household relaxation and general cozy ambiance.',
           'Expert in hallway monitoring.',
@@ -57,17 +57,36 @@ export const mockProfiles: Profile[] = [
     ],
   },
   {
-    id: 'alice-green',
-    name: 'Alice Green',
-    headline: 'UX Designer at CreativeMinds Studio',
+    id: 'lucy-cray-cat',
+    name: 'Lucy Cray The Cat',
+    headline: 'Expert Biscuit Maker & Sunbeam Specialist',
     avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'designer thinking',
-    company: 'CreativeMinds Studio',
-    location: 'Austin, TX',
-    bio: 'Crafting delightful user experiences through empathy and design thinking. Enjoys painting and travel.',
+    dataAiHint: 'gray cat fluffy',
+    company: 'The Cozy Corner',
+    location: 'Sunnyvale, CA',
+    bio: 'Dedicated feline focusing on advanced napping techniques, enthusiastic bird watching, and the art of looking irresistibly cute. Always open to new chin scratch opportunities.',
     experience: [
-      parseExperienceString('Lead UX Designer at PixelPerfect Agency (2020-Present)'),
-      parseExperienceString('UI/UX Designer at MobileFirst Apps (2018-2020)'),
+      {
+        title: 'Chief Relaxation Officer',
+        company: 'The Sunny Spot',
+        dates: '2022 – Present',
+        responsibilities: [
+          'Optimizing sunbeam usage for maximum warmth.',
+          'Providing therapeutic purring services.',
+          'Supervising human activity from elevated perches.'
+        ],
+        location: 'Living Room Window'
+      },
+      {
+        title: 'Lead Dream Investigator',
+        company: 'Nightly Adventures Inc.',
+        dates: '2020 – 2022',
+        responsibilities: [
+          'Exploring alternate realities during sleep.',
+          'Reporting findings via vigorous morning stretches.'
+        ],
+        location: 'Dreamland'
+      },
     ],
   },
   {

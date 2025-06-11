@@ -140,21 +140,16 @@ export default function InvitePage() {
   let connectButtonVariant: "default" | "outline" | "secondary" | "ghost" | "link" | "destructive" | null | undefined = "default";
 
   if (alreadyConnected) {
-    // If they are already connected, the button should allow messaging or updating notes.
-    // We assume if `alreadyConnected` is true, an invitation was implicitly accepted or they were pre-connected.
-    // The `invitationHasBeenSent` is primarily for the "Pending" state for new invites.
     connectButtonText = 'Message';
     connectButtonIcon = <MessageSquare className="mr-2 h-5 w-5"/>;
     connectButtonDisabled = false; 
     connectButtonVariant = "default";
   } else if (invitationHasBeenSent) {
-    // If not connected, but an invitation has been sent
     connectButtonText = 'Pending';
     connectButtonIcon = <Clock className="mr-2 h-5 w-5"/>;
     connectButtonDisabled = true;
     connectButtonVariant = "secondary";
   } else {
-    // Not connected and no invitation sent yet
     connectButtonText = 'Connect';
     connectButtonIcon = <UserPlus className="mr-2 h-5 w-5"/>;
     connectButtonDisabled = false;
@@ -216,9 +211,8 @@ export default function InvitePage() {
                 variant="outline" 
                 size="lg" 
                 className="rounded-full bg-card border-foreground text-foreground disabled:opacity-100" 
-                disabled // This button remains disabled as per original mock
+                disabled 
               >
-                {/* Logic for "Follow" / "Following" based on 'alreadyConnected' or 'invitationHasBeenSent' could go here if needed */}
                 {alreadyConnected || invitationHasBeenSent ? <Check className="mr-2 h-4 w-4"/> : null}
                 {alreadyConnected || invitationHasBeenSent ? 'Following' : 'Follow'}
               </Button>
@@ -245,7 +239,7 @@ export default function InvitePage() {
 
             <p className="text-sm text-muted-foreground mb-4 flex items-center gap-1 justify-center sm:justify-start">
               <Users className="h-4 w-4"/>
-              Followed by Perry Sportello 
+              Followed by Perry Sportello and Lucy Cray The Cat
             </p>
           </div>
         </CardHeader>
