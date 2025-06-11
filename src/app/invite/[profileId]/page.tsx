@@ -137,7 +137,7 @@ export default function InvitePage() {
           {profile.bio && (
             <div className="mt-6 pt-6 border-t">
               <h4 className="font-semibold text-lg mb-2">About</h4>
-              <p className_ ="text-sm text-foreground/80 leading-relaxed whitespace-pre-line">{profile.bio}</p>
+              <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-line">{profile.bio}</p>
             </div>
           )}
 
