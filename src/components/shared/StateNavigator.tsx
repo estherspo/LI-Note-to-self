@@ -36,11 +36,11 @@ export function StateNavigator() {
 
   return (
     <Card className="dark sticky bottom-0 left-0 right-0 w-full z-40 bg-card border-t shadow-lg rounded-none">
-      <CardHeader className="pb-3 pt-4 container mx-auto px-4">
-        <CardTitle className="text-base font-headline text-primary">Prototype State Navigator</CardTitle>
-        <CardDescription className="text-xs text-muted-foreground">Use these buttons to switch between different app states/features for Rememble.</CardDescription>
+      <CardHeader className="pb-2 pt-3 container mx-auto px-4">
+        <CardTitle className="text-sm font-headline text-primary">Prototype State Navigator</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground leading-tight">Use these buttons to switch between different app states/features for Rememble.</CardDescription>
       </CardHeader>
-      <CardContent className="pb-4 pt-0 container mx-auto px-4">
+      <CardContent className="pb-3 pt-0 container mx-auto px-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {navigationStates.map((state) => {
             const isButtonActive = activeStateHref === state.href;
@@ -49,7 +49,7 @@ export function StateNavigator() {
                 key={state.name}
                 variant={isButtonActive ? 'default' : 'outline'}
                 className={cn(
-                  "w-full justify-center text-center h-auto py-2 px-3",
+                  "w-full justify-center text-center h-auto py-1.5 px-3",
                   isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" 
                 )}
                 asChild
