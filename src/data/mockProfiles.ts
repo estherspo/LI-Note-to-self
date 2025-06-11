@@ -39,7 +39,7 @@ export const mockProfiles: Profile[] = [
         ],
         location: 'Home Office'
       },
-      parseExperienceString('Chief Napping Officer at The Comfy Cushion (2021-2024)'),
+      parseExperienceString('Director of Napping at The Comfy Cushion (2021-2024)'),
     ],
   },
   {

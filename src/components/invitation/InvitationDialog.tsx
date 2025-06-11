@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -18,7 +19,7 @@ import type { Profile } from '@/lib/types';
 import { useConnections } from '@/hooks/useConnections';
 import { useToast } from '@/hooks/use-toast';
 import { handleGenerateNotePrompts, saveConnectionNote as serverSaveNote } from '@/lib/actions'; // Server action
-import { Lightbulb, Send, Loader2, CheckCircle2 } from 'lucide-react';
+import { Lightbulb, Send, Loader2, CheckCircle2, Save } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 interface InvitationDialogProps {
@@ -145,7 +146,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
                 value={standardMessage}
                 onChange={(e) => setStandardMessage(e.target.value)}
                 maxLength={MAX_STANDARD_MESSAGE_LENGTH}
-                className="min-h-[80px]"
+                className="min-h-[80px] border-foreground/30"
               />
               <div className={`text-xs ${characterCountStandard > MAX_STANDARD_MESSAGE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
                 {characterCountStandard}/{MAX_STANDARD_MESSAGE_LENGTH} characters
@@ -161,7 +162,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
               value={privateNote}
               onChange={(e) => setPrivateNote(e.target.value)}
               maxLength={MAX_PRIVATE_NOTE_LENGTH}
-              className="min-h-[100px]"
+              className="min-h-[100px] border-foreground/30"
             />
             <div className={`text-xs ${characterCountPrivate > MAX_PRIVATE_NOTE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
               {characterCountPrivate}/{MAX_PRIVATE_NOTE_LENGTH} characters
