@@ -1,7 +1,9 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from '@/components/shared/Navbar';
+import { StateNavigator } from '@/components/shared/StateNavigator'; // Added import
 
 export const metadata: Metadata = {
   title: 'Rememble - Remember Your Connections',
@@ -24,6 +26,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow container mx-auto px-4 py-8">
+            <StateNavigator /> {/* Added StateNavigator */}
             {children}
           </main>
         </div>
