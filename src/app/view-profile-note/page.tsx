@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Linkedin, Users, X, StickyNote, Edit3 } from "lucide-react"; 
+import { Linkedin, Users, X, StickyNote, Edit3, CheckCircle2 } from "lucide-react"; 
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from 'next/navigation';
 import {
@@ -65,7 +65,12 @@ export default function ViewProfileNotePage() {
     setNoteToSelf(editedNoteText);
     setIsEditingNote(false);
     toast({
-      title: "Note to self Saved",
+      title: (
+        <div className="flex items-center">
+          <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+          <span>Note to self Saved</span>
+        </div>
+      ),
       description: "Your note to self has been updated for this session.",
     });
   };
