@@ -42,18 +42,20 @@ export default function InvitePage() {
       <div className="w-full space-y-6">
         <Card>
           <div className="h-48 bg-muted animate-pulse" /> {/* Cover photo skeleton */}
-          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col items-center"> {/* Avatar and details will be centered */}
-            <Skeleton className="h-32 w-32 rounded-full border-4 border-background bg-muted" /> {/* Avatar skeleton */}
+          <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Avatar and details will be left-aligned by default */}
+            <Avatar className="h-32 w-32 rounded-full border-4 border-background bg-card self-center sm:self-start"> {/* Centered on mobile, left on sm+ */}
+                <Skeleton className="h-full w-full rounded-full bg-muted" />
+            </Avatar>
             
-            <div className="w-full mt-4"> {/* Text details block wrapper */}
+            <div className="w-full mt-4 text-center sm:text-left"> {/* Text details block wrapper - responsive alignment */}
               <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-2 w-full">
-                <div className="flex-1 space-y-2 text-center sm:text-left"> {/* Name and Headline wrapper */}
+                <div className="flex-1 space-y-2"> {/* Name and Headline wrapper */}
                   <Skeleton className="h-8 w-3/4 bg-muted mx-auto sm:mx-0" /> {/* Name skeleton */}
                   <Skeleton className="h-5 w-full bg-muted" /> {/* Headline skeleton */}
                 </div>
                 <Skeleton className="h-10 w-32 bg-muted mt-2 sm:mt-0" /> {/* Button Skeleton */}
               </div>
-              <div className="mt-2 space-y-1 w-full text-center sm:text-left"> {/* Company/Location wrapper */}
+              <div className="mt-2 space-y-1 w-full"> {/* Company/Location wrapper */}
                 <div className="flex items-center gap-2 mt-1 justify-center sm:justify-start">
                   <Skeleton className="h-4 w-4 bg-muted" />
                   <Skeleton className="h-4 w-1/2 bg-muted" />
@@ -115,13 +117,13 @@ export default function InvitePage() {
             data-ai-hint="professional network background"
           />
         </div>
-        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col items-center text-center sm:text-left">
-          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card">
+        <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col"> {/* Avatar container now flex-col, default align-items: stretch */}
+          <Avatar className="h-32 w-32 rounded-full border-4 border-card bg-card self-center sm:self-start"> {/* Centered on mobile, left on sm+ */}
             <AvatarImage src={profile.avatarUrl} alt={profile.name} data-ai-hint={profile.dataAiHint || "profile person"} />
             <AvatarFallback>{profile.name.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           
-          <div className="w-full mt-4"> {/* Text content block */}
+          <div className="w-full mt-4 text-center sm:text-left"> {/* Text content block, responsive alignment */}
              <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-2">
                 <div className="flex-1"> 
                     <CardTitle className="font-headline text-3xl">{profile.name}</CardTitle>
