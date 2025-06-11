@@ -53,8 +53,8 @@ export default function AcceptRequestPage() {
         return {
           ...profile, // name, headline, avatarUrl, dataAiHint come from mock
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection",
-          isVerified: true,
-          showLinkedInIcon: false, // Assuming no LinkedIn icon for Jack
+          isVerified: false, // Changed from true to false
+          showLinkedInIcon: false,
         };
       }
       if (profile.id === 'emily-white') { // George Sweeney The Cat
