@@ -17,7 +17,7 @@ import { Label } from '@/components/ui/label';
 import type { Connection } from '@/lib/types';
 import { useConnections } from '@/hooks/useConnections';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, CheckCircle2 } from 'lucide-react'; // Added CheckCircle2
 
 interface PostAcceptNoteDialogProps {
   connection: Connection | null;
@@ -54,7 +54,12 @@ export function PostAcceptNoteDialog({ connection, isOpen, onOpenChange }: PostA
     try {
       updateConnectionNote(connection.id, noteToSelf);
       toast({
-        title: "Note to self saved",
+        title: (
+          <div className="flex items-center">
+            <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+            <span>Note to self saved</span>
+          </div>
+        ),
         description: `Your note to self for ${connection.name} has been saved.`,
       });
       onOpenChange(false);
