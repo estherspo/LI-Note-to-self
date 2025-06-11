@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Send, UserCheck, UserCircle, SearchCode } from 'lucide-react'; // Corrected UserCircle import if it was CircleUser
+import { Send, UserCheck, UserCircle, SearchCode } from 'lucide-react'; // Icons are still imported but will not be used
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
@@ -50,17 +50,15 @@ export function StateNavigator() {
                 key={state.name}
                 variant={isButtonActive ? 'default' : 'outline'}
                 className={cn(
-                  "w-full justify-start text-left h-auto py-1.5 px-2 flex-col items-start sm:flex-row sm:items-center sm:py-2 sm:px-3",
+                  "w-full justify-center text-center h-auto py-2 px-3", // Adjusted padding and justification
                   isButtonActive && "ring-2 ring-primary ring-offset-1"
                 )}
                 asChild
                 size="sm"
               >
                 <Link href={state.href}>
-                  <state.icon className="mr-0 mb-0.5 sm:mr-1.5 sm:mb-0 h-4 w-4 flex-shrink-0" />
-                  <div className="flex flex-col whitespace-normal"> {/* Added whitespace-normal here */}
+                  <div className="flex flex-col whitespace-normal items-center justify-center">
                     <span className="text-xs font-medium">{state.name}</span>
-                    <span className="hidden md:block text-xs text-muted-foreground mt-0.5 leading-tight">{state.description}</span>
                   </div>
                 </Link>
               </Button>

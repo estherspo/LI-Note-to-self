@@ -4,10 +4,10 @@ export const mockProfiles: Profile[] = [
   {
     id: 'jane-doe',
     name: 'Hunter The Cat',
-    headline: 'Chief Vibe Officer (CVO)  at MeowCorp International Inc.',
+    headline: 'Chief Vibe Officer (CVO)  at MeowCorp',
     avatarUrl: 'https://placehold.co/128x128.png', // You can replace this with the actual path to your cat image
     dataAiHint: 'tabby cat',
-    company: 'MeowCorp International Inc.',
+    company: 'MeowCorp',
     location: 'California, CA',
     bio: 'Passionate about building scalable web applications and innovative tech. Lover of hiking and photography.',
     experience: ['Software Engineer at Innovate Corp (2018-2020)', 'Junior Developer at WebStart LLC (2016-2018)'],
