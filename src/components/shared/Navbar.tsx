@@ -14,8 +14,11 @@ import {
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import { Separator } from '@/components/ui/separator';
+import { usePathname } from 'next/navigation'; // Import usePathname
 
 export function Navbar() {
+  const pathname = usePathname(); // Get current pathname
+
   return (
     <header className="bg-card border-b sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -40,10 +43,13 @@ export function Navbar() {
               <span className="text-xs leading-tight">Home</span>
             </Link>
           </Button>
-          <Button variant="ghost" asChild className="h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0" disabled>
+          <Button variant="ghost" asChild className="relative h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0" disabled>
             <Link href="/" className="flex flex-col items-center justify-center text-center text-muted-foreground hover:text-primary">
               <Users className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5" />
               <span className="text-xs leading-tight">My Network</span>
+              {pathname === '/accept-request' && (
+                <span className="absolute top-3 right-3 sm:right-4 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-card"></span>
+              )}
             </Link>
           </Button>
           <Button variant="ghost" asChild className="h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0" disabled>
