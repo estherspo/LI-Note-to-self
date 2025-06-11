@@ -2,17 +2,27 @@
 // src/app/view-profile-note/page.tsx
 "use client";
 
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Linkedin, Users, X, StickyNote, Edit3 } from "lucide-react";
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Linkedin, Users, X, StickyNote, Edit3, Save, MessageSquare } from "lucide-react"; // Added Save, MessageSquare
+
+const MAX_NOTE_LENGTH = 500;
 
 export default function ViewProfileNotePage() {
   const profileName = "Hunter The Cat";
   const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
   const connectionDate = "Jan 15, 2024";
-  const noteToSelfText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
+  const initialNoteToSelfText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
+
+  const [noteToSelf, setNoteToSelf] = useState(initialNoteToSelfText);
+  const [isEditingNote, setIsEditingNote] = useState(false);
+  const [editedNoteText, setEditedNoteText] = useState(initialNoteToSelfText);
+
 
   // Placeholder for multiple avatars
   const premiumUserAvatars = [
@@ -21,12 +31,34 @@ export default function ViewProfileNotePage() {
     { src: "https://placehold.co/24x24.png", alt: "User 3", dataAiHint: "person avatar" },
   ];
 
+  const handleEditNote = () => {
+    setEditedNoteText(noteToSelf); // Start editing with current note
+    setIsEditingNote(true);
+  };
+
+  const handleSaveNote = () => {
+    if (editedNoteText.length > MAX_NOTE_LENGTH) {
+      // Basic validation, could add a toast here
+      alert(`Note cannot exceed ${MAX_NOTE_LENGTH} characters.`);
+      return;
+    }
+    setNoteToSelf(editedNoteText);
+    setIsEditingNote(false);
+  };
+
+  const handleCancelEdit = () => {
+    // No reset to original, just exit editing mode. editedNoteText keeps its value if not saved.
+    setIsEditingNote(false);
+  };
+
+  const characterCount = editedNoteText.length;
+
+
   return (
     <div className="container mx-auto px-0 sm:px-4 py-8 flex justify-center">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="flex flex-row items-center justify-between pb-4">
           <CardTitle className="font-headline text-xl font-semibold">{profileName}</CardTitle>
-          {/* The X button is visual only for this page context. In a real modal, it would close. */}
           <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-muted/50 h-8 w-8" onClick={() => console.log("Close clicked (visual only)")}>
             <X className="h-5 w-5" />
           </Button>
@@ -55,14 +87,40 @@ export default function ViewProfileNotePage() {
               <div className="flex items-start gap-3 pt-2">
                 <StickyNote className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
                 <div className="flex-1">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mb-1">
                     <p className="font-medium text-foreground">Note to self</p>
-                    <Button variant="ghost" size="sm" className="h-auto px-2 py-1 text-xs text-primary hover:bg-muted/50" onClick={() => console.log("Edit note clicked (visual only)")}>
-                      <Edit3 className="h-3 w-3 mr-1" />
-                      Edit
-                    </Button>
+                    {!isEditingNote && (
+                      <Button variant="ghost" size="icon" className="h-7 w-7 text-primary hover:bg-primary/10" onClick={handleEditNote}>
+                        <Edit3 className="h-4 w-4" />
+                        <span className="sr-only">Edit note</span>
+                      </Button>
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground whitespace-pre-line">{noteToSelfText}</p>
+                  {isEditingNote ? (
+                    <div className="space-y-2">
+                      <Textarea
+                        id="noteToSelfViewProfile"
+                        placeholder="e.g., Met at CatCon, discussed tuna snacks..."
+                        value={editedNoteText}
+                        onChange={(e) => setEditedNoteText(e.target.value)}
+                        maxLength={MAX_NOTE_LENGTH}
+                        className="min-h-[100px] border-input text-sm"
+                      />
+                      <div className={`text-xs ${characterCount > MAX_NOTE_LENGTH ? 'text-destructive' : 'text-muted-foreground'}`}>
+                        {characterCount}/{MAX_NOTE_LENGTH} characters
+                      </div>
+                      <div className="flex justify-end gap-2">
+                        <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
+                           <X className="mr-1 h-4 w-4" /> Cancel
+                        </Button>
+                        <Button size="sm" onClick={handleSaveNote} disabled={characterCount > MAX_NOTE_LENGTH}>
+                          <Save className="mr-1 h-4 w-4" /> Save
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-muted-foreground whitespace-pre-line">{noteToSelf || "No note added yet."}</p>
+                  )}
                 </div>
               </div>
 
@@ -80,7 +138,7 @@ export default function ViewProfileNotePage() {
               <div className="flex -space-x-2 mr-2">
                 {premiumUserAvatars.map((avatar, index) => (
                   <Avatar key={index} className="h-6 w-6 border-2 border-background">
-                    <AvatarImage src={avatar.src} alt={avatar.alt} data-ai-hint={avatar.dataAiHint} />
+                    <AvatarImage src={avatar.src} alt={avatar.alt} data-ai-hint={avatar.dataAiHint}/>
                     <AvatarFallback>{avatar.alt.substring(0,1)}</AvatarFallback>
                   </Avatar>
                 ))}
@@ -97,4 +155,3 @@ export default function ViewProfileNotePage() {
     </div>
   );
 }
-
