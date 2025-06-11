@@ -16,7 +16,7 @@ const MAX_NOTE_LENGTH = 500;
 export default function ViewProfileNotePage() {
   const profileName = "Hunter The Cat";
   const profileLinkedInUrl = "linkedin.com/in/hunter-the-cat-cvo";
-  const connectionDate = "Jan 15, 2024";
+  const connectionDate = "June 11, 2025";
   const initialNoteToSelfText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
 
   const [noteToSelf, setNoteToSelf] = useState(initialNoteToSelfText);
