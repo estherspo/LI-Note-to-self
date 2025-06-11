@@ -15,56 +15,29 @@ export function useConnections() {
 
   useEffect(() => {
     try {
-      // Handle Connections
-      const storedConnectionsRaw = localStorage.getItem(CONNECTIONS_STORAGE_KEY);
-      let connectionsToSet: Connection[];
+      // Force reset to initial (empty) state and save it
+      // initialConnections from mockProfiles is already an empty array: export const initialConnections: Connection[] = [];
+      const connectionsToSet: Connection[] = initialConnections; 
+      const sentInvitationsToSet: string[] = []; 
 
-      if (storedConnectionsRaw) {
-        let parsedConnections = JSON.parse(storedConnectionsRaw) as Connection[];
-        // Filter out "Hunter The Cat" by name
-        const filteredConnections = parsedConnections.filter(conn => conn.name !== 'Hunter The Cat');
-        
-        // If filtering changed the list, update localStorage
-        if (filteredConnections.length !== parsedConnections.length) {
-          localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(filteredConnections));
-        }
-        connectionsToSet = filteredConnections;
-      } else {
-        // If no stored connections, use initialConnections (which is now empty)
-        connectionsToSet = initialConnections; 
-        localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(connectionsToSet)); // Persist initial (empty) state
-      }
+      localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(connectionsToSet));
+      localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(sentInvitationsToSet));
+      
       setConnections(connectionsToSet);
-
-      // Handle Sent Invitations
-      const storedSentInvitationsRaw = localStorage.getItem(SENT_INVITATIONS_STORAGE_KEY);
-      let sentInvitationsToSet: string[];
-
-      if (storedSentInvitationsRaw) {
-        let parsedSentInvitations = JSON.parse(storedSentInvitationsRaw) as string[];
-        // Filter out "Hunter The Cat" (profile ID 'hunter-the-cat') from sent invitations
-        const filteredSentInvitations = parsedSentInvitations.filter(id => id !== 'hunter-the-cat');
-        
-        if (filteredSentInvitations.length !== parsedSentInvitations.length) {
-           localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(filteredSentInvitations));
-        }
-        sentInvitationsToSet = filteredSentInvitations;
-      } else {
-        // If no stored sent invitations, initialize as empty
-        sentInvitationsToSet = [];
-        localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(sentInvitationsToSet));
-      }
       setSentInvitations(sentInvitationsToSet);
 
     } catch (error) {
-      console.error("Failed to load or reset data from localStorage", error);
-      // Fallback to a truly empty state if any error occurs during this process
-      const emptyConnections: Connection[] = [];
-      const emptySentInvitations: string[] = [];
-      setConnections(emptyConnections);
-      localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify(emptyConnections));
-      setSentInvitations(emptySentInvitations);
-      localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify(emptySentInvitations));
+      console.error("Failed to clear and initialize data in localStorage", error);
+      // Fallback to ensure internal state is empty even if localStorage write fails
+      setConnections([]);
+      setSentInvitations([]);
+       // Attempt to clear localStorage again in case of partial failure
+      try {
+        localStorage.setItem(CONNECTIONS_STORAGE_KEY, JSON.stringify([]));
+        localStorage.setItem(SENT_INVITATIONS_STORAGE_KEY, JSON.stringify([]));
+      } catch (e) {
+        console.error("Failed to clear localStorage during fallback", e);
+      }
     }
     setIsLoading(false);
   }, []); // Empty dependency array means this runs once on mount
@@ -118,10 +91,6 @@ export function useConnections() {
     
     let updatedSentInvitations = [...sentInvitations];
     if (connectionToRemove) {
-      // Determine the original profile ID to remove from sentInvitations
-      // Assuming connection ID format `conn-${profile.id}-timestamp`
-      // We need to find the profileId from mockProfiles based on something like 'name' if the original 'profile.id' isn't easily extractable
-      // Or, more simply, if connectionToRemove.name is unique enough:
       const profileData = mockProfiles.find(p => p.name === connectionToRemove.name);
       if (profileData) {
          updatedSentInvitations = sentInvitations.filter(id => id !== profileData.id);
