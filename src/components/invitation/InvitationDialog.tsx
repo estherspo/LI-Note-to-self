@@ -120,7 +120,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
         <div className="py-2 space-y-4 max-h-[60vh] overflow-y-auto px-2">
           {!isAlreadyConnected && (
             <div className="space-y-1.5">
-              <Label htmlFor="standardMessage">Add a message to your invitation (optional - this will be sent to them)</Label>
+              <Label htmlFor="standardMessage">Add a note to send with your invite (optional). The person you're inviting will see this.</Label>
               <Textarea
                 id="standardMessage"
                 placeholder={`Hi ${profile.name.split(' ')[0]}, I'd like to connect...`}
