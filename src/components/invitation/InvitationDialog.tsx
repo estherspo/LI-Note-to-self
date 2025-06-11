@@ -117,7 +117,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
           )}
         </DialogHeader>
 
-        <div className="py-2 space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+        <div className="py-2 space-y-4 max-h-[60vh] overflow-y-auto px-2">
           {!isAlreadyConnected && (
             <div className="space-y-1.5">
               <Label htmlFor="standardMessage">Add a note to your invitation (optional)</Label>
