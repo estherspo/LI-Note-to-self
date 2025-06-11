@@ -9,10 +9,9 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 const navigationStates = [
-  { name: 'Send Request', href: '/invite/jane-doe', description: "Mock sending an invitation to a new profile." },
-  { name: 'Accept Request', href: '/accept-request', description: "Simulate accepting an incoming request." },
+  { name: "Invite Hunter (Salty's View)", href: '/invite/jane-doe', description: "View Hunter The Cat's profile as Salty Sears to send an invitation." },
+  { name: "Accept Requests (Hunter's View)", href: '/accept-request', description: "View and manage incoming connection requests as Hunter The Cat." },
   { name: 'View Connection Note', href: '/view-profile-note', description: "View an existing connection's profile and private note." },
-  { name: 'Search Network', href: '/', description: "Search your connections by name, headline, or note." },
 ];
 
 export function StateNavigator() {
@@ -21,10 +20,11 @@ export function StateNavigator() {
 
   useEffect(() => {
     let newActiveHref: string | null = null;
-    const sendRequestStateDefinition = navigationStates.find(state => state.name === 'Send Request');
+    // Use the new name to find the state definition
+    const inviteStateDefinition = navigationStates.find(state => state.name === "Invite Hunter (Salty's View)");
 
-    if (sendRequestStateDefinition && pathname.startsWith('/invite/')) {
-      newActiveHref = sendRequestStateDefinition.href;
+    if (inviteStateDefinition && pathname.startsWith('/invite/')) {
+      newActiveHref = inviteStateDefinition.href;
     } else {
       const matchedState = navigationStates.find(state => state.href === pathname);
       if (matchedState) {
@@ -36,12 +36,16 @@ export function StateNavigator() {
 
   return (
     <Card className="dark sticky bottom-0 left-0 right-0 w-full z-40 bg-card border-t shadow-lg rounded-none">
-      <CardHeader className="pb-2 pt-3 container mx-auto px-4">
+      <CardHeader className="pb-1 pt-2 container mx-auto px-4">
         <CardTitle className="text-sm font-headline text-primary">Prototype State Navigator</CardTitle>
         <CardDescription className="text-xs text-muted-foreground leading-tight">Use these buttons to switch between different app states/features for Rememble.</CardDescription>
       </CardHeader>
-      <CardContent className="pb-3 pt-0 container mx-auto px-4">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <CardContent className="pb-2 pt-1 container mx-auto px-4">
+        <div className={cn(
+            "grid gap-2",
+            navigationStates.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
+          )}
+        >
           {navigationStates.map((state) => {
             const isButtonActive = activeStateHref === state.href;
             return (
@@ -49,7 +53,7 @@ export function StateNavigator() {
                 key={state.name}
                 variant={isButtonActive ? 'default' : 'outline'}
                 className={cn(
-                  "w-full justify-center text-center h-auto py-1.5 px-3",
+                  "w-full justify-center text-center h-auto py-1 px-2", // Reduced padding
                   isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" 
                 )}
                 asChild
@@ -57,7 +61,7 @@ export function StateNavigator() {
               >
                 <Link href={state.href}>
                   <div className="flex flex-col whitespace-normal items-center justify-center">
-                    <span className="text-xs font-medium">{state.name}</span>
+                    <span className="text-xs font-medium leading-tight">{state.name}</span>
                   </div>
                 </Link>
               </Button>
@@ -68,3 +72,4 @@ export function StateNavigator() {
     </Card>
   );
 }
+
