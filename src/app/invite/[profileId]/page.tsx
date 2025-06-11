@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { InvitationDialog } from '@/components/invitation/InvitationDialog';
-import { Building, MapPin, UserPlus, CheckCircle2, Info, Users, MessageSquare, Check } from 'lucide-react';
+import { Building, MapPin, UserPlus, CheckCircle2, Info, Users, MessageSquare, Check, ShieldCheck } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -157,9 +157,7 @@ export default function InvitePage() {
               <div className="w-full sm:w-auto text-center sm:text-left">
                 <CardTitle className="font-headline text-3xl flex items-center justify-center sm:justify-start">
                   {profile.name}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="ml-2 h-6 w-6 text-blue-500">
-                    <path fillRule="evenodd" d="M8.603 3.799A4.5 4.5 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.5 4.5 0 013.498 1.308 4.5 4.5 0 01.986 3.296A4.5 4.5 0 0121.75 12c0 .379-.054.748-.158 1.102a4.5 4.5 0 01-1.308 3.498 4.5 4.5 0 01-3.296.986A4.5 4.5 0 0112 21.75a4.5 4.5 0 01-3.397-1.549 4.5 4.5 0 01-3.498-1.308 4.5 4.5 0 01-.986-3.296A4.5 4.5 0 012.25 12c0-.379.054.748.158-1.102a4.5 4.5 0 011.308-3.498 4.5 4.5 0 013.296-.986A4.5 4.5 0 018.603 3.799zM10.73 15.28a.75.75 0 001.06 1.06l3.5-3.5a.75.75 0 00-1.06-1.06l-3 3-1.5-1.5a.75.75 0 10-1.06 1.06l2 2z" clipRule="evenodd" />
-                  </svg>
+                  <ShieldCheck className="ml-2 h-6 w-6 text-primary" fill="currentColor" />
                   <span className="ml-1 text-sm text-muted-foreground font-normal">· 2nd</span>
                 </CardTitle>
               </div>
