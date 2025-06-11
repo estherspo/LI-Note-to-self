@@ -69,11 +69,6 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
         toast({
           title: "Invitation Sent!",
           description: `Your invitation to ${profile.name} has been sent with your private note.`,
-          action: (
-            <Button variant="outline" size="sm" onClick={() => router.push('/')}>
-              View Network
-            </Button>
-          ),
         });
       }
       onOpenChange(false);
