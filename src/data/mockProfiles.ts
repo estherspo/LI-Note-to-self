@@ -61,9 +61,9 @@ export const mockProfiles: Profile[] = [
     name: 'Lucy Cray The Cat',
     headline: 'Expert Biscuit Maker & Sunbeam Specialist',
     avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'gray cat fluffy',
+    dataAiHint: 'white fluffy cat',
     company: 'The Cozy Corner',
-    location: 'Sunnyvale, CA',
+    location: 'New York',
     bio: 'Dedicated feline focusing on advanced napping techniques, enthusiastic bird watching, and the art of looking irresistibly cute. Always open to new chin scratch opportunities.',
     experience: [
       {
@@ -94,9 +94,9 @@ export const mockProfiles: Profile[] = [
     name: 'Jack Cray The Cat',
     headline: 'VP of Nocturnal Operations at Zoomies United™',
     avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'gray cat serious',
+    dataAiHint: 'gray tabby',
     company: 'Zoomies United™',
-    location: 'Silicon Alley, CA',
+    location: 'New York',
     bio: 'Master of stealth, connoisseur of late-night sprints. Currently optimizing the house for maximum zoom potential and strategic toy deployment. Believes all floor space is a potential racetrack.',
     experience: [
       {
@@ -118,9 +118,9 @@ export const mockProfiles: Profile[] = [
     name: 'George Sweeney The Cat',
     headline: 'Executive Mealtime Coordinator at Food Logistics',
     avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'orange cat',
+    dataAiHint: 'black and white cat',
     company: 'Food Logistics',
-    location: 'Kitchen District, CA',
+    location: 'California',
     bio: 'Passionate about timely meal delivery and rigorous quality control (taste testing is a non-negotiable part of the process). Believes every meal should be an event worth meowing about, ideally five times a day.',
     experience: [
       {
@@ -144,7 +144,7 @@ export const mockProfiles: Profile[] = [
     avatarUrl: 'https://placehold.co/128x128.png',
     dataAiHint: 'cat pirate',
     company: 'The Salty Paw',
-    location: 'Port Meow, CA',
+    location: 'Washington, DC',
     bio: 'Navigating the high seas of napping and treat acquisition. Expert in purr-suasion and strategic pouncing. Believes every string is a challenge.',
     experience: [
       {
