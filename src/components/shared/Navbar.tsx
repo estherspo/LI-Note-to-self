@@ -40,7 +40,7 @@ export function Navbar() {
         
         <nav className="flex items-center h-full">
           <Button variant="ghost" asChild className="h-full px-1.5 sm:px-2 py-0 w-[65px] sm:w-[75px] rounded-none hover:bg-slate-100 flex-shrink-0" disabled>
-            <Link href="/" className="flex flex-col items-center justify-center text-center text-muted-foreground hover:text-primary">
+            <Link href="#" className="flex flex-col items-center justify-center text-center text-muted-foreground hover:text-primary">
               <Home className="h-5 w-5 sm:h-6 sm:w-6 mb-0.5" />
               <span className="text-xs leading-tight">Home</span>
             </Link>
@@ -127,6 +127,7 @@ export function Navbar() {
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
                   onAcceptRequestPage && "opacity-50 pointer-events-none cursor-not-allowed"
                 )}
+                tabIndex={onAcceptRequestPage ? -1 : undefined} 
               >
                 Reactivate
               </Link>
@@ -137,6 +138,7 @@ export function Navbar() {
                   "text-xs text-amber-700 hover:underline leading-tight whitespace-nowrap",
                   onAcceptRequestPage && "opacity-50 pointer-events-none cursor-not-allowed"
                 )}
+                tabIndex={onAcceptRequestPage ? -1 : undefined}
               >
                 Premium: 50% Off
               </Link>
