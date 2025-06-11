@@ -58,7 +58,12 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
         updateConnectionNote(existingConnection.id, privateNote);
          await serverSaveNote(existingConnection.id, privateNote, standardMessage); // Simulate server update for existing
         toast({
-          title: "Private Note Updated",
+          title: (
+            <div className="flex items-center">
+              <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+              <span>Private Note Updated</span>
+            </div>
+          ),
           description: `Your private note for ${profile.name} has been updated.`,
         });
       } else {
@@ -67,7 +72,12 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
           await serverSaveNote(newConn.id, privateNote, standardMessage); // Simulate server save for new
         }
         toast({
-          title: "Invitation Sent!",
+          title: (
+            <div className="flex items-center">
+              <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+              <span>Invitation Sent!</span>
+            </div>
+          ),
           description: "Your invitation has been sent and private note saved.",
         });
       }
