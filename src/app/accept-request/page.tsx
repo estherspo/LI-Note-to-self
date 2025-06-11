@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Users, Link2, MoreHorizontal, ShieldCheck } from 'lucide-react'; 
+import { Users, Link2, MoreHorizontal, ShieldCheck, Gamepad2, Feather, Dot, PawPrint } from 'lucide-react'; 
 import { useToast } from "@/hooks/use-toast";
 
 interface PendingInvitation extends Profile {
@@ -97,8 +97,26 @@ export default function AcceptRequestPage() {
     }
   };
 
+  const dailyGames = [
+    { 
+      icon: Feather, 
+      title: "Feather Frenzy", 
+      description: "Gats goes wild for the flapping, swooping feather beast!" 
+    },
+    { 
+      icon: Dot, 
+      title: "Dot of Doom", 
+      description: "That sneaky red dot must be caught… no matter the cost!" 
+    },
+    { 
+      icon: PawPrint, 
+      title: "Greeble Gambit", 
+      description: "Unseen foes lurk, requiring swift paw-eye coordination and tactical pounces!" 
+    },
+  ];
+
   return (
-    <div className="container mx-auto px-0 sm:px-4 pb-8"> {/* Removed py-8, changed to pb-8 */}
+    <div className="container mx-auto px-0 sm:px-4 pb-8 space-y-6"> 
       <Card className="shadow-lg">
         <Tabs defaultValue="grow" className="w-full">
           <CardHeader className="p-0 border-b">
@@ -136,7 +154,7 @@ export default function AcceptRequestPage() {
               ) : (
                 <ul className="divide-y divide-border">
                   {pendingInvitations.map((inviter) => (
-                    <li key={inviter.id} className="px-4 py-4"> {/* Changed padding here */}
+                    <li key={inviter.id} className="px-4 py-4">
                       <div className="flex items-start gap-4">
                         <Avatar className="h-14 w-14 border">
                           <AvatarImage src={inviter.avatarUrl} alt={inviter.name} data-ai-hint={inviter.dataAiHint || "profile person"} />
@@ -207,8 +225,26 @@ export default function AcceptRequestPage() {
           </TabsContent>
         </Tabs>
       </Card>
+
+      <Card className="shadow-lg">
+        <CardHeader className="px-4 sm:px-6 py-4">
+          <CardTitle className="text-xl font-semibold flex items-center gap-2">
+            <Gamepad2 className="h-6 w-6 text-primary" />
+            Play Daily Games
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-4 sm:px-6 pb-5 space-y-4">
+          {dailyGames.map((game, index) => (
+            <div key={index} className="flex items-start gap-3">
+              <game.icon className="h-6 w-6 text-muted-foreground mt-0.5 shrink-0" />
+              <div>
+                <h4 className="font-medium text-foreground">{game.title}</h4>
+                <p className="text-sm text-muted-foreground">{game.description}</p>
+              </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
     </div>
   );
 }
-
-    
