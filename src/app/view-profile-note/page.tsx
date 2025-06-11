@@ -21,6 +21,7 @@ import {
 
 const MAX_NOTE_LENGTH = 500;
 const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
+const NOTE_STORAGE_KEY = 'hunter-profile-note';
 
 export default function ViewProfileNotePage() {
   const router = useRouter();
@@ -84,7 +85,7 @@ export default function ViewProfileNotePage() {
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-xs">
         <DialogHeader className="flex flex-row items-center justify-between pr-6"> 
           <DialogTitle className="font-headline text-xl font-semibold">{profileName}</DialogTitle>
           {/* The X button is now handled by DialogContent's default close */}
