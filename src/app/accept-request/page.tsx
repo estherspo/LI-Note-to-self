@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile, Connection } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Users, Link2, MoreHorizontal, ShieldCheck, Feather, Dot, PawPrint } from 'lucide-react'; 
+import { Users, Link2, MoreHorizontal, ShieldCheck, Feather, Dot, PawPrint, CheckCircle2 } from 'lucide-react'; 
 import { useToast } from "@/hooks/use-toast";
 import { PostAcceptNoteDialog } from '@/components/connections/PostAcceptNoteDialog';
 
@@ -32,37 +32,35 @@ export default function AcceptRequestPage() {
   useEffect(() => {
     const currentUserId = 'jane-doe'; // Hunter The Cat
 
-    // These profiles should appear as invitations FOR Hunter The Cat
     const invitationProfileIdsOrder = ['salty-sears', 'jack-cray-the-cat', 'george-sweeney-the-cat'];
 
     const invitations: PendingInvitation[] = invitationProfileIdsOrder.map(profileId => {
       const profile = allMockProfiles.find(p => p.id === profileId);
 
-      // If the profile is not found, or it's Hunter's own profile, or Hunter is already connected, don't show as invitation.
       if (!profile || profile.id === currentUserId || connections.some(c => c.id.includes(profile.id))) {
         return null;
       }
 
-      if (profile.id === 'salty-sears') { // Salty Sears The Cat
+      if (profile.id === 'salty-sears') { 
         return {
           ...profile,
           message: "It was great meeting you at CatCon! Let's connect.",
           mutualConnectionsText: undefined,
-          isVerified: true, // Show shield
+          isVerified: true, 
           showLinkedInIcon: false,
           showLinkedInPremiumIcon: false,
         };
       }
-      if (profile.id === 'jack-cray-the-cat') { // Jack Cray The Cat
+      if (profile.id === 'jack-cray-the-cat') { 
         return {
           ...profile,
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection",
-          isVerified: true, // Show shield
+          isVerified: true, 
           showLinkedInIcon: false,
           showLinkedInPremiumIcon: false,
         };
       }
-      if (profile.id === 'george-sweeney-the-cat') { // George Sweeney The Cat
+      if (profile.id === 'george-sweeney-the-cat') { 
         return {
           ...profile,
           message: "Heard you're the go-to cat for gourmet catnip reviews. Would love to pick your brain!",
@@ -72,8 +70,6 @@ export default function AcceptRequestPage() {
           showLinkedInPremiumIcon: true, 
         };
       }
-      // Fallback for any other profile ID in invitationProfileIdsOrder if not customized above
-      // This case shouldn't be hit with the current setup but is a safeguard.
       return { 
         ...profile,
         isVerified: false,
@@ -88,16 +84,19 @@ export default function AcceptRequestPage() {
   const handleAccept = (inviter: PendingInvitation) => {
     const originalProfile = allMockProfiles.find(p => p.id === inviter.id);
     if (originalProfile) {
-      // Add connection without a note initially
       const newConnection = addConnection(originalProfile, undefined); 
       
       setPendingInvitations(prev => prev.filter(p => p.id !== inviter.id));
       toast({
         title: "Connection Accepted",
-        description: `You are now connected with ${inviter.name}.`,
+        description: (
+          <div className="flex items-center">
+            <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
+            <span>You are now connected with {inviter.name}.</span>
+          </div>
+        ),
       });
 
-      // Open dialog to add a note for the new connection
       if (newConnection) {
         setNoteDialogConnection(newConnection);
         setIsAddNoteDialogOpen(true);
