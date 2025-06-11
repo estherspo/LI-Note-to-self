@@ -17,8 +17,11 @@ const navigationStates = [
 export function StateNavigator() {
   const pathname = usePathname();
   const [activeStateHref, setActiveStateHref] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false); // New state to track client-side mount
 
   useEffect(() => {
+    setIsMounted(true); // Set to true once component mounts on the client
+
     let newActiveHref: string | null = null;
     // Use the new name to find the state definition
     const inviteStateDefinition = navigationStates.find(state => state.name === "Invite Hunter (Salty's View)");
@@ -51,10 +54,10 @@ export function StateNavigator() {
             return (
               <Button
                 key={state.name}
-                variant={isButtonActive ? 'default' : 'outline'}
+                variant={isMounted && isButtonActive ? 'default' : 'outline'} // Apply active variant only if mounted
                 className={cn(
                   "w-full justify-center text-center h-auto py-1 px-2", // Reduced padding
-                  isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" 
+                  isMounted && isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" // Apply active ring only if mounted
                 )}
                 asChild
                 size="sm"
@@ -72,4 +75,3 @@ export function StateNavigator() {
     </Card>
   );
 }
-
