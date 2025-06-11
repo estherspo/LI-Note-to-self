@@ -10,14 +10,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile } from '@/lib/types';
 import { mockProfiles as allMockProfiles } from '@/data/mockProfiles';
-import { Linkedin, Users, MessageSquareText, MoreHorizontal, ShieldCheck, Link2 } from 'lucide-react';
+import { Users, Link2, MoreHorizontal, MessageSquareText } from 'lucide-react'; // Removed Linkedin, ShieldCheck as they are not used or handled differently
 import { useToast } from "@/hooks/use-toast";
 
 interface PendingInvitation extends Profile {
   message?: string;
   mutualConnectionsText?: string;
-  isVerified?: boolean;
-  showLinkedInIcon?: boolean;
+  isVerified?: boolean; // Kept for potential future use, but not visually rendered for Jack anymore
+  showLinkedInIcon?: boolean; // Kept for potential future use
+  showLinkedInPremiumIcon?: boolean; // New flag for the gold "in" icon
 }
 
 export default function AcceptRequestPage() {
@@ -28,45 +29,45 @@ export default function AcceptRequestPage() {
   useEffect(() => {
     const currentUserId = 'jane-doe'; // Hunter The Cat's ID
 
-    // Define the exact order and profiles for invitations
     const invitationProfileIdsOrder = ['salty-sears', 'bob-brown', 'emily-white'];
 
     const invitations: PendingInvitation[] = invitationProfileIdsOrder.map(profileId => {
       const profile = allMockProfiles.find(p => p.id === profileId);
 
-      // Skip if profile not found, is current user, or already connected
       if (!profile || profile.id === currentUserId || connections.some(c => c.id.includes(profile.id))) {
         return null;
       }
 
-      // Apply specific invitation details based on profile ID
       if (profile.id === 'salty-sears') { // Salty Sears The Cat
         return {
-          ...profile, // name, headline, avatarUrl, dataAiHint come from mock
+          ...profile,
           message: "It was great meeting you at CatCon! Let's connect.",
           mutualConnectionsText: undefined,
           isVerified: false,
           showLinkedInIcon: false,
+          showLinkedInPremiumIcon: false,
         };
       }
       if (profile.id === 'bob-brown') { // Jack Cray The Cat
         return {
-          ...profile, // name, headline, avatarUrl, dataAiHint come from mock
+          ...profile,
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection",
-          isVerified: false, // Changed from true to false
+          isVerified: false, 
           showLinkedInIcon: false,
+          showLinkedInPremiumIcon: false,
         };
       }
       if (profile.id === 'emily-white') { // George Sweeney The Cat
         return {
-          ...profile, // name, headline, avatarUrl, dataAiHint come from mock
+          ...profile,
           message: "Heard you're the go-to cat for gourmet catnip reviews. Would love to pick your brain!",
           mutualConnectionsText: undefined,
           isVerified: false,
           showLinkedInIcon: false,
+          showLinkedInPremiumIcon: true, // Enable for George
         };
       }
-      return null; // Fallback, should not be reached if IDs in order list are correct
+      return null;
     }).filter(invitation => invitation !== null) as PendingInvitation[];
 
     setPendingInvitations(invitations);
@@ -146,8 +147,12 @@ export default function AcceptRequestPage() {
                             <h3 className="text-lg font-semibold text-foreground hover:underline">
                               <Link href={`/invite/${inviter.id}`}>{inviter.name}</Link>
                             </h3>
-                            {inviter.showLinkedInIcon && <Linkedin className="h-4 w-4 text-muted-foreground fill-muted-foreground" />}
-                            {inviter.isVerified && <ShieldCheck className="h-4 w-4 text-green-600 fill-green-100" />}
+                            {/* Gold "in" icon for premium */}
+                            {inviter.showLinkedInPremiumIcon && (
+                              <span className="ml-1 inline-flex items-center justify-center h-[16px] w-[16px] bg-amber-500 rounded-sm p-0.5 align-middle">
+                                <span className="text-white text-[9px] font-bold leading-none">in</span>
+                              </span>
+                            )}
                           </div>
                           <p className="text-sm text-muted-foreground leading-snug">{inviter.headline}</p>
                           {inviter.mutualConnectionsText && (
