@@ -52,7 +52,7 @@ export function StateNavigator() {
             const isButtonActive = activeStateHref === state.href;
             return (
               <Button
-                key={state.name}
+                key={state.href} // Changed key from state.name to state.href
                 variant={isMounted && isButtonActive ? 'default' : 'outline'} 
                 className={cn(
                   "w-full justify-center text-center h-auto py-1 px-2", 
@@ -63,7 +63,9 @@ export function StateNavigator() {
               >
                 <Link href={state.href}>
                   <div className="flex flex-col whitespace-normal items-center justify-center">
-                    <span className="text-xs font-medium leading-tight">{state.name}</span>
+                    <span className="text-xs font-medium leading-tight">
+                      {isMounted ? state.name : "\u00A0"} {/* Defer rendering full name */}
+                    </span>
                   </div>
                 </Link>
               </Button>
@@ -74,4 +76,3 @@ export function StateNavigator() {
     </Card>
   );
 }
-
