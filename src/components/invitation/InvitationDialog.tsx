@@ -68,7 +68,7 @@ export function InvitationDialog({ profile, isOpen, onOpenChange, isAlreadyConne
         }
         toast({
           title: "Invitation Sent!",
-          description: `Your invitation to ${profile.name} has been sent with your private note.`,
+          description: "Your invitation has been sent and private note saved.",
         });
       }
       onOpenChange(false);
