@@ -116,8 +116,8 @@ export default function AcceptRequestPage() {
       icon: PawPrint, 
       title: "Shadow Stalker", 
       description: "Unseen foes lurk, requiring swift paw-eye coordination and tactical pounces!",
-      iconColorClass: "text-purple-600",
-      buttonClasses: "bg-purple-600 text-white hover:bg-purple-700",
+      iconColorClass: "text-yellow-500",
+      buttonClasses: "bg-yellow-500 text-black hover:bg-yellow-600",
     },
   ];
 
