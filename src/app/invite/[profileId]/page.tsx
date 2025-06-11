@@ -66,6 +66,13 @@ export default function InvitePage() {
               {/* Headline Skeleton */}
               <Skeleton className="h-5 w-5/6 bg-muted mb-2 mx-auto sm:mx-0" />
               
+                {/* Buttons Skeleton - Moved up */}
+              <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
+                <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
+                <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
+                <Skeleton className="h-10 w-full sm:w-20 bg-muted rounded-full" />
+              </div>
+
               {/* Location/Contact Skeleton */}
               <Skeleton className="h-4 w-1/2 bg-muted mb-2 mx-auto sm:mx-0" />
               
@@ -76,13 +83,6 @@ export default function InvitePage() {
               <div className="flex items-center gap-1 mb-4 justify-center sm:justify-start">
                 <Skeleton className="h-4 w-4 bg-muted rounded-full"/>
                 <Skeleton className="h-4 w-28 bg-muted" />
-              </div>
-              
-              {/* Buttons Skeleton */}
-              <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
-                <Skeleton className="h-10 w-full sm:w-28 bg-muted rounded-full" />
-                <Skeleton className="h-10 w-full sm:w-20 bg-muted rounded-full" />
               </div>
             </div>
           </CardHeader>
@@ -168,8 +168,20 @@ export default function InvitePage() {
             </div>
 
             <p className="text-lg text-foreground mb-2 text-center sm:text-left">{profile.headline}</p>
+             {/* Buttons Section - Moved Up */}
+            <div className="flex flex-wrap gap-2 justify-center sm:justify-start mt-4 mb-2">
+              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
+                {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
+                {isAlreadyConnected ? 'Message' : 'Connect'}
+              </Button>
+              <Button variant="outline" size="lg" className="rounded-full">
+                {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
+                {isAlreadyConnected ? 'Following' : 'Follow'}
+              </Button>
+              <Button variant="outline" size="lg" className="rounded-full">More</Button>
+            </div>
             
-            <div className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
+            <div className="text-sm text-muted-foreground mb-2 text-center sm:text-left mt-2">
               {profile.location && (
                 <span>{profile.location}</span>
               )}
@@ -184,25 +196,13 @@ export default function InvitePage() {
               <Users className="h-4 w-4"/>
               Followed by Perry Sportello {/* Mocked */}
             </p>
-            
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-              <Button onClick={handleConnect} size="lg" className="whitespace-nowrap rounded-full">
-                {isAlreadyConnected ? <MessageSquare className="mr-2 h-5 w-5"/> : <UserPlus className="mr-2 h-5 w-5" />}
-                {isAlreadyConnected ? 'Message' : 'Connect'}
-              </Button>
-              <Button variant="outline" size="lg" className="rounded-full">
-                {isAlreadyConnected ? <Check className="mr-2 h-4 w-4"/> : null}
-                {isAlreadyConnected ? 'Following' : 'Follow'}
-              </Button>
-              <Button variant="outline" size="lg" className="rounded-full">More</Button>
-            </div>
           </div>
         </CardHeader>
         
         <CardContent className="px-6 pt-4 pb-6">
           {profile.bio && (
             <div className="mt-6 pt-6 border-t">
-              <h4 className="font-semibold text-lg mb-2">About</h4>
+              <h4 className="font-semibold text-lg mb-2">Highlights</h4>
               <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-line">{profile.bio}</p>
             </div>
           )}
