@@ -23,7 +23,6 @@ export const mockProfiles: Profile[] = [
     name: 'Hunter The Cat',
     headline: 'Chief Vibe Officer (CVO) at MeowCorp',
     avatarUrl: 'https://scontent.cdninstagram.com/v/t51.2885-15/366099042_202111816049079_3015509776983050017_n.jpg',
-    // dataAiHint removed as it's now a specific image
     company: 'MeowCorp',
     location: 'California, CA',
     bio: 'Experienced feline professional specializing in human morale boosting and late-night zoomies. Known for strong interpersonal skills (especially with houseplants and cardboard boxes) and a keen ability to detect the exact moment someone is about to sit down.',
@@ -93,8 +92,8 @@ export const mockProfiles: Profile[] = [
     id: 'jack-cray-the-cat',
     name: 'Jack Cray The Cat',
     headline: 'VP of Nocturnal Operations at Zoomies United™',
-    avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'gray tabby',
+    avatarUrl: 'https://images.unsplash.com/photo-1655056419284-c4f85449779c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWFpbmVjb29uJTIwdGFiYnklMjBjYXR8ZW58MHx8MHx8fDA%3D',
+    dataAiHint: 'maine coon tabby',
     company: 'Zoomies United™',
     location: 'New York',
     bio: 'Master of stealth, connoisseur of late-night sprints. Currently optimizing the house for maximum zoom potential and strategic toy deployment. Believes all floor space is a potential racetrack.',
