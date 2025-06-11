@@ -47,15 +47,13 @@ export default function AcceptRequestPage() {
           showLinkedInIcon: true,
         };
       }
-      if (profile.id === 'bob-brown') { // Map Bob Brown to Sanjay Makasana
+      // The profile with id 'bob-brown' is now "Jack Cray The Cat" in mockProfiles.ts
+      // We will use its details directly and add invitation-specific properties.
+      if (profile.id === 'bob-brown') { 
         return {
-          ...profile,
-          name: 'Sanjay Makasana', // Override name
-          headline: "Founder & CEO at Teamcamp | Simplifying Project Execution for Agencies", // Override headline
-          avatarUrl: 'https://placehold.co/128x128.png', 
-          dataAiHint: 'man smiling',
+          ...profile, // This will bring Jack Cray The Cat's name, headline, avatar, etc.
           mutualConnectionsText: "Lucy Cray The Cat is a mutual connection", 
-          isVerified: true,
+          isVerified: true, // Keep this specific to the invitation display
         };
       }
       if (profile.id === 'emily-white') { // Map Emily White to Priya Sharma
@@ -203,3 +201,4 @@ export default function AcceptRequestPage() {
     </div>
   );
 }
+

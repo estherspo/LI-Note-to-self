@@ -90,17 +90,22 @@ export const mockProfiles: Profile[] = [
     ],
   },
   {
-    id: 'bob-brown',
-    name: 'Bob Brown',
-    headline: 'Data Scientist at AnalyzeData Corp',
+    id: 'bob-brown', // This ID is used for mapping
+    name: 'Jack Cray The Cat',
+    headline: 'Lead Paw-sibilities Engineer at The Scratching Post Inc.',
     avatarUrl: 'https://placehold.co/128x128.png',
-    dataAiHint: 'scientist glasses',
-    company: 'AnalyzeData Corp',
-    location: 'Chicago, IL',
-    bio: 'Transforming data into actionable insights. Expertise in machine learning and statistical modeling. Loves board games.',
+    dataAiHint: 'gray cat serious',
+    company: 'The Scratching Post Inc.',
+    location: 'Silicon Alley, CA',
+    bio: 'Specializing in algorithmically optimized nap locations and chasing rogue laser pointers. Enthusiastic about string theory (especially the kind you can bat at).',
     experience: [
-      parseExperienceString('Senior Data Scientist at Insightful Analytics (2019-Present)'),
-      parseExperienceString('Data Analyst at Quant Solutions (2017-2019)'),
+      {
+        title: 'Lead Paw-sibilities Engineer',
+        company: 'The Scratching Post Inc.',
+        dates: '2023 - Present',
+        responsibilities: ['Developing novel approaches to treat acquisition.', 'Debugging the red dot.']
+      },
+      parseExperienceString('Junior Tail Chaser at Felitech (2021-2023)'),
     ],
   },
   {
@@ -124,3 +129,4 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 
 
 export const initialConnections: Connection[] = [];
+
