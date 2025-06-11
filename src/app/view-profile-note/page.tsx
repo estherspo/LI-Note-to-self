@@ -74,7 +74,7 @@ export default function ViewProfileNotePage() {
       title: (
         <div className="flex items-center">
           <CheckCircle2 className="h-5 w-5 text-green-500 mr-2" />
-          <span>Note to self Saved</span>
+          <span>Note to self saved</span>
         </div>
       ),
     });

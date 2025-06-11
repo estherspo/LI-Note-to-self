@@ -54,7 +54,7 @@ export function PostAcceptNoteDialog({ connection, isOpen, onOpenChange }: PostA
     try {
       updateConnectionNote(connection.id, noteToSelf);
       toast({
-        title: "Note to self Saved",
+        title: "Note to self saved",
         description: `Your note to self for ${connection.name} has been saved.`,
       });
       onOpenChange(false);
