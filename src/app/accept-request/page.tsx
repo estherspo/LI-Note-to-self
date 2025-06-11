@@ -54,19 +54,19 @@ export default function AcceptRequestPage() {
           isVerified: true, 
         };
       }
-      if (profile.id === 'emily-white') { // Map emily-white (George Sweeney The Cat)
+      if (profile.id === 'salty-sears') { // Salty Sears
         return {
-          ...profile, // This will bring George Sweeney The Cat's name, headline, avatar, etc. from mockProfiles
-          avatarUrl: 'https://placehold.co/128x128.png', 
-          dataAiHint: 'orange cat', // Override dataAiHint
-          message: "Hi Hunter, I've heard tales of your sophisticated palate! As the Executive Mealtime Coordinator at Food Logistics, I'd be honored to connect and exchange notes on the latest gourmet kibble trends.",
-          mutualConnectionsText: undefined, // Removed mutual connections
+          ...profile,
+          avatarUrl: 'https://placehold.co/128x128.png',
+          dataAiHint: 'cat pirate',
+          message: "It was great meeting you at CatCon! Let's connect.",
+          mutualConnectionsText: undefined,
           isVerified: false,
           showLinkedInIcon: false,
         };
       }
       return profile as PendingInvitation; 
-    }).filter(p => p.id === 'john-smith' || p.id === 'bob-brown' || p.id === 'emily-white'); 
+    }).filter(p => p.id === 'john-smith' || p.id === 'bob-brown' || p.id === 'salty-sears'); 
 
     setPendingInvitations(mappedInvitations);
   }, [connections]);

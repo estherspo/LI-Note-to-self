@@ -90,52 +90,76 @@ export const mockProfiles: Profile[] = [
     ],
   },
   {
-    id: 'bob-brown', // This ID is used for mapping
+    id: 'bob-brown',
     name: 'Jack Cray The Cat',
     headline: 'VP of Nocturnal Operations at Zoomies United™',
     avatarUrl: 'https://placehold.co/128x128.png',
     dataAiHint: 'gray cat serious',
     company: 'Zoomies United™',
     location: 'Silicon Alley, CA',
-    bio: 'Master of stealth, connoisseur of late-night sprints. Currently optimizing the house for maximum zoom potential and strategic toy deployment.',
+    bio: 'Master of stealth, connoisseur of late-night sprints. Currently optimizing the house for maximum zoom potential and strategic toy deployment. Believes all floor space is a potential racetrack.',
     experience: [
       {
         title: 'VP of Nocturnal Operations',
         company: 'Zoomies United™',
         dates: '2024 - Present',
-        responsibilities: ['Overseeing all after-dark household activities.', 'Strategic deployment of toys to trip humans.', 'Advanced stealth techniques for treat acquisition.']
+        responsibilities: ['Overseeing all after-dark household activities.', 'Strategic deployment of toys to trip humans.', 'Advanced stealth techniques for treat acquisition.', 'Leading the midnight choir practice.']
       },
       {
         title: 'Chief Pillow Inspector', 
         company: 'The Comfy Den', 
         dates: '2022-2024', 
-        responsibilities: ['Ensuring optimal fluffiness levels.', 'Conducting extensive napability tests on all soft surfaces.']
+        responsibilities: ['Ensuring optimal fluffiness levels.', 'Conducting extensive napability tests on all soft surfaces.', 'Providing gravitational assistance to freshly laundered items.']
       },
     ],
   },
   {
-    id: 'emily-white', // This ID is used for mapping
+    id: 'emily-white', 
     name: 'George Sweeney The Cat',
     headline: 'Executive Mealtime Coordinator at Food Logistics',
     avatarUrl: 'https://placehold.co/128x128.png',
     dataAiHint: 'orange cat',
     company: 'Food Logistics',
     location: 'Kitchen District, CA',
-    bio: 'Passionate about timely meal delivery and rigorous quality control (taste testing is a non-negotiable part of the process). Believes every meal should be an event worth meowing about.',
+    bio: 'Passionate about timely meal delivery and rigorous quality control (taste testing is a non-negotiable part of the process). Believes every meal should be an event worth meowing about, ideally five times a day.',
     experience: [
       { 
         title: 'Executive Mealtime Coordinator', 
         company: 'Food Logistics', 
         dates: '2023-Present', 
-        responsibilities: ['Synchronizing human activity with the precise feeding schedule.', 'Advanced treat negotiation tactics and lobbying for extra snacks.', 'Quality assurance of all incoming food items.'] 
+        responsibilities: ['Synchronizing human activity with the precise feeding schedule.', 'Advanced treat negotiation tactics and lobbying for extra snacks.', 'Quality assurance of all incoming food items via enthusiastic sniffing.'] 
       },
       { 
         title: 'Bowl Pre-Wash Technician', 
         company: 'Kitchen Brigade Services', 
         dates: '2021-2023', 
-        responsibilities: ['Ensuring no morsel goes to waste through diligent pre-cleaning.', 'Providing critical feedback on food quality and presentation.'] 
+        responsibilities: ['Ensuring no morsel goes to waste through diligent pre-cleaning.', 'Providing critical feedback on food quality and presentation, often vocally.', 'Advanced water bowl aeration specialist.'] 
       },
     ],
+  },
+  {
+    id: 'salty-sears',
+    name: 'Salty Sears',
+    headline: 'Chief Yarn Officer at The Salty Paw',
+    avatarUrl: 'https://placehold.co/128x128.png',
+    dataAiHint: 'cat pirate',
+    company: 'The Salty Paw',
+    location: 'Port Meow, CA',
+    bio: 'Navigating the high seas of napping and treat acquisition. Expert in purr-suasion and strategic pouncing. Believes every string is a challenge.',
+    experience: [
+      {
+        title: 'Chief Yarn Officer (CYO)',
+        company: 'The Salty Paw',
+        dates: '2023 - Present',
+        responsibilities: ['Managing all yarn-based assets.', 'Leading expeditions to uncharted territories (under the couch).', 'Developing new techniques for box occupation.']
+      },
+      {
+        title: 'First Mate of Feather Wands',
+        company: 'The Playful Pirate Ship',
+        dates: '2021 - 2023',
+        responsibilities: ['Ensuring all feather wands are thoroughly "tested".', 'Mastering the art of the surprise attack on unsuspecting ankles.']
+      }
+    ]
   }
 ];
 
@@ -145,3 +169,4 @@ export const getMockProfileById = (id: string): Profile | undefined => {
 
 
 export const initialConnections: Connection[] = [];
+
