@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/dialog';
 
 const MAX_NOTE_LENGTH = 500;
-const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential playdate for next week. Follow up on the laser pointer recommendation.";
+const defaultInitialNoteText = "Lucy's little brother. Never met the kid.";
 
 export default function ViewProfileNotePage() {
   const router = useRouter();
