@@ -25,9 +25,9 @@ const defaultInitialNoteText = "Met at CatCon 2024. Loves tuna snacks. Potential
 export default function ViewProfileNotePage() {
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(true); 
-  const profileName = "Hunter The Cat";
-  const profileLinkedInDisplayText = "linkedin.com/in/hunter-the-cat-cvo";
-  const profileActualLinkUrl = "https://www.instagram.com/hunter_spo?igsh=NTc4MTIwNjQ2YQ==";
+  const profileName = "Jack The Cat"; // Updated from Hunter The Cat
+  const profileLinkedInDisplayText = "linkedin.com/in/hunter-the-cat-cvo"; // Kept as is, can be updated in a follow-up if needed
+  const profileActualLinkUrl = "https://www.instagram.com/hunter_spo?igsh=NTc4MTIwNjQ2YQ=="; // Kept as is
   const connectionDate = "June 11, 2025";
 
   const [noteToSelf, setNoteToSelf] = useState(defaultInitialNoteText);
