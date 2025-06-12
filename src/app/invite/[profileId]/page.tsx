@@ -4,6 +4,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link'; // Added import for Link
 import { useConnections } from '@/hooks/useConnections';
 import type { Profile as ProfileType } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -230,7 +231,13 @@ export default function InvitePage() {
               {profile.location && (
                 <span>{profile.location}</span>
               )}
-              <span className="text-primary ml-1">· Contact info</span>
+              {profileId === 'jack-cray-the-cat' ? (
+                <Link href="/view-profile-note" className="text-primary hover:underline ml-1">
+                  · Contact info
+                </Link>
+              ) : (
+                <span className="text-primary ml-1">· Contact info</span>
+              )}
             </div>
             
             <p className="text-sm text-muted-foreground mb-2 text-center sm:text-left">
