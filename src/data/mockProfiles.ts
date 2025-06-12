@@ -117,7 +117,7 @@ export const mockProfiles: Profile[] = [
     id: 'george-sweeney-the-cat',
     name: 'George Sweeney The Cat',
     headline: 'Executive Mealtime Coordinator at Food Logistics',
-    avatarUrl: 'https://placehold.co/128x128.png',
+    avatarUrl: 'https://images.unsplash.com/photo-1641029670910-96f4607fcceb?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBjYXR8ZW58MHwyfDB8fHww',
     dataAiHint: 'black and white cat',
     company: 'Food Logistics',
     location: 'California',
