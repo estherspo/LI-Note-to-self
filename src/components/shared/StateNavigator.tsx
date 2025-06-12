@@ -10,9 +10,9 @@ import { useEffect, useState } from 'react';
 
 const navigationStates = [
   { name: "Invite Hunter (Salty's View)", href: '/invite/hunter-the-cat', description: "View Hunter The Cat's profile as Salty Sears to send an invitation." },
-  { name: "Jack's Profile", href: '/invite/jack-cray-the-cat', description: "View Jack The Cat's profile as Hunter to send an invitation or view existing connection." },
   { name: "My Network (Hunter's View)", href: '/my-network', description: "View your network, manage invitations, and play daily games." },
   { name: "View Note to self (Hunter's View)", href: '/view-profile-note', description: "View an existing connection's profile and private note." },
+  { name: "Jack's Profile", href: '/invite/jack-cray-the-cat', description: "View Jack The Cat's profile as Hunter to send an invitation or view existing connection." },
 ];
 
 export function StateNavigator() {
@@ -87,3 +87,4 @@ export function StateNavigator() {
     </Card>
   );
 }
+
