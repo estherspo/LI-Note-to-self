@@ -22,7 +22,7 @@ export const mockProfiles: Profile[] = [
     id: 'hunter-the-cat',
     name: 'Hunter The Cat',
     headline: 'Chief Vibe Officer (CVO) at MeowCorp',
-    avatarUrl: 'https://images.unsplash.com/photo-1723669335157-3bf696d356ee?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJyb3duJTIwbWFpbmUlMjBjb29ufGVufDB8fDB8fHww',
+    avatarUrl: 'https://images.unsplash.com/photo-1685271286659-c83faa4f5cb1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFpbmUlMjBjb29ufGVufDB8MnwwfHx8MA%3D%3D',
     dataAiHint: 'maine coon',
     company: 'MeowCorp',
     location: 'California, CA',
