@@ -36,9 +36,9 @@ export default function ViewProfileNotePage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    // If dialog is closed by any means (onOpenChange), navigate to home
+    // If dialog is closed by any means (onOpenChange), navigate to Jack The Cat's profile page
     if (!isDialogOpen) {
-      router.push('/');
+      router.push('/invite/jack-cray-the-cat');
     }
   }, [isDialogOpen, router]);
 
