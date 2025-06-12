@@ -131,7 +131,7 @@ export default function InvitePage() {
     );
   }
   
-  const coverPhotoUrl = "https://placehold.co/1200x300.png";
+  const coverPhotoUrl = "https://images.unsplash.com/photo-1530396220186-53cd210802ef?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHlhcm58ZW58MHwwfDB8fHww";
   const companyDomain = profile.company ? profile.company.toLowerCase().replace(/\s+/g, '').replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") + '.com' : '';
 
   let connectButtonText = 'Connect';
@@ -166,7 +166,7 @@ export default function InvitePage() {
             alt={`${profile.name}'s cover photo`} 
             fill
             style={{objectFit: "cover"}}
-            data-ai-hint="professional network background"
+            data-ai-hint="yarn texture"
           />
         </div>
         <CardHeader className="relative -mt-[64px] px-6 pt-0 pb-6 flex flex-col">
