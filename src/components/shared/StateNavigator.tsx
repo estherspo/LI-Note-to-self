@@ -37,7 +37,7 @@ export function StateNavigator() {
   }, [pathname]);
 
   return (
-    <Card className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-72 z-40 bg-card border-r shadow-lg rounded-none overflow-y-auto">
+    <Card className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-72 z-60 bg-card border-r shadow-lg rounded-none overflow-y-auto">
       <CardHeader className="p-4 border-b">
         <CardTitle className="text-md font-headline text-primary">Prototype State Navigator</CardTitle>
         <CardDescription className="text-xs text-muted-foreground leading-tight mt-1">
@@ -73,3 +73,4 @@ export function StateNavigator() {
     </Card>
   );
 }
+
