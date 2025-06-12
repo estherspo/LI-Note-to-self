@@ -37,34 +37,31 @@ export function StateNavigator() {
   }, [pathname]);
 
   return (
-    <Card className="dark sticky bottom-0 left-0 right-0 w-full z-[60] bg-card border-t shadow-lg rounded-none">
-      <CardHeader className="pb-1 pt-2 container mx-auto px-4">
-        <CardTitle className="text-sm font-headline text-primary">Prototype State Navigator</CardTitle>
-        <CardDescription className="text-xs text-muted-foreground leading-tight">Use these buttons to switch between different app states/features for Rememble.</CardDescription>
+    <Card className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-72 z-40 bg-card border-r shadow-lg rounded-none overflow-y-auto">
+      <CardHeader className="p-4 border-b">
+        <CardTitle className="text-md font-headline text-primary">Prototype State Navigator</CardTitle>
+        <CardDescription className="text-xs text-muted-foreground leading-tight mt-1">
+          Use these buttons to switch between different app states/features for Rememble.
+        </CardDescription>
       </CardHeader>
-      <CardContent className="pb-2 pt-1 container mx-auto px-4">
-        <div className={cn(
-            "grid gap-2",
-            navigationStates.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
-          )}
-        >
+      <CardContent className="p-4">
+        <div className="flex flex-col space-y-2">
           {navigationStates.map((state) => {
             const isButtonActive = activeStateHref === state.href;
             return (
               <Button
-                key={state.href} // Changed key from state.name to state.href
-                variant={isMounted && isButtonActive ? 'default' : 'outline'} 
+                key={state.href}
+                variant={isMounted && isButtonActive ? 'default' : 'secondary'}
                 className={cn(
-                  "w-full justify-center text-center h-auto py-1 px-2", 
-                  isMounted && isButtonActive && "ring-2 ring-primary ring-offset-1 ring-offset-background" 
+                  "w-full justify-start text-left h-auto py-2.5 px-3",
+                  isMounted && isButtonActive && "ring-2 ring-primary-foreground ring-offset-2 ring-offset-primary"
                 )}
                 asChild
-                size="sm"
               >
                 <Link href={state.href}>
-                  <div className="flex flex-col whitespace-normal items-center justify-center">
-                    <span className="text-xs font-medium leading-tight">
-                      {isMounted ? state.name : "\u00A0"} {/* Defer rendering full name */}
+                  <div className="flex flex-col items-start w-full">
+                    <span className="text-sm font-medium leading-snug">
+                      {isMounted ? state.name : "\u00A0"}
                     </span>
                   </div>
                 </Link>
