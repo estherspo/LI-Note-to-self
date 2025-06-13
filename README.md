@@ -40,7 +40,7 @@ This prototype explores that idea using Firebase Studio, simulating what it migh
 
 ### 🔹 Step 1: Initial Prompts (ChatGPT + Gemini)  
 
-I started by dictating the problem statement, pain points, and my initial idea to ChatGPT, asking it to turn these into a formal Product Requirements Document (PRD). You can see the resulting PRD here: [PRD.md](https://github.com/estherspo/LI-Note-to-self/blob/master/PRD.md).
+I started by dictating the problem statement, pain points, and my initial idea to ChatGPT, asking it to turn these into a formal Product Requirements Document (PRD). You can see the resulting PRD here: [PRD.md](https://github.com/estherspo/LI-Note-to-self/docs/PRD.md).
 
 Next, I fed this PRD into Gemini with the following prompt:
 
