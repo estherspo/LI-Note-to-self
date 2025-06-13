@@ -1,6 +1,8 @@
 # LI-Note-to-self 🧠📩  
 *A prototype exploring how to make LinkedIn connections more intentional by letting you leave yourself a note.*
 
+Preview here (https://9000-firebase-studio-1749650334813.cluster-aj77uug3sjd4iut4ev6a4jbtf2.cloudworkstations.dev)
+
 ---
 
 ## Why I Built This  
@@ -40,7 +42,7 @@ This prototype explores that idea using Firebase Studio, simulating what it migh
 
 ### 🔹 Step 1: Initial Prompts (ChatGPT + Gemini)  
 
-I started by dictating the problem statement, pain points, and my initial idea to ChatGPT, asking it to turn these into a formal Product Requirements Document (PRD). You can see the resulting PRD here: [PRD.md](https://github.com/estherspo/LI-Note-to-self/docs/PRD.md).
+I started by dictating the problem statement, pain points, and my initial idea to ChatGPT, asking it to turn these into a formal Product Requirements Document (PRD). You can see the resulting PRD here: [[PRD.md](https://github.com/estherspo/LI-Note-to-self/docs/PRD.md)](https://github.com/estherspo/LI-Note-to-self/blob/master/docs/PRD.md).
 
 Next, I fed this PRD into Gemini with the following prompt:
 
